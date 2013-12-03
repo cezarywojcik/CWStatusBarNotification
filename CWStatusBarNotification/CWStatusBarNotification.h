@@ -8,35 +8,55 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CWStatusBarNotification : NSObject
-
-enum {
-    CWNotificationStyleStatusBarNotification,
-    CWNotificationStyleNavigationBarNotification
+typedef NS_ENUM(NSInteger, CWStatusBarNotificationType){
+    CWStatusBarNotificationTypeStatusBar,
+    CWStatusBarNotificationTypeNavigationBar
 };
 
-enum {
-    CWNotificationAnimationStyleTop,
-    CWNotificationAnimationStyleBottom,
-    CWNotificationAnimationStyleLeft,
-    CWNotificationAnimationStyleRight
+typedef NS_ENUM(NSInteger, CWStatusBarNotificationPresentationType){
+    CWStatusBarNotificationPresentationTypeCover,
+    CWStatusBarNotificationPresentationTypePush
 };
 
-@property (strong, nonatomic) UILabel *notificationLabel;
-@property (strong, nonatomic) UIColor *notificationLabelBackgroundColor;
-@property (strong, nonatomic) UIColor *notificationLabelTextColor;
+typedef NS_ENUM(NSInteger, CWStatusBarNotificationAnimationStyle) {
+    CWStatusBarNotificationAnimationStyleTop,
+    CWStatusBarNotificationAnimationStyleBottom,
+    CWStatusBarNotificationAnimationStyleLeft,
+    CWStatusBarNotificationAnimationStyleRight
+};
 
-@property (strong, nonatomic) UIView *statusBarView;
+typedef NS_ENUM(NSInteger, CWStatusBarNotificationAnimationType) {
+    CWStatusBarNotificationAnimationTypeLinear,
+    CWStatusBarNotificationAnimationTypeSpring
+};
 
-@property (nonatomic) NSInteger notificationStyle;
-@property (nonatomic) NSInteger notificationAnimationInStyle;
-@property (nonatomic) NSInteger notificationAnimationOutStyle;
-@property (nonatomic) BOOL notificationIsShowing;
+extern NSString *const kCWStatusBarNotificationNotificationTypeKey;
+extern NSString *const kCWStatusBarNotificationNotificationPresentationTypeKey;
 
-@property (strong, nonatomic) UIWindow *notificationWindow;
+extern NSString *const kCWStatusBarNotificationAnimationTypeKey;
+extern NSString *const kCWStatusBarNotificationAnimationInStyleKey;
+extern NSString *const kCWStatusBarNotificationAnimationOutStyleKey;
 
-- (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration;
-- (void)displayNotificationWithMessage:(NSString *)message completion:(void (^)(void))completion;
-- (void)dismissNotification;
+extern NSString *const kCWStatusBarNotificationAnimationInTimeIntervalKey;
+extern NSString *const kCWStatusBarNotificationTimeIntervalKey;
+extern NSString *const kCWStatusBarNotificationAnimationOutTimeIntervalKey;
+
+extern NSString *const kCWStatusBarNotificationAnimationSpringDampingKey;
+extern NSString *const kCWStatusBarNotificationAnimationSpringInitialVelocityKey;
+
+extern NSString *const kCWStatusBarNotificationTextKey;
+extern NSString *const kCWStatusBarNotificationFontKey;
+extern NSString *const kCWStatusBarNotificationTextColorKey;
+extern NSString *const kCWStatusBarNotificationTextAlignmentKey;
+extern NSString *const kCWStatusBarNotificationTextShadowColorKey;
+extern NSString *const kCWStatusBarNotificationTextShadowOffsetKey;
+
+extern NSString *const kCWStatusBarNotificationBackgroundColorKey;
+extern NSString *const kCWStatusBarNotificationImageKey;
+
+@interface CWStatusBarNotificationManager : NSObject
+
++ (void)setDefaultOptions:(NSDictionary*)defaultOptions;
++ (void)showNotificationWithOptions:(NSDictionary*)options completionBlock:(void (^)(void))completion;
 
 @end
