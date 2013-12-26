@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@interface ScrollLabel : UILabel
+- (CGFloat)scrollTime;
+@end
+
 @interface CWStatusBarNotification : NSObject
 
 enum {
@@ -22,7 +26,7 @@ enum {
     CWNotificationAnimationStyleRight
 };
 
-@property (strong, nonatomic) UILabel *notificationLabel;
+@property (strong, nonatomic) ScrollLabel *notificationLabel;
 @property (strong, nonatomic) UIColor *notificationLabelBackgroundColor;
 @property (strong, nonatomic) UIColor *notificationLabelTextColor;
 

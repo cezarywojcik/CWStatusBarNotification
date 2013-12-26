@@ -12,6 +12,9 @@
 
 #define STATUS_BAR_ANIMATION_LENGTH 0.25f
 #define FONT_SIZE 12.0f
+#define PADDING 10.0f
+#define SCROLL_SPEED 40.0f
+#define SCROLL_DELAY 1.0f
 
 @implementation CWStatusBarNotification
 
@@ -101,7 +104,7 @@
 
 - (void)createNotificationLabelWithMessage:(NSString *)message
 {
-    self.notificationLabel = [UILabel new];
+    self.notificationLabel = [ScrollLabel new];
     self.notificationLabel.text = message;
     self.notificationLabel.textAlignment = NSTextAlignmentCenter;
     self.notificationLabel.adjustsFontSizeToFitWidth = YES;
@@ -234,7 +237,11 @@
         [UIView animateWithDuration:STATUS_BAR_ANIMATION_LENGTH animations:^{
             [self firstFrameChange];
         } completion:^(BOOL finished) {
-            [completion invoke];
+            double delayInSeconds = [self.notificationLabel scrollTime];
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [completion invoke];
+            });
         }];
     }
 
@@ -266,5 +273,55 @@
         });
     }];
 }
+
+@end
+
+@implementation ScrollLabel {
+    UIImageView *textImage;
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        textImage = [[UIImageView alloc] init];
+        [self addSubview:textImage];
+    }
+    return self;
+}
+
+- (CGFloat)fullWidth {
+    return [self.text sizeWithAttributes:@{NSFontAttributeName: self.font}].width;
+}
+
+- (CGFloat)scrollOffset {
+    CGRect insetRect = CGRectInset(self.bounds, PADDING, 0);
+    return MAX(0, [self fullWidth] - insetRect.size.width);
+}
+
+- (CGFloat)scrollTime {
+    return ([self scrollOffset] > 0) ? [self scrollOffset] / SCROLL_SPEED + SCROLL_DELAY : 0;
+}
+
+- (void)drawTextInRect:(CGRect)rect {
+    if ([self scrollOffset] > 0) {
+        rect.size.width = [self fullWidth] + PADDING * 2;
+        UIGraphicsBeginImageContextWithOptions(rect.size, NO, [UIScreen mainScreen].scale);
+        [super drawTextInRect:rect];
+        textImage.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        [textImage sizeToFit];
+        [UIView animateWithDuration:[self scrollTime] - SCROLL_DELAY
+                              delay:SCROLL_DELAY
+                            options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             textImage.transform = CGAffineTransformMakeTranslation(-[self scrollOffset], 0);
+                         } completion:^(BOOL finished) {
+                         }];
+    } else {
+        textImage.image = nil;
+        [super drawTextInRect:rect];
+    }
+}
+
 
 @end
