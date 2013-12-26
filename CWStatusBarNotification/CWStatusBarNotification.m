@@ -41,11 +41,14 @@
 # pragma mark - dimensions
 
 - (CGFloat)getStatusBarHeight {
+    if (self.notificationLabelHeight > 0) {
+        return self.notificationLabelHeight;
+    }
     CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     if (UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
         statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.width;
     }
-    return statusBarHeight;
+    return statusBarHeight > 0 ? statusBarHeight : 20;
 }
 
 - (CGFloat)getStatusBarWidth {
