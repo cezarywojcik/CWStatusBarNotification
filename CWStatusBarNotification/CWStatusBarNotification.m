@@ -33,6 +33,7 @@
         self.notificationStyle = CWNotificationStyleStatusBarNotification;
         self.notificationAnimationInStyle = CWNotificationAnimationStyleBottom;
         self.notificationAnimationOutStyle = CWNotificationAnimationStyleBottom;
+        self.notificationAnimationType = CWNotificationAnimationTypeReplace;
     }
     return self;
 }
@@ -143,8 +144,10 @@
 {
     self.statusBarView = [[UIView alloc] initWithFrame:[self getNotificationLabelFrame]];
     self.statusBarView.clipsToBounds = YES;
-    UIView *statusBarImageView = [[UIScreen mainScreen] snapshotViewAfterScreenUpdates:YES];
-    [self.statusBarView addSubview:statusBarImageView];
+    if (self.notificationAnimationType == CWNotificationAnimationTypeReplace) {
+        UIView *statusBarImageView = [[UIScreen mainScreen] snapshotViewAfterScreenUpdates:YES];
+        [self.statusBarView addSubview:statusBarImageView];
+    }
     [self.notificationWindow.rootViewController.view addSubview:self.statusBarView];
     [self.notificationWindow.rootViewController.view sendSubviewToBack:self.statusBarView];
 }

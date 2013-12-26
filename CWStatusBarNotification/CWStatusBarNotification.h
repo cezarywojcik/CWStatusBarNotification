@@ -14,16 +14,21 @@
 
 @interface CWStatusBarNotification : NSObject
 
-enum {
+typedef NS_ENUM(NSInteger, CWNotificationStyle) {
     CWNotificationStyleStatusBarNotification,
     CWNotificationStyleNavigationBarNotification
 };
 
-enum {
+typedef NS_ENUM(NSInteger, CWNotificationAnimationStyle) {
     CWNotificationAnimationStyleTop,
     CWNotificationAnimationStyleBottom,
     CWNotificationAnimationStyleLeft,
     CWNotificationAnimationStyleRight
+};
+
+typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
+    CWNotificationAnimationTypeReplace,
+    CWNotificationAnimationTypeOverlay
 };
 
 @property (strong, nonatomic) ScrollLabel *notificationLabel;
@@ -32,9 +37,10 @@ enum {
 
 @property (strong, nonatomic) UIView *statusBarView;
 
-@property (nonatomic) NSInteger notificationStyle;
-@property (nonatomic) NSInteger notificationAnimationInStyle;
-@property (nonatomic) NSInteger notificationAnimationOutStyle;
+@property (nonatomic) CWNotificationAnimationStyle notificationStyle;
+@property (nonatomic) CWNotificationAnimationStyle notificationAnimationInStyle;
+@property (nonatomic) CWNotificationAnimationStyle notificationAnimationOutStyle;
+@property (nonatomic) CWNotificationAnimationType notificationAnimationType;
 @property (nonatomic) BOOL notificationIsShowing;
 
 @property (strong, nonatomic) UIWindow *notificationWindow;
