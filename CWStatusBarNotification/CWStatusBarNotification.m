@@ -109,9 +109,10 @@
 - (void)createNotificationLabelWithMessage:(NSString *)message
 {
     self.notificationLabel = [ScrollLabel new];
+    self.notificationLabel.numberOfLines = self.multiline ? 0 : 1;
     self.notificationLabel.text = message;
     self.notificationLabel.textAlignment = NSTextAlignmentCenter;
-    self.notificationLabel.adjustsFontSizeToFitWidth = YES;
+    self.notificationLabel.adjustsFontSizeToFitWidth = NO;
     self.notificationLabel.font = [UIFont systemFontOfSize:FONT_SIZE];
     self.notificationLabel.backgroundColor = self.notificationLabelBackgroundColor;
     self.notificationLabel.textColor = self.notificationLabelTextColor;
@@ -300,6 +301,8 @@
 }
 
 - (CGFloat)scrollOffset {
+    if (self.numberOfLines != 1) return 0;
+
     CGRect insetRect = CGRectInset(self.bounds, PADDING, 0);
     return MAX(0, [self fullWidth] - insetRect.size.width);
 }
@@ -325,7 +328,7 @@
                          }];
     } else {
         textImage.image = nil;
-        [super drawTextInRect:rect];
+        [super drawTextInRect:CGRectInset(rect, PADDING, 0)];
     }
 }
 
