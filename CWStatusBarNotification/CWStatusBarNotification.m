@@ -250,6 +250,9 @@
                 [completion invoke];
             });
         }];
+    } else {
+        self.notificationLabel.text = message;
+        [completion invoke];
     }
 
 }
