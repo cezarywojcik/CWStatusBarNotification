@@ -47,7 +47,7 @@ If you prefer to manually choose when to display and dismiss the notification, y
 ```
 [self.notification displayNotificationWithMessage:@"Hello" completion:nil];
 // wait until you need to dismiss
-[self.notofication dismissNotification];
+[self.notification dismissNotification];
 ```
 
 ## Customizing Appearance
