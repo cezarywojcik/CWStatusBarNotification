@@ -29,11 +29,13 @@
     if (self) {
         // set defaults
         self.notificationLabelBackgroundColor = [[UIApplication sharedApplication] delegate].window.tintColor;
+        self.notificationLabelFont = [UIFont systemFontOfSize:FONT_SIZE];
         self.notificationLabelTextColor = [UIColor whiteColor];
+        
         self.notificationStyle = CWNotificationStyleStatusBarNotification;
+        self.notificationAnimationType = CWNotificationAnimationTypeReplace;
         self.notificationAnimationInStyle = CWNotificationAnimationStyleBottom;
         self.notificationAnimationOutStyle = CWNotificationAnimationStyleBottom;
-        self.notificationAnimationType = CWNotificationAnimationTypeReplace;
     }
     return self;
 }
@@ -110,12 +112,14 @@
 {
     self.notificationLabel = [ScrollLabel new];
     self.notificationLabel.numberOfLines = self.multiline ? 0 : 1;
-    self.notificationLabel.text = message;
     self.notificationLabel.textAlignment = NSTextAlignmentCenter;
     self.notificationLabel.adjustsFontSizeToFitWidth = NO;
-    self.notificationLabel.font = [UIFont systemFontOfSize:FONT_SIZE];
+    self.notificationLabel.text = message;
+    
     self.notificationLabel.backgroundColor = self.notificationLabelBackgroundColor;
     self.notificationLabel.textColor = self.notificationLabelTextColor;
+    self.notificationLabel.font = self.notificationLabelFont;
+    
     switch (self.notificationAnimationInStyle) {
         case CWNotificationAnimationStyleTop:
             self.notificationLabel.frame = [self getNotificationLabelTopFrame];
