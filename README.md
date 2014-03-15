@@ -1,5 +1,7 @@
 # CWStatusBarNotification
 
+[![Build Status](https://travis-ci.org/cezarywojcik/CWStatusBarNotification.png?branch=master)](https://travis-ci.org/cezarywojcik/CWStatusBarNotification)
+
 `CWStatusBarNotification` is a library that allows you to easily create text-based notifications that appear on the status bar.
 
 ![demo](screenshots/demo.gif)
