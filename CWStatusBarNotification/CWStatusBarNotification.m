@@ -116,6 +116,7 @@
     self.notificationLabel.font = [UIFont systemFontOfSize:FONT_SIZE];
     self.notificationLabel.backgroundColor = self.notificationLabelBackgroundColor;
     self.notificationLabel.textColor = self.notificationLabelTextColor;
+    self.notificationLabel.clipsToBounds = YES;
     switch (self.notificationAnimationInStyle) {
         case CWNotificationAnimationStyleTop:
             self.notificationLabel.frame = [self getNotificationLabelTopFrame];
@@ -282,6 +283,8 @@
 }
 
 @end
+
+# pragma mark - ScrollLabel
 
 @implementation ScrollLabel {
     UIImageView *textImage;
