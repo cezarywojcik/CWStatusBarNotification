@@ -52,6 +52,32 @@ If you prefer to manually choose when to display and dismiss the notification, y
 [self.notification dismissNotification];
 ```
 
+### Behavior on Tap
+
+The default behavior when the notification is tapped is to dismiss it. However, you can override this behavior by setting the `onTapNotification` block to something different. 
+
+For example:
+
+```
+self.notification.notificationTappedBlock = ^(void) {
+    NSLog(@"notification tapped");
+    // more code here
+};
+
+```
+
+Note that overriding this block means that the notification will no longer be dismissed when tapped. If you want the notification to still dismiss when tapped, make sure to implement the following when overriding the block:
+
+```
+__weak typeof(self) weakSelf = self;
+self.notification.notificationTappedBlock = ^(void) {
+    if (!weakSelf.notificationIsDismissing) {
+        [weakSelf dismissNotification];
+        // more code here
+    }
+};
+```
+
 ## Customizing Appearance
 
 First of all, you can customize the background color and text color using the following properties: `notificationLabelBackgroundColor` and `notificationLabelTextColor`.
