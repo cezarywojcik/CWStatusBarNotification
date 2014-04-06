@@ -22,12 +22,12 @@ Copy the folder `CWStatusBarNotification` to your project.
 
 ## Usage
 
-***Note:** The previous version of this library implemented the notifications using a category. This version uses an object instead.*
+**Note:** The previous version of this library implemented the notifications using a category. This version uses an object instead.*
 
 Firstly, you need the following import statement:
 
 ```
-#import "CWStatusBarNotification.h"
+#import <CWStatusBarNotification/CWStatusBarNotification.h>
 ```
 
 Now, you need to create a `CWStatusBarNotification` object. It is recommended that you do so by attaching it as a property to a `UIViewController`.
