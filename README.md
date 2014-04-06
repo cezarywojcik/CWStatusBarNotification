@@ -2,7 +2,7 @@
 
 `CWStatusBarNotification` is a library that allows you to easily create text-based notifications that appear on the status bar.
 
-![demo](screenshots/demo.gif)
+![demo](Screenshots/demo.gif)
 
 ## Requirements
 
@@ -14,7 +14,7 @@ Works for iPhone and iPad.
 
 ### CocoaPods
 
-`pod 'CWStatusBarNotification', '~> 2.1.0'`
+`pod 'CWStatusBarNotification', '~> 3.0'`
 
 ### Manual
 
@@ -61,7 +61,7 @@ notification.notificationLabelBackgroundColor = [UIColor blackColor];
 notification.notificationLabelTextColor = [UIColor greenColor];
 ```
 
-![custom colors](screenshots/ss1.gif)
+![custom colors](Screenshots/ss1.gif)
 
 The default value of `notificationLabelBackgroundColor` is `[[UIApplication sharedApplication] delegate].window.tintColor`.
 
@@ -69,7 +69,7 @@ The default value of `notification.notificationLabelTextColor` is `[UIColor whit
 
 Finally, you can also choose from two styles - a notification the size of the status bar, or a notification the size of the status bar and a navigation bar. Simply change the `notificationStyle` property of the `CWStatusBarNotification` object to either `CWNotificationStyleStatusBarNotification` or `CWNotificationStyleNavigationBarNotification`.
 
-![custom style](screenshots/ss2.gif)
+![custom style](Screenshots/ss2.gif)
 
 The default value of `notificationStyle` is `CWNotificationStyleStatusBarNotification`.
 

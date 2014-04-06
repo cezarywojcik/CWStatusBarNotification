@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CWStatusBarNotification.h"
+#import <CWStatusBarNotification/CWStatusBarNotification.h>
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *lblDuration;
 @property (weak, nonatomic) IBOutlet UISlider *sliderDuration;
