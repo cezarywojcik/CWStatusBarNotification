@@ -56,7 +56,7 @@ You can customize the Notification appearance using the `textAttributes` propert
 
 The default background color is `[[UIApplication sharedApplication] delegate].window.tintColor` and the default text color is `[UIColor whiteColor]`.
 
-**NOTE:** `notificationLabelBackgroundColor` and `notificationLabelTextColor` have been deprecated in v3.0) and are no longer used. Please use `textAttributes` instead.
+**NOTE:** `notificationLabelBackgroundColor` and `notificationLabelTextColor` have been deprecated in v3.0 and are no longer used. Please use `textAttributes` instead.
 
 ![custom colors](Screenshots/ss1.gif)
 
