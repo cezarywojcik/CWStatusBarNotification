@@ -52,20 +52,13 @@ If you prefer to manually choose when to display and dismiss the notification, y
 
 ## Customizing Appearance
 
-First of all, you can customize the background color and text color using the following properties: `notificationLabelBackgroundColor` and `notificationLabelTextColor`.
+You can customize the Notification appearance using the `textAttributes` property. This is a dictionary that uses the same key-value pairs as the attributes for NSAttributedString. It is actually used to set a label's attributedString attributes under the hood. The label's background color will be set to the value of `NSBackgroundColorAttributeName`.
 
-Example:
+The default background color is `[[UIApplication sharedApplication] delegate].window.tintColor` and the default text color is `[UIColor whiteColor]`.
 
-```
-notification.notificationLabelBackgroundColor = [UIColor blackColor];
-notification.notificationLabelTextColor = [UIColor greenColor];
-```
+**NOTE:** `notificationLabelBackgroundColor` and `notificationLabelTextColor` have been deprecated in v3.0) and are no longer used. Please use `textAttributes` instead.
 
 ![custom colors](Screenshots/ss1.gif)
-
-The default value of `notificationLabelBackgroundColor` is `[[UIApplication sharedApplication] delegate].window.tintColor`.
-
-The default value of `notification.notificationLabelTextColor` is `[UIColor whiteColor]`.
 
 Finally, you can also choose from two styles - a notification the size of the status bar, or a notification the size of the status bar and a navigation bar. Simply change the `notificationStyle` property of the `CWStatusBarNotification` object to either `CWNotificationStyleStatusBarNotification` or `CWNotificationStyleNavigationBarNotification`.
 
