@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (strong, nonatomic) ScrollLabel *notificationLabel;
 @property (assign, nonatomic) BOOL multiline;
 
-@property (copy, nonatomic) NSDictionary *textAttributes;
+@property (copy, nonatomic) NSDictionary *textAttributes; // Uses the same attributes as NSAttributedString.
 @property (assign, nonatomic) CGFloat notificationLabelHeight;
 
 @property (strong, nonatomic) UIColor *notificationLabelBackgroundColor __deprecated;
@@ -46,7 +46,8 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (strong, nonatomic) UIView *statusBarView;
 @property (strong, nonatomic) UIWindow *notificationWindow;
 
-@property (assign, nonatomic) BOOL notificationIsShowing;
+@property (assign, nonatomic) BOOL notificationIsShowing __deprecated;
+@property (assign, nonatomic, readonly, getter = isShowing) BOOL showing;
 @property (assign, nonatomic) CWNotificationAnimationStyle notificationStyle;
 @property (assign, nonatomic) CWNotificationAnimationStyle notificationAnimationInStyle;
 @property (assign, nonatomic) CWNotificationAnimationStyle notificationAnimationOutStyle;

@@ -13,6 +13,12 @@
 #define SCROLL_DELAY 1.0f
 #define PADDING 10.0f
 
+@interface CWStatusBarNotification ()
+
+@property (assign, nonatomic, readwrite, getter = isShowing) BOOL showing;
+
+@end
+
 @implementation CWStatusBarNotification
 
 #pragma mark - Superclass Methods Override -
@@ -40,15 +46,16 @@
 
 - (void)dismissNotification
 {
-    if (self.notificationIsShowing) {
+    if (self.showing) {
         [self secondFrameChange];
         [UIView animateWithDuration:STATUS_BAR_ANIMATION_LENGTH animations:^{
             [self thirdFrameChange];
         } completion:^(BOOL finished) {
             [self.notificationLabel removeFromSuperview];
             [self.statusBarView removeFromSuperview];
-            [self setNotificationIsShowing:NO];
             [self setNotificationWindow:nil];
+            [self setShowing:NO];
+            
             [[NSNotificationCenter defaultCenter] removeObserver:self
                                                             name:UIApplicationDidChangeStatusBarOrientationNotification
                                                           object:nil];
@@ -69,8 +76,8 @@
 
 - (void)displayNotificationWithMessage:(NSString *)message completion:(void (^)(void))completion
 {
-    if (!self.notificationIsShowing) {
-        self.notificationIsShowing = YES;
+    if (!self.showing) {
+        self.showing = YES;
         
         // create UIWindow
         [self setupNotificationWindow];
@@ -310,6 +317,18 @@
             self.notificationLabel.frame = [self notificationLabelRightFrame];
             break;
     }
+}
+
+#pragma mark - Setters and Getters -
+
+- (BOOL)notificationIsShowing
+{
+    return self.showing;
+}
+
+- (void)setNotificationIsShowing:(BOOL)notificationIsShowing
+{
+    self.showing = notificationIsShowing;
 }
 
 @end
