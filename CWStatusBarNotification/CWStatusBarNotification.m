@@ -405,6 +405,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         } completion:^(BOOL finished) {
             [self.notificationLabel removeFromSuperview];
             [self.statusBarView removeFromSuperview];
+            [self.notificationWindow setHidden:YES];
             self.notificationWindow = nil;
             self.notificationLabel = nil;
             self.notificationIsShowing = NO;
