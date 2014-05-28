@@ -15,6 +15,19 @@
 #define SCROLL_SPEED 40.0f
 #define SCROLL_DELAY 1.0f
 
+@implementation CWWindowContainer
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    if (point.y > 0 && point.y < [UIApplication sharedApplication].statusBarFrame.size.height) {
+        return [super hitTest:point withEvent:event];
+    }
+    
+    return nil;
+}
+
+@end
+
 # pragma mark - dispatch after with cancellation
 // adapted from: https://github.com/Spaceman-Labs/Dispatch-Cancel
 
@@ -278,7 +291,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)createNotificationWindow
 {
-    self.notificationWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.notificationWindow = [[CWWindowContainer alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.notificationWindow.backgroundColor = [UIColor clearColor];
     self.notificationWindow.userInteractionEnabled = YES;
     self.notificationWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

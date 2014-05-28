@@ -14,6 +14,9 @@ typedef void(^CompletionBlock)(void);
 - (CGFloat)scrollTime;
 @end
 
+@interface CWWindowContainer : UIWindow
+@end
+
 @interface CWStatusBarNotification : NSObject
 
 typedef NS_ENUM(NSInteger, CWNotificationStyle) {
@@ -50,7 +53,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (nonatomic) BOOL notificationIsShowing;
 @property (nonatomic) BOOL notificationIsDismissing;
 
-@property (strong, nonatomic) UIWindow *notificationWindow;
+@property (strong, nonatomic) CWWindowContainer *notificationWindow;
 
 - (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration;
 - (void)displayNotificationWithMessage:(NSString *)message completion:(void (^)(void))completion;
