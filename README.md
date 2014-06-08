@@ -33,7 +33,7 @@ var notification = CWStatusBarNotification()
 After you have a `CWStatusBarNotification` object, you can simply call the `displayNotificationMessage(message: String, duration: Double)` method:
 
 ```
-self.notification.displayNotificationWithMessage("Hello, World!", 1.0)
+self.notification.displayNotificationWithMessage("Hello, World!", duration: 1.0)
 ```
 
 If you prefer to manually choose when to display and dismiss the notification, you can do so as well:
