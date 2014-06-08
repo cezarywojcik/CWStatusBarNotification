@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-import Foundation
-import UIKit
-
 // ---- [ constants ] ---------------------------------------------------------
 
 let STATUS_BAR_ANIMATION_LENGTH : Double = 0.25
