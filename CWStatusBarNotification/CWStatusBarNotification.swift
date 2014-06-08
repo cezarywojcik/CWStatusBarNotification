@@ -112,25 +112,25 @@ class CWWindowContainer : UIWindow {
     }
 }
 
-// ---- [ delayed block handle ] ----------------------------------------------
+// ---- [ delayed closure handle ] ----------------------------------------------
 
-typealias CWDelayedBlockHandle = (Bool) -> ()
+typealias CWDelayedClosureHandle = (Bool) -> ()
 
-func performBlockAfterDelay(seconds : Double, block: dispatch_block_t)
--> CWDelayedBlockHandle? {
-    if block == nil {
+func performClosureAfterDelay(seconds : Double, closure: dispatch_block_t)
+-> CWDelayedClosureHandle? {
+    if closure == nil {
         return nil
     }
         
-    var blockToExecute : dispatch_block_t! = block // copy?
-    var delayHandleCopy : CWDelayedBlockHandle! = nil
+    var closureToExecute : dispatch_block_t! = closure // copy?
+    var delayHandleCopy : CWDelayedClosureHandle! = nil
     
-    var delayHandle : CWDelayedBlockHandle = {
+    var delayHandle : CWDelayedClosureHandle = {
         (cancel : Bool) -> () in
-        if !cancel && blockToExecute != nil {
-            dispatch_async(dispatch_get_main_queue(), blockToExecute)
+        if !cancel && closureToExecute != nil {
+            dispatch_async(dispatch_get_main_queue(), closureToExecute)
         }
-        blockToExecute = nil
+        closureToExecute = nil
         delayHandleCopy = nil
     }
     
@@ -147,7 +147,7 @@ func performBlockAfterDelay(seconds : Double, block: dispatch_block_t)
     return delayHandleCopy
 }
 
-func cancelDelayedBlock(delayedHandle : CWDelayedBlockHandle!) {
+func cancelDelayedClosure(delayedHandle : CWDelayedClosureHandle!) {
     if delayedHandle == nil {
         return
     }
@@ -165,7 +165,7 @@ class CWStatusBarNotification : NSObject {
     var notificationLabelHeight : CGFloat!
     var multiline : Bool = false
     var statusBarView : UIView!
-    var notificationTappedBlock : () -> () = {}
+    var notificationTappedClosure : () -> () = {}
     var notificationStyle : CWNotificationStyle = .StatusBarNotification
     var notificationAnimationInStyle : CWNotificationAnimationStyle = .Bottom
     var notificationAnimationOutStyle : CWNotificationAnimationStyle = .Bottom
@@ -175,11 +175,11 @@ class CWStatusBarNotification : NSObject {
     var notificationWindow : CWWindowContainer!
     
     var tapGestureRecognizer : UITapGestureRecognizer?
-    var dismissHandle : CWDelayedBlockHandle?
+    var dismissHandle : CWDelayedClosureHandle?
     init() {
         super.init()
         
-        self.notificationTappedBlock = {
+        self.notificationTappedClosure = {
             if !self.notificationIsDismissing {
                 self.dismissNotification()
             }
@@ -260,7 +260,7 @@ class CWStatusBarNotification : NSObject {
     // on tap
     
     func notificationTapped(recognizer : UITapGestureRecognizer) {
-        self.notificationTappedBlock()
+        self.notificationTappedClosure()
     }
     
     // display helpers
@@ -346,7 +346,7 @@ class CWStatusBarNotification : NSObject {
         case .Top:
             self.notificationLabel.frame = self.getNotificationLabelTopFrame()
         case .Bottom:
-            self.notificationLabel.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            self.notificationLabel.transform = CGAffineTransformMakeScale(1.0, 0.01)
         case .Left:
             self.notificationLabel.frame = self.getNotificationLabelLeftFrame()
         case .Right:
@@ -381,7 +381,7 @@ class CWStatusBarNotification : NSObject {
                 self.firstFrameChange()
                 }, completion: { (finished : Bool) -> () in
                     var delayInSeconds = Double(self.notificationLabel.scrollTime())
-                    performBlockAfterDelay(delayInSeconds, {
+                    performClosureAfterDelay(delayInSeconds, {
                         if completion != nil {
                             completion()!
                         }
@@ -392,7 +392,7 @@ class CWStatusBarNotification : NSObject {
     
     func dismissNotification() {
         if self.notificationIsShowing {
-            cancelDelayedBlock(self.dismissHandle)
+            cancelDelayedClosure(self.dismissHandle)
             self.notificationIsDismissing = true
             self.secondFrameChange()
             UIView.animateWithDuration(STATUS_BAR_ANIMATION_LENGTH, animations: {
@@ -411,7 +411,7 @@ class CWStatusBarNotification : NSObject {
     
     func displayNotificationWithMessage(message: String, duration: Double) {
         self.displayNotificationWithMessage(message, completion: {
-            self.dismissHandle = performBlockAfterDelay(duration, {
+            self.dismissHandle = performClosureAfterDelay(duration, {
                 self.dismissNotification()
                 })
             })

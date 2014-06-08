@@ -1,4 +1,4 @@
-# CWStatusBarNotification
+# CWStatusBarNotification - Swift Branch
 
 [![Build Status](https://travis-ci.org/cezarywojcik/CWStatusBarNotification.png?branch=master)](https://travis-ci.org/cezarywojcik/CWStatusBarNotification)
 
@@ -8,7 +8,7 @@
 
 ## Requirements
 
-`CWStatusBarNotification` uses ARC and requires iOS 7.0+.
+`CWStatusBarNotification` uses Swift and requires iOS 7.0+.
 
 Works for iPhone and iPad.
 
@@ -16,7 +16,7 @@ Works for iPhone and iPad.
 
 ### CocoaPods
 
-`pod 'CWStatusBarNotification', '~> 2.1.1'`
+Sometime in the future...
 
 ### Manual
 
@@ -24,58 +24,47 @@ Copy the folder `CWStatusBarNotification` to your project.
 
 ## Usage
 
-***Note:** The previous version of this library implemented the notifications using a category. This version uses an object instead.*
-
-Firstly, you need the following import statement:
+You need to create a `CWStatusBarNotification` object. It is recommended that you do so by attaching it as a property to a view controller.
 
 ```
-#import "CWStatusBarNotification.h"
+var notification = CWStatusBarNotification()
 ```
 
-Now, you need to create a `CWStatusBarNotification` object. It is recommended that you do so by attaching it as a property to a `UIViewController`.
+After you have a `CWStatusBarNotification` object, you can simply call the `displayNotificationMessage(message: String, duration: Double)` method:
 
 ```
-CWStatusBarNotification *notification = [CWStatusBarNotification new];
-```
-After you have a `CWStatusBarNotification` object, you can simply call the `displayNotificationMessage:forDuration:` method:
-
-```
-[self.notification displayNotificationWithMessage:@"Hello, World!"
-                   forDuration:1.0f];
+self.notification.displayNotificationWithMessage("Hello, World!", 1.0)
 ```
 
 If you prefer to manually choose when to display and dismiss the notification, you can do so as well:
 
 ```
-[self.notification displayNotificationWithMessage:@"Hello" completion:nil];
+self.notification.displayNotificationWithMessage("Hello", completion: nil)
 // wait until you need to dismiss
-[self.notification dismissNotification];
+self.notification.dismissNotification()
 ```
 
 ### Behavior on Tap
 
-The default behavior when the notification is tapped is to dismiss it. However, you can override this behavior by setting the `onTapNotification` block to something different. 
+The default behavior when the notification is tapped is to dismiss it. However, you can override this behavior by setting the `notificationTappedBlock` closure to something different. 
 
 For example:
-
 ```
-self.notification.notificationTappedBlock = ^(void) {
-    NSLog(@"notification tapped");
+self.notification.notificationTappedBlock = {
+    println("notification tapped")
     // more code here
-};
-
+}
 ```
 
-Note that overriding this block means that the notification will no longer be dismissed when tapped. If you want the notification to still dismiss when tapped, make sure to implement the following when overriding the block:
+Note that overriding this closure means that the notification will no longer be dismissed when tapped. If you want the notification to still dismiss when tapped, make sure to implement the following when overriding the closure:
 
 ```
-__weak typeof(self) weakSelf = self;
-self.notification.notificationTappedBlock = ^(void) {
-    if (!weakSelf.notificationIsDismissing) {
-        [weakSelf dismissNotification];
-        // more code here
+self.notification.notificationTappedBlock = {
+    if !self.notificationIsDismissing {
+        self.dismissNotification()
     }
-};
+    // more code here
+}
 ```
 
 ## Customizing Appearance
@@ -85,36 +74,42 @@ First of all, you can customize the background color and text color using the fo
 Example:
 
 ```
-notification.notificationLabelBackgroundColor = [UIColor blackColor];
-notification.notificationLabelTextColor = [UIColor greenColor];
+self.notification.notificationLabelBackgroundColor = UIColor.blackColor()
+self.notification.notificationLabelTextColor = UIColor.greenColor()
 ```
 
 ![custom colors](screenshots/ss1.gif)
 
-The default value of `notificationLabelBackgroundColor` is `[[UIApplication sharedApplication] delegate].window.tintColor`.
+The default value of `notificationLabelBackgroundColor` is `UIColor.blackColor()`.
 
-The default value of `notification.notificationLabelTextColor` is `[UIColor whiteColor]`.
+The default value of `notification.notificationLabelTextColor` is `UIColor.whiteColor()`.
 
-Finally, you can also choose from two styles - a notification the size of the status bar, or a notification the size of the status bar and a navigation bar. Simply change the `notificationStyle` property of the `CWStatusBarNotification` object to either `CWNotificationStyleStatusBarNotification` or `CWNotificationStyleNavigationBarNotification`.
+Finally, you can also choose from two styles - a notification the size of the status bar, or a notification the size of the status bar and a navigation bar. Simply change the `notificationStyle` property of the `CWStatusBarNotification` object to either `CWNotificationStyle.StatusBarNotification` or `CWNotificationStyle.NavigationBarNotification`.
+
+Example:
+
+```
+self.notification.notificationStyle = .NavigationBarNotification
+```
 
 ![custom style](screenshots/ss2.gif)
 
-The default value of `notificationStyle` is `CWNotificationStyleStatusBarNotification`.
+The default value of `notificationStyle` is `CWNotificationStyle.StatusBarNotification`.
 
 ## Customizing Animation
 
 There are two properties that determine the animation style of the notification: `notificationAnimationInStyle` and `notificationAnimationOutStyle`. Each can take on one of four values:
 
-* `CWNotificationAnimationStyleTop`
-* `CWNotificationAnimationStyleBottom`
-* `CWNotificationAnimationStyleLeft`
-* `CWNotificationAnimationStyleRight`
+* `CWNotificationAnimationStyle.Top`
+* `CWNotificationAnimationStyle.Bottom`
+* `CWNotificationAnimationStyle.Left`
+* `CWNotificationAnimationStyle.Right`
 
 The `notificationAnimationInStyle` describes where the notification comes from, whereas the `notificationAnimationOutStyle` describes where the notification will go.
 
-The default value for `notificationAnimationInStyle` is `CWNotificationAnimationStyleTop`.
+The default value for `notificationAnimationInStyle` is `CWNotificationAnimationStyle.Top`.
 
-The default value for `notificationAnimationOutStyle` is `CWNotificationAnimationStyleTop`.
+The default value for `notificationAnimationOutStyle` is `CWNotificationAnimationStyle.Top`.
 
 ### Additional Remarks
 
@@ -124,7 +119,7 @@ The notifications will work in both screen orientations, however, screen rotatio
 
     The MIT License (MIT)
 
-    Copyright (c) 2013 Cezary Wojcik <http://www.cezarywojcik.com>
+    Copyright (c) 2014 Cezary Wojcik <http://www.cezarywojcik.com>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal

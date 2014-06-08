@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
     @IBOutlet var segFromStyle : UISegmentedControl
     @IBOutlet var segToStyle : UISegmentedControl
     
-    var notification : CWStatusBarNotification!
+    var notification = CWStatusBarNotification()
     
     init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
@@ -38,9 +38,6 @@ class MainViewController: UIViewController {
         var attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
         self.segFromStyle.setTitleTextAttributes(attributes, forState: .Normal)
         self.segToStyle.setTitleTextAttributes(attributes, forState: .Normal)
-        
-        // initialize CWStatusBarNotification
-        self.notification = CWStatusBarNotification()
         
         // set default blue color
         self.notification.notificationLabelBackgroundColor = UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
