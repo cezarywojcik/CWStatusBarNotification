@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/cezarywojcik/CWStatusBarNotification.png?branch=master)](https://travis-ci.org/cezarywojcik/CWStatusBarNotification)
 
+**NOTE:** You can find a `Swift` implementation of this library [in the swift branch of this repo](https://github.com/cezarywojcik/CWStatusBarNotification/tree/swift).
+
 `CWStatusBarNotification` is a library that allows you to easily create text-based notifications that appear on the status bar.
 
 ![demo](screenshots/demo.gif)
@@ -124,7 +126,7 @@ The notifications will work in both screen orientations, however, screen rotatio
 
     The MIT License (MIT)
 
-    Copyright (c) 2013 Cezary Wojcik <http://www.cezarywojcik.com>
+    Copyright (c) 2014 Cezary Wojcik <http://www.cezarywojcik.com>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
