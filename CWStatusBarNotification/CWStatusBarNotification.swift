@@ -160,40 +160,27 @@ func cancelDelayedBlock(delayedHandle : CWDelayedBlockHandle!) {
 class CWStatusBarNotification : NSObject {
     
     var notificationLabel : ScrollLabel!
-    var notificationLabelBackgroundColor : UIColor
-    var notificationLabelTextColor : UIColor
+    var notificationLabelBackgroundColor : UIColor = UIColor.blackColor()
+    var notificationLabelTextColor : UIColor = UIColor.whiteColor()
     var notificationLabelHeight : CGFloat!
-    var multiline : Bool
+    var multiline : Bool = false
     var statusBarView : UIView!
-    var notificationTappedBlock : () -> ()
-    var notificationStyle : CWNotificationStyle
-    var notificationAnimationInStyle : CWNotificationAnimationStyle
-    var notificationAnimationOutStyle : CWNotificationAnimationStyle
-    var notificationAnimationType : CWNotificationAnimationType
-    var notificationIsShowing : Bool
-    var notificationIsDismissing : Bool
+    var notificationTappedBlock : () -> () = {}
+    var notificationStyle : CWNotificationStyle = .StatusBarNotification
+    var notificationAnimationInStyle : CWNotificationAnimationStyle = .Bottom
+    var notificationAnimationOutStyle : CWNotificationAnimationStyle = .Bottom
+    var notificationAnimationType : CWNotificationAnimationType = .Replace
+    var notificationIsShowing : Bool = false
+    var notificationIsDismissing : Bool = false
     var notificationWindow : CWWindowContainer!
     
     var tapGestureRecognizer : UITapGestureRecognizer?
     var dismissHandle : CWDelayedBlockHandle?
-    
     init() {
-        self.notificationLabelBackgroundColor = UIColor.blackColor()
-        self.notificationLabelTextColor = UIColor.whiteColor()
-        self.multiline = false
-        self.notificationTappedBlock = {}
-        self.notificationStyle = .StatusBarNotification
-        self.notificationAnimationInStyle = .Bottom
-        self.notificationAnimationOutStyle = .Bottom
-        self.notificationAnimationType = .Replace
-        self.notificationIsShowing = false
-        self.notificationIsDismissing = false
-        self.tapGestureRecognizer = nil
-        
         super.init()
         
         self.notificationTappedBlock = {
-            if self.notificationIsDismissing {
+            if !self.notificationIsDismissing {
                 self.dismissNotification()
             }
         }
@@ -411,9 +398,8 @@ class CWStatusBarNotification : NSObject {
             UIView.animateWithDuration(STATUS_BAR_ANIMATION_LENGTH, animations: {
                 self.thirdFrameChange()
                 }, completion: { (finished : Bool) -> () in
-                    self.notificationLabel.removeFromSuperview()
-                    self.statusBarView.removeFromSuperview()
-                    self.notificationWindow.hidden = true
+                    self.notificationLabel?.removeFromSuperview()
+                    self.statusBarView?.removeFromSuperview()
                     self.notificationWindow = nil
                     self.notificationLabel = nil
                     self.notificationIsShowing = false
