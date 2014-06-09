@@ -27,7 +27,7 @@ Copy the folder `CWStatusBarNotification` to your project.
 You need to create a `CWStatusBarNotification` object. It is recommended that you do so by attaching it as a property to a view controller.
 
 ```
-var notification = CWStatusBarNotification()
+let notification = CWStatusBarNotification()
 ```
 
 After you have a `CWStatusBarNotification` object, you can simply call the `displayNotificationMessage(message: String, duration: Double)` method:

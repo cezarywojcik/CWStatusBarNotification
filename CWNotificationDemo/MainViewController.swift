@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
     @IBOutlet var segFromStyle : UISegmentedControl
     @IBOutlet var segToStyle : UISegmentedControl
     
-    var notification = CWStatusBarNotification()
+    let notification = CWStatusBarNotification()
     
     init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
