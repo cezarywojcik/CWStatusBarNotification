@@ -24,7 +24,7 @@ enum CWNotificationStyle : Int {
     case NavigationBarNotification
 }
 
-enum CWNotificationAnimationStyle : Int{
+enum CWNotificationAnimationStyle : Int {
     case Top
     case Bottom
     case Left
