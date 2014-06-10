@@ -69,4 +69,16 @@
     [self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value];
 }
 
+- (IBAction)toggleShowNotification:(UIButton *)sender
+{
+    if (self.notification.notificationIsShowing) {
+        [self.notification dismissNotification];
+        return;
+    }
+    
+    self.notification.notificationAnimationInStyle = self.segFromStyle.selectedSegmentIndex;
+    self.notification.notificationAnimationOutStyle = self.segToStyle.selectedSegmentIndex;
+    [self.notification displayNotificationWithMessage:self.txtNotificationMessage.text minimumDuration:5.0f completion:nil];
+}
+
 @end
