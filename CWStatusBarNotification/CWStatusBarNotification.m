@@ -197,29 +197,37 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     return [UIScreen mainScreen].bounds.size.height;
 }
 
+- (CGFloat)getStatusBarOffset
+{
+    if ([self getStatusBarHeight] == 40.0f) {
+        return -20.0f;
+    }
+    return 0.0f;
+}
+
 - (CGRect)getNotificationLabelTopFrame
 {
-    return CGRectMake(0, -1*[self getNotificationLabelHeight], [self getStatusBarWidth], [self getNotificationLabelHeight]);
+    return CGRectMake(0, [self getStatusBarOffset] + -1*[self getNotificationLabelHeight], [self getStatusBarWidth], [self getNotificationLabelHeight]);
 }
 
 - (CGRect)getNotificationLabelLeftFrame
 {
-    return CGRectMake(-1*[self getStatusBarWidth], 0, [self getStatusBarWidth], [self getNotificationLabelHeight]);
+    return CGRectMake(-1*[self getStatusBarWidth], [self getStatusBarOffset], [self getStatusBarWidth], [self getNotificationLabelHeight]);
 }
 
 - (CGRect)getNotificationLabelRightFrame
 {
-    return CGRectMake([self getStatusBarWidth], 0, [self getStatusBarWidth], [self getNotificationLabelHeight]);
+    return CGRectMake([self getStatusBarWidth], [self getStatusBarOffset], [self getStatusBarWidth], [self getNotificationLabelHeight]);
 }
 
 - (CGRect)getNotificationLabelBottomFrame
 {
-    return CGRectMake(0, [self getNotificationLabelHeight], [self getStatusBarWidth], 0);
+    return CGRectMake(0, [self getStatusBarOffset] + [self getNotificationLabelHeight], [self getStatusBarWidth], 0);
 }
 
 - (CGRect)getNotificationLabelFrame
 {
-    return CGRectMake(0, 0, [self getStatusBarWidth], [self getNotificationLabelHeight]);
+    return CGRectMake(0, [self getStatusBarOffset], [self getStatusBarWidth], [self getNotificationLabelHeight]);
 }
 
 - (CGFloat)getNavigationBarHeight
@@ -245,7 +253,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 # pragma mark - screen orientation change
 
-- (void)screenOrientationChanged
+- (void)updateStatusBarFrame
 {
     self.notificationLabel.frame = [self getNotificationLabelFrame];
     self.statusBarView.hidden = YES;
@@ -341,7 +349,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         case CWNotificationAnimationStyleBottom:
             self.statusBarView.frame = [self getNotificationLabelTopFrame];
             self.notificationLabel.layer.anchorPoint = CGPointMake(0.5f, 1.0f);
-            self.notificationLabel.center = CGPointMake(self.notificationLabel.center.x, [self getNotificationLabelHeight]);
+            self.notificationLabel.center = CGPointMake(self.notificationLabel.center.x, [self getStatusBarOffset] + [self getNotificationLabelHeight]);
             break;
         case CWNotificationAnimationStyleLeft:
             self.statusBarView.frame = [self getNotificationLabelRightFrame];
@@ -393,7 +401,10 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         [self.notificationWindow setHidden:NO];
 
         // checking for screen orientation change
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screenOrientationChanged) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateStatusBarFrame) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+        
+        // checking for status bar change
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateStatusBarFrame) name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
 
         // animate
         [UIView animateWithDuration:STATUS_BAR_ANIMATION_LENGTH animations:^{
@@ -424,6 +435,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
             self.notificationIsShowing = NO;
             self.notificationIsDismissing = NO;
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
         }];
     }
 }
