@@ -444,6 +444,10 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
             if(completion)
                 completion();
         }];
+    }else
+    {
+        if(completion)
+            completion();
     }
 }
 
