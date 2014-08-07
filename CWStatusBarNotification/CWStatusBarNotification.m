@@ -15,6 +15,18 @@
 #define SCROLL_SPEED 40.0f
 #define SCROLL_DELAY 1.0f
 
+@interface RPViewController : UIViewController
+@end
+
+@implementation RPViewController
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return [[UIApplication sharedApplication].keyWindow.rootViewController supportedInterfaceOrientations];
+}
+
+@end
+
 @implementation CWWindowContainer
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
@@ -304,7 +316,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     self.notificationWindow.userInteractionEnabled = YES;
     self.notificationWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.notificationWindow.windowLevel = UIWindowLevelStatusBar;
-    self.notificationWindow.rootViewController = [UIViewController new];
+    self.notificationWindow.rootViewController = [RPViewController new];
 }
 
 - (void)createStatusBarView
