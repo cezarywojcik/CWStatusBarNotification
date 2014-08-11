@@ -441,11 +441,11 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
             self.notificationIsDismissing = NO;
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
-            if(completion)
-            {
-                completion();
-            }
         }];
+    }
+    if(completion)
+    {
+        completion();
     }
 }
 
