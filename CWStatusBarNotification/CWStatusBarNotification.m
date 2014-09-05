@@ -244,10 +244,13 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 - (CGFloat)getNotificationLabelHeight
 {
     switch (self.notificationStyle) {
-        case CWNotificationStyleStatusBarNotification:
-            return [self getStatusBarHeight];
         case CWNotificationStyleNavigationBarNotification:
-            return [self getStatusBarHeight] + [self getNavigationBarHeight];
+            if ([UIApplication sharedApplication].statusBarHidden) {
+                return [self getNavigationBarHeight];
+            } else {
+                return [self getStatusBarHeight] + [self getNavigationBarHeight];
+            }
+        case CWNotificationStyleStatusBarNotification:
         default:
             return [self getStatusBarHeight];
     }
