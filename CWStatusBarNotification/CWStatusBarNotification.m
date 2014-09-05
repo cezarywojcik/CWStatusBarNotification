@@ -30,6 +30,26 @@
 
 @end
 
+@implementation CWViewController
+
+- (instancetype)initWithNotification:(CWStatusBarNotification *)notification {
+    self = [super init];
+    if (self) {
+        self.notification = notification;
+    }
+    return self;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return [self.notification.delegate statusBarNotificationSupportedOrientations];
+}
+
+- (BOOL)shouldAutorotate {
+    return [self.notification.delegate statusBarNotificationShouldAutoRotate];
+}
+
+@end
+
 # pragma mark - dispatch after with cancellation
 // adapted from: https://github.com/Spaceman-Labs/Dispatch-Cancel
 
@@ -309,7 +329,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     self.notificationWindow.userInteractionEnabled = YES;
     self.notificationWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.notificationWindow.windowLevel = UIWindowLevelStatusBar;
-    self.notificationWindow.rootViewController = [UIViewController new];
+    self.notificationWindow.rootViewController = [[CWViewController alloc] initWithNotification:self];
 }
 
 - (void)createStatusBarView

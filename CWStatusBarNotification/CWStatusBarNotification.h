@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class CWStatusBarNotification;
+
+@protocol CWStatusBarNotificationDelegate <NSObject>
+- (NSUInteger)statusBarNotificationSupportedOrientations;
+- (BOOL)statusBarNotificationShouldAutoRotate;
+@end
+
 typedef void(^CWCompletionBlock)(void);
 
 @interface ScrollLabel : UILabel
@@ -15,6 +22,11 @@ typedef void(^CWCompletionBlock)(void);
 @end
 
 @interface CWWindowContainer : UIWindow
+@end
+
+@interface CWViewController : UIViewController
+- (instancetype)initWithNotification:(CWStatusBarNotification *)notification;
+@property (weak, nonatomic) CWStatusBarNotification *notification;
 @end
 
 @interface CWStatusBarNotification : NSObject
@@ -36,6 +48,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
     CWNotificationAnimationTypeOverlay
 };
 
+@property (weak, nonatomic) id <CWStatusBarNotificationDelegate> delegate;
 @property (strong, nonatomic) ScrollLabel *notificationLabel;
 @property (strong, nonatomic) UIColor *notificationLabelBackgroundColor;
 @property (strong, nonatomic) UIColor *notificationLabelTextColor;
