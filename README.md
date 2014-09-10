@@ -46,17 +46,24 @@ After you have a `CWStatusBarNotification` object, you can simply call the `disp
                    forDuration:1.0f];
 ```
 
-If you prefer to manually choose when to display and dismiss the notification, you can do so as well:
+If you need to execute certain functionality if the notification is fully dismissed, you have the option to define an additional block for`dismissed` like so:
+
+```
+[self.notification displayNotificationWithMessage:@"Hello, World!"
+                   forDuration:1.0f dismissed:nil];
+```
+
+If you prefer to manually choose when to display and dismiss the notification, you can do so as well. Also here you can define a block for `dismissed` that is executed after the dismiss animation is over:
 
 ```
 [self.notification displayNotificationWithMessage:@"Hello" completion:nil];
 // wait until you need to dismiss
-[self.notification dismissNotification];
+[self.notification dismissNotification dismissed:nil];
 ```
 
 ### Behavior on Tap
 
-The default behavior when the notification is tapped is to dismiss it. However, you can override this behavior by setting the `onTapNotification` block to something different. 
+The default behavior when the notification is tapped is to dismiss it. However, you can override this behavior by setting the `onTapNotification` block to something different.
 
 For example:
 

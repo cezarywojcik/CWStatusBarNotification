@@ -69,4 +69,15 @@
     [self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value];
 }
 
+- (IBAction)btnShowMultipleNotificationsPressed:(UIButton *)sender
+{
+	self.notification.notificationAnimationInStyle = self.segFromStyle.selectedSegmentIndex;
+	self.notification.notificationAnimationOutStyle = self.segToStyle.selectedSegmentIndex;
+
+	[self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value dismissed:^{
+		NSLog(@"First Notification completely dismissed - Show next Notification");
+		[self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value];
+	}];
+}
+
 @end
