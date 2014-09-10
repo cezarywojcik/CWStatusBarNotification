@@ -443,6 +443,11 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
+- (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration
+{
+	[self displayNotificationWithMessage:message forDuration:duration dismissed:nil];
+}
+
 - (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration dismissed:(void (^)(void))dismissed
 {
     [self displayNotificationWithMessage:message completion:^{
