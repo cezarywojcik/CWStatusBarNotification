@@ -370,7 +370,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
             self.notificationLabel.frame = [self getNotificationLabelTopFrame];
             break;
         case CWNotificationAnimationStyleBottom:
-            self.notificationLabel.transform = CGAffineTransformMakeScale(1.0f, 0.0f);
+            self.notificationLabel.transform = CGAffineTransformMakeScale(1.0f, 0.01f);
             break;
         case CWNotificationAnimationStyleLeft:
             self.notificationLabel.frame = [self getNotificationLabelLeftFrame];
