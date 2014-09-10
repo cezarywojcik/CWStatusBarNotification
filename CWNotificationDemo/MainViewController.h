@@ -21,5 +21,6 @@
 
 - (IBAction)sliderDurationChanged:(UISlider *)sender;
 - (IBAction)btnShowNotificationPressed:(UIButton *)sender;
+- (IBAction)btnShowMultipleNotificationsPressed:(UIButton *)sender;
 
 @end

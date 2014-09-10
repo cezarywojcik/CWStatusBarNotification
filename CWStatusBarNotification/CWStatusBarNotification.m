@@ -170,7 +170,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         __weak typeof(self) weakSelf = self;
         self.notificationTappedBlock = ^(void) {
             if (!weakSelf.notificationIsDismissing) {
-                [weakSelf dismissNotification];
+                [weakSelf dismissNotificationWithFinishBlock:nil];
             }
         };
     }
@@ -420,7 +420,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
-- (void)dismissNotification
+- (void)dismissNotificationWithFinishBlock:(void (^)(void))dismissed
 {
     if (self.notificationIsShowing) {
         cancel_delayed_block(self.dismissHandle);
@@ -438,15 +438,16 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
             self.notificationIsDismissing = NO;
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
+			[dismissed invoke];
         }];
     }
 }
 
-- (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration
+- (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration dismissed:(void (^)(void))dismissed
 {
     [self displayNotificationWithMessage:message completion:^{
         self.dismissHandle = perform_block_after_delay(duration, ^{
-            [self dismissNotification];
+            [self dismissNotificationWithFinishBlock:dismissed];
         });
     }];
 }
