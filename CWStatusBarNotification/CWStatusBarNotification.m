@@ -204,6 +204,12 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     if (self.notificationLabelHeight > 0) {
         return self.notificationLabelHeight;
     }
+    
+    BOOL orientationSupported = 1 << [[UIApplication sharedApplication] statusBarOrientation] & [self.delegate statusBarNotificationSupportedOrientations]; // Convert to orientation mask and check if the current orientation is actually supported
+    if (!orientationSupported) {
+        return 0;
+    }
+    
     CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     if (SYSTEM_VERSION_LESS_THAN(@"8.0") && UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
         statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.width;
