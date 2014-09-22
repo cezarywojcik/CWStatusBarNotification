@@ -446,6 +446,8 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
                 [completion invoke];
             });
         }];
+    } else {
+        self.notificationLabel.text = message;
     }
 }
 
