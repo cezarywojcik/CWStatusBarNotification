@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^CompletionBlock)(void);
+typedef void(^CWCompletionBlock)(void);
 
 @interface ScrollLabel : UILabel
 - (CGFloat)scrollTime;
@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 
 @property (strong, nonatomic) UIView *statusBarView;
 
-@property (copy, nonatomic) CompletionBlock notificationTappedBlock;
+@property (copy, nonatomic) CWCompletionBlock notificationTappedBlock;
 
 @property (nonatomic) CWNotificationAnimationStyle notificationStyle;
 @property (nonatomic) CWNotificationAnimationStyle notificationAnimationInStyle;

@@ -9,6 +9,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CWStatusBarNotification.h"
 
+#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
 #define STATUS_BAR_ANIMATION_LENGTH 0.25f
 #define FONT_SIZE 12.0f
 #define PADDING 10.0f
@@ -19,7 +21,15 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
-    if (point.y > 0 && point.y < [UIApplication sharedApplication].statusBarFrame.size.height) {
+    CGFloat height;
+    if (SYSTEM_VERSION_LESS_THAN(@"8.0") && UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        height = [UIApplication sharedApplication].statusBarFrame.size.width;
+    }
+    else {
+        height = [UIApplication sharedApplication].statusBarFrame.size.height;
+    }
+    
+    if (point.y > 0 && point.y < height) {
         return [super hitTest:point withEvent:event];
     }
     
@@ -183,7 +193,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         return self.notificationLabelHeight;
     }
     CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
-    if (UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+    if (SYSTEM_VERSION_LESS_THAN(@"8.0") && UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
         statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.width;
     }
     return statusBarHeight > 0 ? statusBarHeight : 20;
@@ -191,10 +201,10 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (CGFloat)getStatusBarWidth
 {
-    if (UIDeviceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
-        return [UIScreen mainScreen].bounds.size.width;
+    if (SYSTEM_VERSION_LESS_THAN(@"8.0") && UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        return [UIScreen mainScreen].bounds.size.height;
     }
-    return [UIScreen mainScreen].bounds.size.height;
+    return [UIScreen mainScreen].bounds.size.width;
 }
 
 - (CGFloat)getStatusBarOffset
@@ -368,7 +378,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
             self.notificationLabel.frame = [self getNotificationLabelTopFrame];
             break;
         case CWNotificationAnimationStyleBottom:
-            self.notificationLabel.transform = CGAffineTransformMakeScale(1.0f, 0.0f);
+            self.notificationLabel.transform = CGAffineTransformMakeScale(1.0f, 0.01f);
             break;
         case CWNotificationAnimationStyleLeft:
             self.notificationLabel.frame = [self getNotificationLabelLeftFrame];
