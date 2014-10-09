@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 
 @property (copy, nonatomic) CWCompletionBlock notificationTappedBlock;
 
-@property (nonatomic) CWNotificationAnimationStyle notificationStyle;
+@property (nonatomic) CWNotificationStyle notificationStyle;
 @property (nonatomic) CWNotificationAnimationStyle notificationAnimationInStyle;
 @property (nonatomic) CWNotificationAnimationStyle notificationAnimationOutStyle;
 @property (nonatomic) CWNotificationAnimationType notificationAnimationType;
