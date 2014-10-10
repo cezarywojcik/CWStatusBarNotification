@@ -57,6 +57,9 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 
 - (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration;
 - (void)displayNotificationWithMessage:(NSString *)message completion:(void (^)(void))completion;
+
+- (void)dismissNotificationWithCompletion:(void (^)(void))completion;
+
 - (void)dismissNotification;
 
 @end
