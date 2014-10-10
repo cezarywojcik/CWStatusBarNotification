@@ -146,6 +146,8 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 @property (strong, nonatomic) CWDelayedBlockHandle dismissHandle;
+@property (strong, nonatomic) NSDate *displayTimestamp;
+@property (nonatomic) NSTimeInterval minimumDuration;
 
 @end
 
@@ -428,8 +430,27 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
+- (void)displayNotificationWithMessage:(NSString *)message minimumDuration:(NSTimeInterval)minimumDuration completion:(void (^)(void))completion
+{
+    self.displayTimestamp = [NSDate date];
+    self.minimumDuration = minimumDuration;
+    [self displayNotificationWithMessage:message completion:completion];
+}
+
 - (void)dismissNotification
 {
+    NSTimeInterval displayTime = [[NSDate date] timeIntervalSinceDate:self.displayTimestamp];
+    if (self.minimumDuration > displayTime) {
+        NSTimeInterval duration = self.minimumDuration - displayTime;
+        perform_block_after_delay(duration, ^{
+            [self dismissNotification];
+        });
+        return;
+    }
+    
+    self.minimumDuration = 0.0f;
+    self.displayTimestamp = nil;
+    
     if (self.notificationIsShowing) {
         cancel_delayed_block(self.dismissHandle);
         self.notificationIsDismissing = YES;
@@ -450,7 +471,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
-- (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration
+- (void)displayNotificationWithMessage:(NSString *)message forDuration:(NSTimeInterval)duration
 {
     [self displayNotificationWithMessage:message completion:^{
         self.dismissHandle = perform_block_after_delay(duration, ^{
