@@ -69,4 +69,11 @@
     [self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value];
 }
 
+- (IBAction)btnShowCustomNotificationPressed:(UIButton *)sender {
+    self.notification.notificationAnimationInStyle = self.segFromStyle.selectedSegmentIndex;
+    self.notification.notificationAnimationOutStyle = self.segToStyle.selectedSegmentIndex;
+    UIView *view = [[NSBundle mainBundle] loadNibNamed:@"CustomView" owner:nil options:nil][0];
+    [self.notification displayNotificationWithView:view forDuration:self.sliderDuration.value];
+}
+
 @end

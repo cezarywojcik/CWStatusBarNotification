@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -72,9 +72,20 @@
                         <segment title="From Right"/>
                     </segments>
                 </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8G-aN-rjr">
+                    <rect key="frame" x="117" y="297" width="180" height="30"/>
+                    <state key="normal" title="Show Custom Notification">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnShowCustomNotificationPressed:" destination="-1" eventType="touchUpInside" id="LIQ-4P-I0D"/>
+                        <action selector="btnShowNotificationPressed:" destination="-1" eventType="touchUpInside" id="jNW-Ie-NPn"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="E8G-aN-rjr" firstAttribute="top" secondItem="DId-6z-9ak" secondAttribute="bottom" constant="10" id="65O-jS-huU"/>
                 <constraint firstItem="lnj-T4-sfz" firstAttribute="leading" secondItem="nHX-St-Osi" secondAttribute="leading" id="7da-li-6Kn"/>
                 <constraint firstItem="vWx-wx-d32" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="8hY-Bj-MI2"/>
                 <constraint firstItem="oAK-DR-B27" firstAttribute="leading" secondItem="nHX-St-Osi" secondAttribute="trailing" constant="8" symbolic="YES" id="9ki-g4-vZj"/>
@@ -90,6 +101,7 @@
                 <constraint firstItem="lnj-T4-sfz" firstAttribute="top" secondItem="Bza-7R-910" secondAttribute="bottom" constant="8" symbolic="YES" id="iOO-Sk-CU0"/>
                 <constraint firstItem="Bza-7R-910" firstAttribute="trailing" secondItem="lnj-T4-sfz" secondAttribute="trailing" id="pZ0-3h-ZuL"/>
                 <constraint firstItem="VqG-wR-oYI" firstAttribute="leading" secondItem="nHX-St-Osi" secondAttribute="leading" id="qTt-Y1-xfG"/>
+                <constraint firstItem="E8G-aN-rjr" firstAttribute="centerX" secondItem="DId-6z-9ak" secondAttribute="centerX" id="qrX-mR-Hox"/>
                 <constraint firstItem="lnj-T4-sfz" firstAttribute="leading" secondItem="Bza-7R-910" secondAttribute="leading" id="tXW-Jb-JXr"/>
                 <constraint firstItem="vWx-wx-d32" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="ulj-gO-yBc"/>
                 <constraint firstItem="nHX-St-Osi" firstAttribute="top" secondItem="lnj-T4-sfz" secondAttribute="bottom" constant="9" id="w3P-gu-lkL"/>
