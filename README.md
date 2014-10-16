@@ -18,7 +18,7 @@ Works for iPhone and iPad.
 
 ### CocoaPods
 
-`pod 'CWStatusBarNotification', '~> 2.1.3'`
+`pod 'CWStatusBarNotification', '~> 2.1.4'`
 
 ### Manual
 
@@ -121,6 +121,14 @@ The default value for `notificationAnimationOutStyle` is `CWNotificationAnimatio
 ### Additional Remarks
 
 The notifications will work in both screen orientations, however, screen rotation while a notification is displayed is not yet fully supported.
+
+## Apps Using This Library
+
+If you would like for your app to be featured here, [contact me](cezarywojcik.com/contact) and I would love to hear about your app!
+
+* [SlideShare Presentations](https://itunes.apple.com/app/id917418728)
+* [Pong Ping](https://itunes.apple.com/us/app/pong-ping-social-addictive/id822887888)
+* [NextMovies](https://itunes.apple.com/us/app/nextmovies-smart-movie-recommendation/id680850329)
 
 ## License
 
