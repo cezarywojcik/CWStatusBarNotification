@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370883CE19F08756000E79D6 /* CustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 370883CD19F08756000E79D6 /* CustomView.xib */; };
 		5E0D045E1838AE0D00CBFC35 /* CWStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0D045D1838AE0D00CBFC35 /* CWStatusBarNotification.m */; };
 		5E2FFB5718367C01003333F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2FFB5618367C01003333F8 /* Foundation.framework */; };
 		5E2FFB5918367C01003333F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2FFB5818367C01003333F8 /* CoreGraphics.framework */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		370883CD19F08756000E79D6 /* CustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomView.xib; sourceTree = "<group>"; };
 		5E0D045C1838AE0D00CBFC35 /* CWStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWStatusBarNotification.h; path = CWStatusBarNotification/CWStatusBarNotification.h; sourceTree = SOURCE_ROOT; };
 		5E0D045D1838AE0D00CBFC35 /* CWStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWStatusBarNotification.m; path = CWStatusBarNotification/CWStatusBarNotification.m; sourceTree = SOURCE_ROOT; };
 		5E2FFB5318367C01003333F8 /* CWNotificationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWNotificationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,7 @@
 			children = (
 				5E2FFB6518367C01003333F8 /* AppDelegate.h */,
 				5E2FFB6618367C01003333F8 /* AppDelegate.m */,
+				370883CD19F08756000E79D6 /* CustomView.xib */,
 				5E2FFB8918367C75003333F8 /* View Controllers */,
 				5E2FFB6818367C01003333F8 /* Images.xcassets */,
 				5E2FFB5D18367C01003333F8 /* Supporting Files */,
@@ -240,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E7E40DA19C0F9CF00A0E3E0 /* LaunchScreen.xib in Resources */,
+				370883CE19F08756000E79D6 /* CustomView.xib in Resources */,
 				5E2FFB6118367C01003333F8 /* InfoPlist.strings in Resources */,
 				5E2FFB8F18367CA3003333F8 /* MainViewController.xib in Resources */,
 				5E2FFB6918367C01003333F8 /* Images.xcassets in Resources */,

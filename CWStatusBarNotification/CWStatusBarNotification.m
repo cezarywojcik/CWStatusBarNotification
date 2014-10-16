@@ -146,12 +146,13 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 @property (strong, nonatomic) CWDelayedBlockHandle dismissHandle;
+@property (assign, nonatomic) BOOL isCustomView;
 
 @end
 
 @implementation CWStatusBarNotification
 
-@synthesize notificationLabel, notificationLabelBackgroundColor, notificationLabelTextColor, notificationWindow;
+@synthesize notificationLabel, notificationLabelBackgroundColor, notificationLabelTextColor, notificationWindow, customView;
 
 @synthesize statusBarView;
 
@@ -169,6 +170,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         self.notificationAnimationOutStyle = CWNotificationAnimationStyleBottom;
         self.notificationAnimationType = CWNotificationAnimationTypeReplace;
         self.notificationIsDismissing = NO;
+        self.isCustomView = NO;
 
         // create tap recognizer
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(notificationTapped:)];
@@ -265,7 +267,11 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)updateStatusBarFrame
 {
-    self.notificationLabel.frame = [self getNotificationLabelFrame];
+    if (self.isCustomView) {
+        self.customView.frame = [self getNotificationLabelFrame];
+    } else {
+        self.notificationLabel.frame = [self getNotificationLabelFrame];
+    }
     self.statusBarView.hidden = YES;
 }
 
@@ -278,6 +284,27 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 # pragma mark - display helpers
 
+- (void)setupNotificationView:(UIView *)view
+{
+    view.clipsToBounds = YES;
+    view.userInteractionEnabled = YES;
+    [view addGestureRecognizer:self.tapGestureRecognizer];
+    switch (self.notificationAnimationInStyle) {
+        case CWNotificationAnimationStyleTop:
+            view.frame = [self getNotificationLabelTopFrame];
+            break;
+        case CWNotificationAnimationStyleBottom:
+            view.frame = [self getNotificationLabelBottomFrame];
+            break;
+        case CWNotificationAnimationStyleLeft:
+            view.frame = [self getNotificationLabelLeftFrame];
+            break;
+        case CWNotificationAnimationStyleRight:
+            view.frame = [self getNotificationLabelRightFrame];
+            break;
+    }
+}
+
 - (void)createNotificationLabelWithMessage:(NSString *)message
 {
     self.notificationLabel = [ScrollLabel new];
@@ -288,23 +315,13 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     self.notificationLabel.font = [UIFont systemFontOfSize:FONT_SIZE];
     self.notificationLabel.backgroundColor = self.notificationLabelBackgroundColor;
     self.notificationLabel.textColor = self.notificationLabelTextColor;
-    self.notificationLabel.clipsToBounds = YES;
-    self.notificationLabel.userInteractionEnabled = YES;
-    [self.notificationLabel addGestureRecognizer:self.tapGestureRecognizer];
-    switch (self.notificationAnimationInStyle) {
-        case CWNotificationAnimationStyleTop:
-            self.notificationLabel.frame = [self getNotificationLabelTopFrame];
-            break;
-        case CWNotificationAnimationStyleBottom:
-            self.notificationLabel.frame = [self getNotificationLabelBottomFrame];
-            break;
-        case CWNotificationAnimationStyleLeft:
-            self.notificationLabel.frame = [self getNotificationLabelLeftFrame];
-            break;
-        case CWNotificationAnimationStyleRight:
-            self.notificationLabel.frame = [self getNotificationLabelRightFrame];
-            break;
-    }
+    [self setupNotificationView:self.notificationLabel];
+}
+
+- (void)createNotificationCustomView:(UIView *)view
+{
+    self.customView = view;
+    [self setupNotificationView:self.customView];
 }
 
 - (void)createNotificationWindow
@@ -333,7 +350,8 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)firstFrameChange
 {
-    self.notificationLabel.frame = [self getNotificationLabelFrame];
+    UIView *view = self.isCustomView ? self.customView : self.notificationLabel;
+    view.frame = [self getNotificationLabelFrame];
     switch (self.notificationAnimationInStyle) {
         case CWNotificationAnimationStyleTop:
             self.statusBarView.frame = [self getNotificationLabelBottomFrame];
@@ -352,14 +370,15 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)secondFrameChange
 {
+    UIView *view = self.isCustomView ? self.customView : self.notificationLabel;
     switch (self.notificationAnimationOutStyle) {
         case CWNotificationAnimationStyleTop:
             self.statusBarView.frame = [self getNotificationLabelBottomFrame];
             break;
         case CWNotificationAnimationStyleBottom:
             self.statusBarView.frame = [self getNotificationLabelTopFrame];
-            self.notificationLabel.layer.anchorPoint = CGPointMake(0.5f, 1.0f);
-            self.notificationLabel.center = CGPointMake(self.notificationLabel.center.x, [self getStatusBarOffset] + [self getNotificationLabelHeight]);
+            view.layer.anchorPoint = CGPointMake(0.5f, 1.0f);
+            view.center = CGPointMake(view.center.x, [self getStatusBarOffset] + [self getNotificationLabelHeight]);
             break;
         case CWNotificationAnimationStyleLeft:
             self.statusBarView.frame = [self getNotificationLabelRightFrame];
@@ -372,19 +391,20 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)thirdFrameChange
 {
+    UIView *view = self.isCustomView ? self.customView : self.notificationLabel;
     self.statusBarView.frame = [self getNotificationLabelFrame];
     switch (self.notificationAnimationOutStyle) {
         case CWNotificationAnimationStyleTop:
-            self.notificationLabel.frame = [self getNotificationLabelTopFrame];
+            view.frame = [self getNotificationLabelTopFrame];
             break;
         case CWNotificationAnimationStyleBottom:
-            self.notificationLabel.transform = CGAffineTransformMakeScale(1.0f, 0.01f);
+            view.transform = CGAffineTransformMakeScale(1.0f, 0.01f);
             break;
         case CWNotificationAnimationStyleLeft:
-            self.notificationLabel.frame = [self getNotificationLabelLeftFrame];
+            view.frame = [self getNotificationLabelLeftFrame];
             break;
         case CWNotificationAnimationStyleRight:
-            self.notificationLabel.frame = [self getNotificationLabelRightFrame];
+            view.frame = [self getNotificationLabelRightFrame];
             break;
     }
 }
@@ -394,6 +414,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 - (void)displayNotificationWithMessage:(NSString *)message completion:(void (^)(void))completion
 {
     if (!self.notificationIsShowing) {
+        self.isCustomView = NO;
         self.notificationIsShowing = YES;
 
         // create UIWindow
@@ -428,6 +449,41 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
+- (void)displayNotificationWithView:(UIView *)view completion:(void (^)(void))completion
+{
+    if (!self.notificationIsShowing) {
+        self.isCustomView = YES;
+        self.notificationIsShowing = YES;
+        
+        // create UIWindow
+        [self createNotificationWindow];
+        
+        // setup view
+        [self createNotificationCustomView:view];
+        
+        // create status bar view
+        [self createStatusBarView];
+        
+        // add view to window
+        [self.notificationWindow.rootViewController.view addSubview:self.customView];
+        [self.notificationWindow.rootViewController.view bringSubviewToFront:self.customView];
+        [self.notificationWindow setHidden:NO];
+        
+        // checking for screen orientation change
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateStatusBarFrame) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+        
+        // checking for status bar change
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateStatusBarFrame) name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
+        
+        // animate
+        [UIView animateWithDuration:STATUS_BAR_ANIMATION_LENGTH animations:^{
+            [self firstFrameChange];
+        } completion:^(BOOL finished) {
+            [completion invoke];
+        }];
+    }
+}
+
 - (void)dismissNotification
 {
     if (self.notificationIsShowing) {
@@ -437,11 +493,12 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         [UIView animateWithDuration:STATUS_BAR_ANIMATION_LENGTH animations:^{
             [self thirdFrameChange];
         } completion:^(BOOL finished) {
-            [self.notificationLabel removeFromSuperview];
+            UIView *view = self.isCustomView ? self.customView : self.notificationLabel;
+            [view removeFromSuperview];
             [self.statusBarView removeFromSuperview];
             [self.notificationWindow setHidden:YES];
             self.notificationWindow = nil;
-            self.notificationLabel = nil;
+            view = nil;
             self.notificationIsShowing = NO;
             self.notificationIsDismissing = NO;
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
@@ -453,6 +510,15 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 - (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration
 {
     [self displayNotificationWithMessage:message completion:^{
+        self.dismissHandle = perform_block_after_delay(duration, ^{
+            [self dismissNotification];
+        });
+    }];
+}
+
+- (void)displayNotificationWithView:(UIView *)view forDuration:(CGFloat)duration
+{
+    [self displayNotificationWithView:view completion:^{
         self.dismissHandle = perform_block_after_delay(duration, ^{
             [self dismissNotification];
         });

@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (strong, nonatomic) UIColor *notificationLabelBackgroundColor;
 @property (strong, nonatomic) UIColor *notificationLabelTextColor;
 @property (assign, nonatomic) CGFloat notificationLabelHeight;
+@property (strong, nonatomic) UIView *customView;
 @property (assign, nonatomic) BOOL multiline;
 
 @property (strong, nonatomic) UIView *statusBarView;
@@ -57,6 +58,8 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 
 - (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration;
 - (void)displayNotificationWithMessage:(NSString *)message completion:(void (^)(void))completion;
+- (void)displayNotificationWithView:(UIView *)view forDuration:(CGFloat)duration;
+- (void)displayNotificationWithView:(UIView *)view completion:(void (^)(void))completion;
 - (void)dismissNotification;
 
 @end
