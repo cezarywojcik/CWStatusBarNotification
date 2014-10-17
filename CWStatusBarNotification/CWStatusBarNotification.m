@@ -267,11 +267,8 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)updateStatusBarFrame
 {
-    if (self.isCustomView) {
-        self.customView.frame = [self getNotificationLabelFrame];
-    } else {
-        self.notificationLabel.frame = [self getNotificationLabelFrame];
-    }
+    UIView *view = self.isCustomView ? self.customView : self.notificationLabel;
+    view.frame = [self getNotificationLabelFrame];
     self.statusBarView.hidden = YES;
 }
 
@@ -320,7 +317,18 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)createNotificationCustomView:(UIView *)view
 {
-    self.customView = view;
+    self.customView = [[UIView alloc] init];
+    // Doesn't use autoresizing masks so that we can create constraints below manually
+    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.customView addSubview:view];
+    
+    // Setup Auto Layout constaints so that the custom view that is added is constained to be the same
+    // size as its superview, whose frame will be altered
+    [self.customView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.customView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0]];
+    [self.customView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.customView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0]];
+    [self.customView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.customView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
+    [self.customView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.customView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
+    
     [self setupNotificationView:self.customView];
 }
 
@@ -463,10 +471,11 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         
         // create status bar view
         [self createStatusBarView];
-        
+
         // add view to window
-        [self.notificationWindow.rootViewController.view addSubview:self.customView];
-        [self.notificationWindow.rootViewController.view bringSubviewToFront:self.customView];
+        UIView *rootView = self.notificationWindow.rootViewController.view;
+        [rootView addSubview:self.customView];
+        [rootView bringSubviewToFront:self.customView];
         [self.notificationWindow setHidden:NO];
         
         // checking for screen orientation change

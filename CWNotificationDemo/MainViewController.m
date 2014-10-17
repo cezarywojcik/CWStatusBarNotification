@@ -60,6 +60,12 @@
     [self updateDurationLabel];
 }
 
+- (IBAction)notificationStyleChanged:(UISwitch *)sender
+{
+    self.notificationStyleLabel.text = sender.on ? @"Status Bar" : @"Navigation Bar";
+    self.notification.notificationStyle = sender.on ? CWNotificationStyleStatusBarNotification : CWNotificationStyleNavigationBarNotification;
+}
+
 # pragma mark - show notification
 
 - (IBAction)btnShowNotificationPressed:(UIButton *)sender
