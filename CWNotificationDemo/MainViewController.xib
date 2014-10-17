@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
                 <outlet property="lblDuration" destination="oAK-DR-B27" id="roa-nx-2td"/>
+                <outlet property="notificationStyleLabel" destination="vCP-z3-d8I" id="w8D-aD-anT"/>
                 <outlet property="segFromStyle" destination="vWx-wx-d32" id="Zvu-PE-8D7"/>
                 <outlet property="segToStyle" destination="Bza-7R-910" id="CkD-Lr-RCl"/>
                 <outlet property="sliderDuration" destination="lnj-T4-sfz" id="BYx-MN-Cnz"/>
@@ -82,6 +83,32 @@
                         <action selector="btnShowNotificationPressed:" destination="-1" eventType="touchUpInside" id="jNW-Ie-NPn"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdx-ge-BUc">
+                    <rect key="frame" x="110" y="332" width="195" height="45"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status Bar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCP-z3-d8I">
+                            <rect key="frame" x="2" y="12" width="81" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kMg-IK-wId">
+                            <rect key="frame" x="129" y="7" width="51" height="31"/>
+                            <connections>
+                                <action selector="notificationStyleChanged:" destination="-1" eventType="valueChanged" id="l5q-T2-kkR"/>
+                            </connections>
+                        </switch>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="vCP-z3-d8I" firstAttribute="centerY" secondItem="kMg-IK-wId" secondAttribute="centerY" id="3SI-Am-gjr"/>
+                        <constraint firstItem="vCP-z3-d8I" firstAttribute="leading" secondItem="jdx-ge-BUc" secondAttribute="leading" constant="2" id="JX1-pS-6MA"/>
+                        <constraint firstAttribute="width" constant="195" id="ULf-xN-mdP"/>
+                        <constraint firstAttribute="trailing" secondItem="kMg-IK-wId" secondAttribute="trailing" constant="17" id="UMt-vg-87u"/>
+                        <constraint firstAttribute="centerY" secondItem="vCP-z3-d8I" secondAttribute="centerY" id="VC6-YO-6GP"/>
+                        <constraint firstAttribute="height" constant="45" id="x6g-OL-a8r"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -89,9 +116,11 @@
                 <constraint firstItem="lnj-T4-sfz" firstAttribute="leading" secondItem="nHX-St-Osi" secondAttribute="leading" id="7da-li-6Kn"/>
                 <constraint firstItem="vWx-wx-d32" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="8hY-Bj-MI2"/>
                 <constraint firstItem="oAK-DR-B27" firstAttribute="leading" secondItem="nHX-St-Osi" secondAttribute="trailing" constant="8" symbolic="YES" id="9ki-g4-vZj"/>
+                <constraint firstItem="jdx-ge-BUc" firstAttribute="centerX" secondItem="E8G-aN-rjr" secondAttribute="centerX" id="CSN-1b-hyf"/>
                 <constraint firstItem="oAK-DR-B27" firstAttribute="trailing" secondItem="lnj-T4-sfz" secondAttribute="trailing" id="DF9-5s-ORR"/>
                 <constraint firstItem="nHX-St-Osi" firstAttribute="firstBaseline" secondItem="oAK-DR-B27" secondAttribute="firstBaseline" id="ELp-HE-4nH"/>
                 <constraint firstItem="VqG-wR-oYI" firstAttribute="top" secondItem="nHX-St-Osi" secondAttribute="bottom" constant="7" id="I7c-GM-lko"/>
+                <constraint firstItem="jdx-ge-BUc" firstAttribute="top" secondItem="E8G-aN-rjr" secondAttribute="bottom" constant="5" id="PQJ-pr-K5R"/>
                 <constraint firstItem="vWx-wx-d32" firstAttribute="top" secondItem="1" secondAttribute="top" constant="78" id="UEb-Dv-gVI"/>
                 <constraint firstItem="DId-6z-9ak" firstAttribute="centerX" secondItem="VqG-wR-oYI" secondAttribute="centerX" id="UR8-ES-cIh"/>
                 <constraint firstItem="DId-6z-9ak" firstAttribute="top" secondItem="VqG-wR-oYI" secondAttribute="bottom" constant="10" id="ZgW-j6-ji5"/>

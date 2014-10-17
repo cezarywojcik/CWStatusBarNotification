@@ -267,11 +267,8 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)updateStatusBarFrame
 {
-    if (self.isCustomView) {
-        self.customView.frame = [self getNotificationLabelFrame];
-    } else {
-        self.notificationLabel.frame = [self getNotificationLabelFrame];
-    }
+    UIView *view = self.isCustomView ? self.customView : self.notificationLabel;
+    view.frame = [self getNotificationLabelFrame];
     self.statusBarView.hidden = YES;
 }
 
@@ -465,8 +462,9 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         [self createStatusBarView];
         
         // add view to window
-        [self.notificationWindow.rootViewController.view addSubview:self.customView];
-        [self.notificationWindow.rootViewController.view bringSubviewToFront:self.customView];
+        UIView *rootView = self.notificationWindow.rootViewController.view;
+        [rootView addSubview:self.customView];
+        [rootView bringSubviewToFront:self.customView];
         [self.notificationWindow setHidden:NO];
         
         // checking for screen orientation change
