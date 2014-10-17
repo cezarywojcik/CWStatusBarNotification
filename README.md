@@ -18,7 +18,7 @@ Works for iPhone and iPad.
 
 ### CocoaPods
 
-`pod 'CWStatusBarNotification', '~> 2.1.4'`
+`pod 'CWStatusBarNotification', '~> 2.2.0'`
 
 ### Manual
 
@@ -30,25 +30,26 @@ Copy the folder `CWStatusBarNotification` to your project.
 
 Firstly, you need the following import statement:
 
-```
+```objc
 #import "CWStatusBarNotification.h"
 ```
 
 Now, you need to create a `CWStatusBarNotification` object. It is recommended that you do so by attaching it as a property to a `UIViewController`.
 
-```
+```objc
 CWStatusBarNotification *notification = [CWStatusBarNotification new];
 ```
+
 After you have a `CWStatusBarNotification` object, you can simply call the `displayNotificationMessage:forDuration:` method:
 
-```
+```objc
 [self.notification displayNotificationWithMessage:@"Hello, World!"
                    forDuration:1.0f];
 ```
 
 If you prefer to manually choose when to display and dismiss the notification, you can do so as well:
 
-```
+```objc
 [self.notification displayNotificationWithMessage:@"Hello" completion:nil];
 // wait until you need to dismiss
 [self.notification dismissNotification];
@@ -60,17 +61,16 @@ The default behavior when the notification is tapped is to dismiss it. However, 
 
 For example:
 
-```
+```objc
 self.notification.notificationTappedBlock = ^(void) {
     NSLog(@"notification tapped");
     // more code here
 };
-
 ```
 
 Note that overriding this block means that the notification will no longer be dismissed when tapped. If you want the notification to still dismiss when tapped, make sure to implement the following when overriding the block:
 
-```
+```objc
 __weak typeof(self) weakSelf = self;
 self.notification.notificationTappedBlock = ^(void) {
     if (!weakSelf.notificationIsDismissing) {
@@ -86,7 +86,7 @@ First of all, you can customize the background color and text color using the fo
 
 Example:
 
-```
+```objc
 notification.notificationLabelBackgroundColor = [UIColor blackColor];
 notification.notificationLabelTextColor = [UIColor greenColor];
 ```
@@ -117,6 +117,24 @@ The `notificationAnimationInStyle` describes where the notification comes from, 
 The default value for `notificationAnimationInStyle` is `CWNotificationAnimationStyleTop`.
 
 The default value for `notificationAnimationOutStyle` is `CWNotificationAnimationStyleTop`.
+
+## Presenting a Custom View
+
+As of version `2.2.0`, you can choose to present a custom view in lieu of presenting a simple message. The demo project shows a simple way in which you can make a custom NIB file and present it as the notification view using the `displayNotificationWithView:forDuration:` method:
+
+```objc
+UIView *view = [[NSBundle mainBundle] loadNibNamed:@"CustomView" owner:nil options:nil][0];
+    [self.notification displayNotificationWithView:view forDuration:self.sliderDuration.value];
+```
+   
+You can also display the notification and choose when to dismiss it as usual:
+
+```objc
+[self.notification displayNotificationWithView:view completion:nil];
+// wait until you need to dismiss
+[self.notification dismissNotification];
+```
+
 
 ### Additional Remarks
 
