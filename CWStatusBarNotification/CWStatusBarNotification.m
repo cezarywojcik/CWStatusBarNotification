@@ -38,6 +38,18 @@
 
 @end
 
+@interface RPViewController : UIViewController
+@end
+
+@implementation RPViewController
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return [[UIApplication sharedApplication].keyWindow.rootViewController supportedInterfaceOrientations];
+}
+
+@end
+
 # pragma mark - dispatch after with cancellation
 // adapted from: https://github.com/Spaceman-Labs/Dispatch-Cancel
 
@@ -331,7 +343,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     self.notificationWindow.userInteractionEnabled = YES;
     self.notificationWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.notificationWindow.windowLevel = UIWindowLevelStatusBar;
-    self.notificationWindow.rootViewController = [UIViewController new];
+    self.notificationWindow.rootViewController = [RPViewController new];
 }
 
 - (void)createStatusBarView
@@ -486,6 +498,11 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)dismissNotification
 {
+    [self dismissNotificationWithCompletion:nil];
+}
+
+- (void)dismissNotificationWithCompletion:(void (^)(void))completion
+{
     if (self.notificationIsShowing) {
         cancel_delayed_block(self.dismissHandle);
         self.notificationIsDismissing = YES;
@@ -505,13 +522,22 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
         }];
     }
+    if(completion)
+    {
+        completion();
+    }
 }
 
 - (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration
 {
+    [self displayNotificationWithMessage:message forDuration:duration completion:nil];
+}
+
+- (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration completion:(void (^)(void))completion
+{
     [self displayNotificationWithMessage:message completion:^{
         self.dismissHandle = perform_block_after_delay(duration, ^{
-            [self dismissNotification];
+            [self dismissNotificationWithCompletion:completion];
         });
     }];
 }
