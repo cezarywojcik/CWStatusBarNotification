@@ -124,7 +124,7 @@ As of version `2.2.0`, you can choose to present a custom view in lieu of presen
 
 ```objc
 UIView *view = [[NSBundle mainBundle] loadNibNamed:@"CustomView" owner:nil options:nil][0];
-    [self.notification displayNotificationWithView:view forDuration:self.sliderDuration.value];
+[self.notification displayNotificationWithView:view forDuration:self.sliderDuration.value];
 ```
    
 You can also display the notification and choose when to dismiss it as usual:

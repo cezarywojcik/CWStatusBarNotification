@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 Pod::Spec.new do |s|
   s.name         = "CWStatusBarNotification"
   s.version      = "2.2.0"
