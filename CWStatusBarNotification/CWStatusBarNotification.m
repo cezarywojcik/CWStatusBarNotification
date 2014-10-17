@@ -495,6 +495,11 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)dismissNotification
 {
+    [self dismissNotificationWithCompletion:nil];
+}
+
+- (void)dismissNotificationWithCompletion:(void (^)(void))completion
+{
     if (self.notificationIsShowing) {
         cancel_delayed_block(self.dismissHandle);
         self.notificationIsDismissing = YES;
@@ -512,7 +517,14 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
             self.notificationIsDismissing = NO;
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
+            if (completion) {
+                completion();
+            }
         }];
+    } else {
+        if (completion) {
+            completion();
+        }
     }
 }
 
