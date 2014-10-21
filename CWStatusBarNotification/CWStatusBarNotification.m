@@ -29,7 +29,7 @@
         height = [UIApplication sharedApplication].statusBarFrame.size.height;
     }
     
-    if (point.y > 0 && point.y < self.notificationHeight != 0.0 ? self.notificationHeight : height) {
+    if (point.y > 0 && point.y < (self.notificationHeight != 0.0 ? self.notificationHeight : height)) {
         return [super hitTest:point withEvent:event];
     }
     
