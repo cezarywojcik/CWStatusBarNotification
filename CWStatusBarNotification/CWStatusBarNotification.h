@@ -15,6 +15,9 @@ typedef void(^CWCompletionBlock)(void);
 @end
 
 @interface CWWindowContainer : UIWindow
+
+@property (assign, nonatomic) CGFloat notificationHeight;
+
 @end
 
 @interface CWStatusBarNotification : NSObject

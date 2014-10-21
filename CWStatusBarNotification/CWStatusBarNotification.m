@@ -29,7 +29,7 @@
         height = [UIApplication sharedApplication].statusBarFrame.size.height;
     }
     
-    if (point.y > 0 && point.y < height) {
+    if (point.y > 0 && point.y < self.notificationHeight != 0.0 ? self.notificationHeight : height) {
         return [super hitTest:point withEvent:event];
     }
     
@@ -340,6 +340,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     self.notificationWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.notificationWindow.windowLevel = UIWindowLevelStatusBar;
     self.notificationWindow.rootViewController = [UIViewController new];
+    self.notificationWindow.notificationHeight = [self getNotificationLabelHeight];
 }
 
 - (void)createStatusBarView
