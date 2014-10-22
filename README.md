@@ -26,8 +26,6 @@ Copy the folder `CWStatusBarNotification` to your project.
 
 ## Usage
 
-***Note:** The previous version of this library implemented the notifications using a category. This version uses an object instead.*
-
 Firstly, you need the following import statement:
 
 ```objc
