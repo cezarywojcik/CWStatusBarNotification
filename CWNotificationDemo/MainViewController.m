@@ -60,24 +60,24 @@
     [self updateDurationLabel];
 }
 
-- (IBAction)notificationStyleChanged:(UISwitch *)sender
-{
-    self.notificationStyleLabel.text = sender.on ? @"Status Bar" : @"Navigation Bar";
-    self.notification.notificationStyle = sender.on ? CWNotificationStyleStatusBarNotification : CWNotificationStyleNavigationBarNotification;
-}
-
 # pragma mark - show notification
 
-- (IBAction)btnShowNotificationPressed:(UIButton *)sender
+- (void)setupNotification
 {
     self.notification.notificationAnimationInStyle = self.segFromStyle.selectedSegmentIndex;
     self.notification.notificationAnimationOutStyle = self.segToStyle.selectedSegmentIndex;
+    self.notification.notificationStyle = self.notificationStyle.selectedSegmentIndex == 0 ?
+    CWNotificationStyleStatusBarNotification : CWNotificationStyleNavigationBarNotification;
+}
+
+- (IBAction)btnShowNotificationPressed:(UIButton *)sender
+{
+    [self setupNotification];
     [self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value];
 }
 
 - (IBAction)btnShowCustomNotificationPressed:(UIButton *)sender {
-    self.notification.notificationAnimationInStyle = self.segFromStyle.selectedSegmentIndex;
-    self.notification.notificationAnimationOutStyle = self.segToStyle.selectedSegmentIndex;
+    [self setupNotification];
     UIView *view = [[NSBundle mainBundle] loadNibNamed:@"CustomView" owner:nil options:nil][0];
     [self.notification displayNotificationWithView:view forDuration:self.sliderDuration.value];
 }

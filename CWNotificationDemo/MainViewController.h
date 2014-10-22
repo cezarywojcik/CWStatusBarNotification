@@ -16,12 +16,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtNotificationMessage;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segFromStyle;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segToStyle;
-@property (weak, nonatomic) IBOutlet UILabel *notificationStyleLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *notificationStyle;
 
 @property (strong, nonatomic) CWStatusBarNotification *notification;
 
 - (IBAction)sliderDurationChanged:(UISlider *)sender;
-- (IBAction)notificationStyleChanged:(UISwitch *)sender;
 - (IBAction)btnShowNotificationPressed:(UIButton *)sender;
 - (IBAction)btnShowCustomNotificationPressed:(UIButton *)sender;
 

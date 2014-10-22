@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
                 <outlet property="lblDuration" destination="oAK-DR-B27" id="roa-nx-2td"/>
-                <outlet property="notificationStyleLabel" destination="vCP-z3-d8I" id="w8D-aD-anT"/>
+                <outlet property="notificationStyle" destination="fcn-wc-llO" id="6cr-5b-6JN"/>
                 <outlet property="segFromStyle" destination="vWx-wx-d32" id="Zvu-PE-8D7"/>
                 <outlet property="segToStyle" destination="Bza-7R-910" id="CkD-Lr-RCl"/>
                 <outlet property="sliderDuration" destination="lnj-T4-sfz" id="BYx-MN-Cnz"/>
@@ -22,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DId-6z-9ak">
-                    <rect key="frame" x="147" y="257" width="121" height="30"/>
+                    <rect key="frame" x="147" y="293" width="121" height="30"/>
                     <state key="normal" title="Show Notification">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -31,27 +30,23 @@
                     </connections>
                 </button>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="lnj-T4-sfz">
-                    <rect key="frame" x="18" y="150" width="378" height="31"/>
+                    <rect key="frame" x="18" y="186" width="378" height="31"/>
                     <connections>
                         <action selector="sliderDurationChanged:" destination="-1" eventType="valueChanged" id="bHo-Bt-cG4"/>
                     </connections>
                 </slider>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHX-St-Osi">
-                    <rect key="frame" x="20" y="189" width="75" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="M5r-vA-0qr"/>
-                        <constraint firstAttribute="width" constant="75" id="PQ4-ZU-uu9"/>
-                    </constraints>
+                    <rect key="frame" x="20" y="225" width="75" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAK-DR-B27">
-                    <rect key="frame" x="103" y="189" width="291" height="21"/>
+                    <rect key="frame" x="103" y="225" width="291" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notification Message" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VqG-wR-oYI">
-                    <rect key="frame" x="20" y="217" width="374" height="30"/>
+                    <rect key="frame" x="20" y="253" width="374" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -73,9 +68,16 @@
                         <segment title="From Right"/>
                     </segments>
                 </segmentedControl>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fcn-wc-llO">
+                    <rect key="frame" x="20" y="150" width="374" height="29"/>
+                    <segments>
+                        <segment title="Status Bar"/>
+                        <segment title="Navigation Bar"/>
+                    </segments>
+                </segmentedControl>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8G-aN-rjr">
-                    <rect key="frame" x="117" y="297" width="180" height="30"/>
-                    <state key="normal" title="Show Custom Notification">
+                    <rect key="frame" x="99" y="331" width="216" height="30"/>
+                    <state key="normal" title="Show Custom View Notification">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -83,59 +85,34 @@
                         <action selector="btnShowNotificationPressed:" destination="-1" eventType="touchUpInside" id="jNW-Ie-NPn"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdx-ge-BUc">
-                    <rect key="frame" x="110" y="332" width="195" height="45"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status Bar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCP-z3-d8I">
-                            <rect key="frame" x="2" y="12" width="81" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kMg-IK-wId">
-                            <rect key="frame" x="129" y="7" width="51" height="31"/>
-                            <connections>
-                                <action selector="notificationStyleChanged:" destination="-1" eventType="valueChanged" id="l5q-T2-kkR"/>
-                            </connections>
-                        </switch>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="vCP-z3-d8I" firstAttribute="centerY" secondItem="kMg-IK-wId" secondAttribute="centerY" id="3SI-Am-gjr"/>
-                        <constraint firstItem="vCP-z3-d8I" firstAttribute="leading" secondItem="jdx-ge-BUc" secondAttribute="leading" constant="2" id="JX1-pS-6MA"/>
-                        <constraint firstAttribute="width" constant="195" id="ULf-xN-mdP"/>
-                        <constraint firstAttribute="trailing" secondItem="kMg-IK-wId" secondAttribute="trailing" constant="17" id="UMt-vg-87u"/>
-                        <constraint firstAttribute="centerY" secondItem="vCP-z3-d8I" secondAttribute="centerY" id="VC6-YO-6GP"/>
-                        <constraint firstAttribute="height" constant="45" id="x6g-OL-a8r"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="E8G-aN-rjr" firstAttribute="top" secondItem="DId-6z-9ak" secondAttribute="bottom" constant="10" id="65O-jS-huU"/>
-                <constraint firstItem="lnj-T4-sfz" firstAttribute="leading" secondItem="nHX-St-Osi" secondAttribute="leading" id="7da-li-6Kn"/>
-                <constraint firstItem="vWx-wx-d32" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="8hY-Bj-MI2"/>
-                <constraint firstItem="oAK-DR-B27" firstAttribute="leading" secondItem="nHX-St-Osi" secondAttribute="trailing" constant="8" symbolic="YES" id="9ki-g4-vZj"/>
-                <constraint firstItem="jdx-ge-BUc" firstAttribute="centerX" secondItem="E8G-aN-rjr" secondAttribute="centerX" id="CSN-1b-hyf"/>
-                <constraint firstItem="oAK-DR-B27" firstAttribute="trailing" secondItem="lnj-T4-sfz" secondAttribute="trailing" id="DF9-5s-ORR"/>
-                <constraint firstItem="nHX-St-Osi" firstAttribute="firstBaseline" secondItem="oAK-DR-B27" secondAttribute="firstBaseline" id="ELp-HE-4nH"/>
-                <constraint firstItem="VqG-wR-oYI" firstAttribute="top" secondItem="nHX-St-Osi" secondAttribute="bottom" constant="7" id="I7c-GM-lko"/>
-                <constraint firstItem="jdx-ge-BUc" firstAttribute="top" secondItem="E8G-aN-rjr" secondAttribute="bottom" constant="5" id="PQJ-pr-K5R"/>
-                <constraint firstItem="vWx-wx-d32" firstAttribute="top" secondItem="1" secondAttribute="top" constant="78" id="UEb-Dv-gVI"/>
-                <constraint firstItem="DId-6z-9ak" firstAttribute="centerX" secondItem="VqG-wR-oYI" secondAttribute="centerX" id="UR8-ES-cIh"/>
-                <constraint firstItem="DId-6z-9ak" firstAttribute="top" secondItem="VqG-wR-oYI" secondAttribute="bottom" constant="10" id="ZgW-j6-ji5"/>
-                <constraint firstItem="VqG-wR-oYI" firstAttribute="trailing" secondItem="oAK-DR-B27" secondAttribute="trailing" id="ca3-UN-5wh"/>
-                <constraint firstItem="vWx-wx-d32" firstAttribute="trailing" secondItem="Bza-7R-910" secondAttribute="trailing" id="exg-le-qML"/>
-                <constraint firstItem="Bza-7R-910" firstAttribute="leading" secondItem="vWx-wx-d32" secondAttribute="leading" id="iGR-gp-5UT"/>
-                <constraint firstItem="lnj-T4-sfz" firstAttribute="top" secondItem="Bza-7R-910" secondAttribute="bottom" constant="8" symbolic="YES" id="iOO-Sk-CU0"/>
-                <constraint firstItem="Bza-7R-910" firstAttribute="trailing" secondItem="lnj-T4-sfz" secondAttribute="trailing" id="pZ0-3h-ZuL"/>
-                <constraint firstItem="VqG-wR-oYI" firstAttribute="leading" secondItem="nHX-St-Osi" secondAttribute="leading" id="qTt-Y1-xfG"/>
-                <constraint firstItem="E8G-aN-rjr" firstAttribute="centerX" secondItem="DId-6z-9ak" secondAttribute="centerX" id="qrX-mR-Hox"/>
-                <constraint firstItem="lnj-T4-sfz" firstAttribute="leading" secondItem="Bza-7R-910" secondAttribute="leading" id="tXW-Jb-JXr"/>
-                <constraint firstItem="vWx-wx-d32" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="ulj-gO-yBc"/>
-                <constraint firstItem="nHX-St-Osi" firstAttribute="top" secondItem="lnj-T4-sfz" secondAttribute="bottom" constant="9" id="w3P-gu-lkL"/>
-                <constraint firstItem="nHX-St-Osi" firstAttribute="baseline" secondItem="oAK-DR-B27" secondAttribute="baseline" id="xJd-gb-3E0"/>
-                <constraint firstItem="Bza-7R-910" firstAttribute="top" secondItem="vWx-wx-d32" secondAttribute="bottom" constant="8" symbolic="YES" id="yyp-bu-hx4"/>
+                <constraint firstItem="vWx-wx-d32" firstAttribute="top" secondItem="1" secondAttribute="top" constant="78" id="1oB-rT-mPo"/>
+                <constraint firstAttribute="centerX" secondItem="fcn-wc-llO" secondAttribute="centerX" id="2Vh-Y9-bR5"/>
+                <constraint firstItem="oAK-DR-B27" firstAttribute="top" secondItem="lnj-T4-sfz" secondAttribute="bottom" constant="9" id="6zC-Vn-47H"/>
+                <constraint firstAttribute="centerX" secondItem="E8G-aN-rjr" secondAttribute="centerX" id="9d1-PR-JUW"/>
+                <constraint firstItem="fcn-wc-llO" firstAttribute="top" secondItem="Bza-7R-910" secondAttribute="bottom" constant="8" id="CXZ-Xq-PaS"/>
+                <constraint firstAttribute="centerX" secondItem="VqG-wR-oYI" secondAttribute="centerX" id="EZF-ae-sk0"/>
+                <constraint firstItem="DId-6z-9ak" firstAttribute="top" secondItem="VqG-wR-oYI" secondAttribute="bottom" constant="10" id="Koz-Hg-zs6"/>
+                <constraint firstItem="oAK-DR-B27" firstAttribute="leading" secondItem="nHX-St-Osi" secondAttribute="trailing" constant="8" id="Rv3-LK-x94"/>
+                <constraint firstItem="vWx-wx-d32" firstAttribute="width" secondItem="Bza-7R-910" secondAttribute="width" id="TLh-rn-5OJ"/>
+                <constraint firstItem="VqG-wR-oYI" firstAttribute="width" secondItem="fcn-wc-llO" secondAttribute="width" id="VN0-NS-cxS"/>
+                <constraint firstItem="fcn-wc-llO" firstAttribute="width" secondItem="lnj-T4-sfz" secondAttribute="width" id="VaZ-W0-jE9"/>
+                <constraint firstItem="nHX-St-Osi" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="am1-tr-889"/>
+                <constraint firstItem="fcn-wc-llO" firstAttribute="width" secondItem="Bza-7R-910" secondAttribute="width" id="e4t-sE-dFP"/>
+                <constraint firstAttribute="centerX" secondItem="DId-6z-9ak" secondAttribute="centerX" constant="-0.5" id="eaF-Ou-aly"/>
+                <constraint firstAttribute="trailing" secondItem="vWx-wx-d32" secondAttribute="trailing" constant="20" id="fax-Hs-B09"/>
+                <constraint firstItem="fcn-wc-llO" firstAttribute="width" secondItem="oAK-DR-B27" secondAttribute="width" constant="83" id="gJx-JQ-AKj"/>
+                <constraint firstItem="Bza-7R-910" firstAttribute="top" secondItem="vWx-wx-d32" secondAttribute="bottom" constant="8" id="iKn-wI-ama"/>
+                <constraint firstAttribute="centerX" secondItem="lnj-T4-sfz" secondAttribute="centerX" id="mud-VX-xYt"/>
+                <constraint firstItem="nHX-St-Osi" firstAttribute="top" secondItem="lnj-T4-sfz" secondAttribute="bottom" constant="9" id="oWk-lv-8CY"/>
+                <constraint firstItem="VqG-wR-oYI" firstAttribute="top" secondItem="nHX-St-Osi" secondAttribute="bottom" constant="7.5" id="pMI-GA-jIb"/>
+                <constraint firstItem="vWx-wx-d32" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="qul-l9-Wcv"/>
+                <constraint firstItem="lnj-T4-sfz" firstAttribute="top" secondItem="fcn-wc-llO" secondAttribute="bottom" constant="8" id="rcX-0a-RzU"/>
+                <constraint firstAttribute="centerX" secondItem="Bza-7R-910" secondAttribute="centerX" id="wU3-cB-7dO"/>
+                <constraint firstItem="E8G-aN-rjr" firstAttribute="top" secondItem="DId-6z-9ak" secondAttribute="bottom" constant="8" id="xGQ-39-pOh"/>
+                <constraint firstAttribute="centerX" secondItem="vWx-wx-d32" secondAttribute="centerX" id="z6v-r5-zad"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
