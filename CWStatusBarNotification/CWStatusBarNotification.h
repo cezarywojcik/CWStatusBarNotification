@@ -42,6 +42,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (strong, nonatomic) ScrollLabel *notificationLabel;
 @property (strong, nonatomic) UIColor *notificationLabelBackgroundColor;
 @property (strong, nonatomic) UIColor *notificationLabelTextColor;
+@property (strong, nonatomic) UIFont *notificationLabelFont;
 @property (assign, nonatomic) CGFloat notificationLabelHeight;
 @property (strong, nonatomic) UIView *customView;
 @property (assign, nonatomic) BOOL multiline;

@@ -152,7 +152,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 @implementation CWStatusBarNotification
 
-@synthesize notificationLabel, notificationLabelBackgroundColor, notificationLabelTextColor, notificationWindow, customView;
+@synthesize notificationLabel, notificationLabelBackgroundColor, notificationLabelTextColor, notificationLabelFont, notificationWindow, customView;
 
 @synthesize statusBarView;
 
@@ -165,6 +165,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         // set defaults
         self.notificationLabelBackgroundColor = [[UIApplication sharedApplication] delegate].window.tintColor;
         self.notificationLabelTextColor = [UIColor whiteColor];
+        self.notificationLabelFont = [UIFont systemFontOfSize:FONT_SIZE];
         self.notificationStyle = CWNotificationStyleStatusBarNotification;
         self.notificationAnimationInStyle = CWNotificationAnimationStyleBottom;
         self.notificationAnimationOutStyle = CWNotificationAnimationStyleBottom;
@@ -309,7 +310,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     self.notificationLabel.text = message;
     self.notificationLabel.textAlignment = NSTextAlignmentCenter;
     self.notificationLabel.adjustsFontSizeToFitWidth = NO;
-    self.notificationLabel.font = [UIFont systemFontOfSize:FONT_SIZE];
+    self.notificationLabel.font = self.notificationLabelFont;
     self.notificationLabel.backgroundColor = self.notificationLabelBackgroundColor;
     self.notificationLabel.textColor = self.notificationLabelTextColor;
     [self setupNotificationView:self.notificationLabel];
