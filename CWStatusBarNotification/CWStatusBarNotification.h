@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Cezary Wojcik. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef void(^CWCompletionBlock)(void);
 
