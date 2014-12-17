@@ -356,7 +356,7 @@ class CWStatusBarNotification : NSObject {
     
     // display notification
     
-    func displayNotificationWithMessage(message: NSString, completion: () -> ()?) {
+    func displayNotificationWithMessage(message: NSString, completion: (() -> ())?) {
         if !self.notificationIsShowing {
             self.notificationIsShowing = true
             
