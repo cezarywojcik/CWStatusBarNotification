@@ -356,7 +356,7 @@ class CWStatusBarNotification : NSObject {
     
     // display notification
     
-    func displayNotificationWithMessage(message: NSString, completion: () -> ()?) {
+    func displayNotificationWithMessage(message: NSString, completion: (() -> ())?) {
         if !self.notificationIsShowing {
             self.notificationIsShowing = true
             
@@ -382,8 +382,8 @@ class CWStatusBarNotification : NSObject {
                 }, completion: { (finished : Bool) -> () in
                     var delayInSeconds = Double(self.notificationLabel.scrollTime())
                     performClosureAfterDelay(delayInSeconds, {
-                        if completion() != nil {
-                            completion()!
+                        if let completion = completion {
+                            completion()
                         }
                     })
                 })
