@@ -16,23 +16,10 @@
 		5E2FFB6318367C01003333F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2FFB6218367C01003333F8 /* main.m */; };
 		5E2FFB6718367C01003333F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2FFB6618367C01003333F8 /* AppDelegate.m */; };
 		5E2FFB6918367C01003333F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E2FFB6818367C01003333F8 /* Images.xcassets */; };
-		5E2FFB7018367C01003333F8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2FFB6F18367C01003333F8 /* XCTest.framework */; };
-		5E2FFB7118367C01003333F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2FFB5618367C01003333F8 /* Foundation.framework */; };
-		5E2FFB7218367C01003333F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2FFB5A18367C01003333F8 /* UIKit.framework */; };
 		5E2FFB8E18367CA3003333F8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2FFB8C18367CA3003333F8 /* MainViewController.m */; };
 		5E2FFB8F18367CA3003333F8 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E2FFB8D18367CA3003333F8 /* MainViewController.xib */; };
 		5E7E40DA19C0F9CF00A0E3E0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E7E40D919C0F9CF00A0E3E0 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		5E2FFB7318367C01003333F8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E2FFB4B18367C01003333F8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5E2FFB5218367C01003333F8;
-			remoteInfo = CWNotificationDemo;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		370883CD19F08756000E79D6 /* CustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomView.xib; sourceTree = "<group>"; };
@@ -49,7 +36,6 @@
 		5E2FFB6518367C01003333F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5E2FFB6618367C01003333F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5E2FFB6818367C01003333F8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5E2FFB6E18367C01003333F8 /* CWNotificationDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWNotificationDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E2FFB6F18367C01003333F8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5E2FFB8B18367CA3003333F8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		5E2FFB8C18367CA3003333F8 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -65,16 +51,6 @@
 				5E2FFB5918367C01003333F8 /* CoreGraphics.framework in Frameworks */,
 				5E2FFB5B18367C01003333F8 /* UIKit.framework in Frameworks */,
 				5E2FFB5718367C01003333F8 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5E2FFB6B18367C01003333F8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5E2FFB7018367C01003333F8 /* XCTest.framework in Frameworks */,
-				5E2FFB7218367C01003333F8 /* UIKit.framework in Frameworks */,
-				5E2FFB7118367C01003333F8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				5E2FFB5318367C01003333F8 /* CWNotificationDemo.app */,
-				5E2FFB6E18367C01003333F8 /* CWNotificationDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,24 +159,6 @@
 			productReference = 5E2FFB5318367C01003333F8 /* CWNotificationDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5E2FFB6D18367C01003333F8 /* CWNotificationDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5E2FFB8218367C01003333F8 /* Build configuration list for PBXNativeTarget "CWNotificationDemoTests" */;
-			buildPhases = (
-				5E2FFB6A18367C01003333F8 /* Sources */,
-				5E2FFB6B18367C01003333F8 /* Frameworks */,
-				5E2FFB6C18367C01003333F8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5E2FFB7418367C01003333F8 /* PBXTargetDependency */,
-			);
-			name = CWNotificationDemoTests;
-			productName = CWNotificationDemoTests;
-			productReference = 5E2FFB6E18367C01003333F8 /* CWNotificationDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -213,9 +170,6 @@
 				TargetAttributes = {
 					5E2FFB5218367C01003333F8 = {
 						DevelopmentTeam = QMZH6X9D3C;
-					};
-					5E2FFB6D18367C01003333F8 = {
-						TestTargetID = 5E2FFB5218367C01003333F8;
 					};
 				};
 			};
@@ -232,7 +186,6 @@
 			projectRoot = "";
 			targets = (
 				5E2FFB5218367C01003333F8 /* CWNotificationDemo */,
-				5E2FFB6D18367C01003333F8 /* CWNotificationDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -250,13 +203,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5E2FFB6C18367C01003333F8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -271,22 +217,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5E2FFB6A18367C01003333F8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5E2FFB7418367C01003333F8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5E2FFB5218367C01003333F8 /* CWNotificationDemo */;
-			targetProxy = 5E2FFB7318367C01003333F8 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5E2FFB5F18367C01003333F8 /* InfoPlist.strings */ = {
@@ -408,46 +339,6 @@
 			};
 			name = Release;
 		};
-		5E2FFB8318367C01003333F8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CWNotificationDemo.app/CWNotificationDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CWNotificationDemo/CWNotificationDemo-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "CWNotificationDemoTests/CWNotificationDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		5E2FFB8418367C01003333F8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CWNotificationDemo.app/CWNotificationDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CWNotificationDemo/CWNotificationDemo-Prefix.pch";
-				INFOPLIST_FILE = "CWNotificationDemoTests/CWNotificationDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -465,15 +356,6 @@
 			buildConfigurations = (
 				5E2FFB8018367C01003333F8 /* Debug */,
 				5E2FFB8118367C01003333F8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5E2FFB8218367C01003333F8 /* Build configuration list for PBXNativeTarget "CWNotificationDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5E2FFB8318367C01003333F8 /* Debug */,
-				5E2FFB8418367C01003333F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
