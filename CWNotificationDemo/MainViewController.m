@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "CWStatusBarNotification.h"
 
-@interface MainViewController ()
+@interface MainViewController () <UITextFieldDelegate>
 
 @end
 
@@ -32,6 +32,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"CWStatusBarNotification";
     [self updateDurationLabel];
+    [self updateAnimationDurationLabel];
     UIFont *font = [UIFont boldSystemFontOfSize:10.0f];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
     [self.segFromStyle setTitleTextAttributes:attributes forState:UIControlStateNormal];
@@ -52,12 +53,31 @@
 
 - (void)updateDurationLabel
 {
-    self.lblDuration.text = [NSString stringWithFormat:@"%f seconds", self.sliderDuration.value];
+    self.lblDuration.text = [NSString stringWithFormat:@"%.2f secs.", self.sliderDuration.value];
+}
+
+- (void)updateAnimationDurationLabel
+{
+    self.lblAnimationDuration.text = [NSString stringWithFormat:@"%.2f secs.", self.sliderAnimationDuration.value];
 }
 
 - (IBAction)sliderDurationChanged:(UISlider *)sender
 {
     [self updateDurationLabel];
+}
+
+- (IBAction)sliderAnimationDurationChanged:(UISlider *)sender
+{
+    [self updateAnimationDurationLabel];
+    self.notification.notificationAnimationDuration = sender.value;
+}
+
+
+#pragma mark - Text field delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
 }
 
 # pragma mark - show notification
