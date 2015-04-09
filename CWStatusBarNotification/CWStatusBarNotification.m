@@ -38,6 +38,15 @@
 
 @end
 
+@implementation CWViewController
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return _preferredStatusBarStyle;
+}
+
+@end
+
 # pragma mark - dispatch after with cancellation
 // adapted from: https://github.com/Spaceman-Labs/Dispatch-Cancel
 
@@ -172,6 +181,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         self.notificationAnimationType = CWNotificationAnimationTypeReplace;
         self.notificationIsDismissing = NO;
         self.isCustomView = NO;
+        self.preferredStatusBarStyle = UIStatusBarStyleDefault;
 
         // create tap recognizer
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(notificationTapped:)];
@@ -340,7 +350,9 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     self.notificationWindow.userInteractionEnabled = YES;
     self.notificationWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.notificationWindow.windowLevel = UIWindowLevelStatusBar;
-    self.notificationWindow.rootViewController = [UIViewController new];
+    CWViewController *rootViewController = [[CWViewController alloc] init];
+    rootViewController.preferredStatusBarStyle = self.preferredStatusBarStyle;
+    self.notificationWindow.rootViewController = rootViewController;
     self.notificationWindow.notificationHeight = [self getNotificationLabelHeight];
 }
 
