@@ -20,6 +20,10 @@ typedef void(^CWCompletionBlock)(void);
 
 @end
 
+@interface CWViewController : UIViewController
+@property (nonatomic) UIStatusBarStyle preferredStatusBarStyle;
+@end
+
 @interface CWStatusBarNotification : NSObject
 
 typedef NS_ENUM(NSInteger, CWNotificationStyle) {
@@ -59,6 +63,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (nonatomic) BOOL notificationIsDismissing;
 
 @property (strong, nonatomic) CWWindowContainer *notificationWindow;
+@property (nonatomic) UIStatusBarStyle preferredStatusBarStyle;
 
 - (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration;
 - (void)displayNotificationWithMessage:(NSString *)message completion:(void (^)(void))completion;
