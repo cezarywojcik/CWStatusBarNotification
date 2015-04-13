@@ -38,11 +38,27 @@
 
 @end
 
+@interface CWViewController()
+
+@property (nonatomic, assign) NSInteger _cwViewControllerSupportedInterfaceOrientation;
+
+@end
+
 @implementation CWViewController
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return _preferredStatusBarStyle;
+}
+
+- (void)setSupportedInterfaceOrientations:(NSInteger)supportedInterfaceOrientations
+{
+    self._cwViewControllerSupportedInterfaceOrientation = supportedInterfaceOrientations;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return self._cwViewControllerSupportedInterfaceOrientation;
 }
 
 @end
@@ -182,6 +198,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         self.notificationIsDismissing = NO;
         self.isCustomView = NO;
         self.preferredStatusBarStyle = UIStatusBarStyleDefault;
+        self.supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
 
         // create tap recognizer
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(notificationTapped:)];
@@ -351,6 +368,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     self.notificationWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.notificationWindow.windowLevel = UIWindowLevelStatusBar;
     CWViewController *rootViewController = [[CWViewController alloc] init];
+    [rootViewController setSupportedInterfaceOrientations:self.supportedInterfaceOrientations];
     rootViewController.preferredStatusBarStyle = self.preferredStatusBarStyle;
     self.notificationWindow.rootViewController = rootViewController;
     self.notificationWindow.notificationHeight = [self getNotificationLabelHeight];

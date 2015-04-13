@@ -22,6 +22,7 @@ typedef void(^CWCompletionBlock)(void);
 
 @interface CWViewController : UIViewController
 @property (nonatomic) UIStatusBarStyle preferredStatusBarStyle;
+@property (nonatomic, setter=setSupportedInterfaceOrientations:) NSInteger supportedInterfaceOrientations;
 @end
 
 @interface CWStatusBarNotification : NSObject
@@ -56,6 +57,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (copy, nonatomic) CWCompletionBlock notificationTappedBlock;
 
 @property (nonatomic) CWNotificationStyle notificationStyle;
+@property (nonatomic) NSInteger supportedInterfaceOrientations;
 @property (nonatomic) CWNotificationAnimationStyle notificationAnimationInStyle;
 @property (nonatomic) CWNotificationAnimationStyle notificationAnimationOutStyle;
 @property (nonatomic) CWNotificationAnimationType notificationAnimationType;
