@@ -61,6 +61,12 @@
     return self._cwViewControllerSupportedInterfaceOrientation;
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+    return !(statusBarHeight > 0);
+}
+
 @end
 
 # pragma mark - dispatch after with cancellation
