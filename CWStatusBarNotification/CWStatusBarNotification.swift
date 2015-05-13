@@ -19,19 +19,19 @@ let SCROLL_DELAY : CGFloat = 1.0
 
 // ---- [ enums ] -------------------------------------------------------------
 
-enum CWNotificationStyle : Int {
+@objc enum CWNotificationStyle : Int {
     case StatusBarNotification
     case NavigationBarNotification
 }
 
-enum CWNotificationAnimationStyle : Int {
+@objc enum CWNotificationAnimationStyle : Int {
     case Top
     case Bottom
     case Left
     case Right
 }
 
-enum CWNotificationAnimationType : Int {
+@objc enum CWNotificationAnimationType : Int {
     case Replace
     case Overlay
 }
