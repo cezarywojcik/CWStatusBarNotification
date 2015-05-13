@@ -12,7 +12,6 @@ import UIKit
 // ---- [ constants ] ---------------------------------------------------------
 
 let STATUS_BAR_ANIMATION_LENGTH : Double = 0.25
-let FONT_SIZE : CGFloat = 12.0
 let PADDING : CGFloat = 10.0
 let SCROLL_SPEED : CGFloat = 40.0
 let SCROLL_DELAY : CGFloat = 1.0
@@ -155,6 +154,7 @@ func cancelDelayedClosure(delayedHandle : CWDelayedClosureHandle!) {
 class CWStatusBarNotification : NSObject {
     
     var notificationLabel : ScrollLabel!
+    var notificationLabelFont : UIFont!
     var notificationLabelBackgroundColor : UIColor = UIColor.blackColor()
     var notificationLabelTextColor : UIColor = UIColor.whiteColor()
     var notificationLabelHeight : CGFloat!
@@ -267,7 +267,7 @@ class CWStatusBarNotification : NSObject {
         self.notificationLabel.text = message
         self.notificationLabel.textAlignment = .Center
         self.notificationLabel.adjustsFontSizeToFitWidth = false
-        self.notificationLabel.font = UIFont.systemFontOfSize(FONT_SIZE)
+        self.notificationLabel.font = self.notificationLabelFont
         self.notificationLabel.backgroundColor = self.notificationLabelBackgroundColor
         self.notificationLabel.textColor = self.notificationLabelTextColor
         self.notificationLabel.clipsToBounds = true

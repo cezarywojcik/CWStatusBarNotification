@@ -37,6 +37,7 @@ class MainViewController: UIViewController {
         
         // set default blue color
         self.notification.notificationLabelBackgroundColor = UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+        self.notification.notificationLabelFont = font
     }
     
     func updateDurationLabel() {
