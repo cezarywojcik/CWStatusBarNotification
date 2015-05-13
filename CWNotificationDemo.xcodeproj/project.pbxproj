@@ -12,18 +12,7 @@
 		5EB773291944565500D6E3DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB773281944565500D6E3DE /* AppDelegate.swift */; };
 		5EB7732E1944565500D6E3DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EB7732C1944565500D6E3DE /* Main.storyboard */; };
 		5EB773301944565500D6E3DE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB7732F1944565500D6E3DE /* Images.xcassets */; };
-		5EB7733C1944565500D6E3DE /* CWNotificationDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7733B1944565500D6E3DE /* CWNotificationDemoTests.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		5EB773361944565500D6E3DE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5EB7731B1944565500D6E3DE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5EB773221944565500D6E3DE;
-			remoteInfo = CWNotificationDemo;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5E6ADFC019445715002E29E1 /* CWStatusBarNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWStatusBarNotification.swift; sourceTree = "<group>"; };
@@ -33,20 +22,10 @@
 		5EB773281944565500D6E3DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EB7732D1944565500D6E3DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5EB7732F1944565500D6E3DE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5EB773351944565500D6E3DE /* CWNotificationDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWNotificationDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EB7733A1944565500D6E3DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5EB7733B1944565500D6E3DE /* CWNotificationDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWNotificationDemoTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5EB773201944565500D6E3DE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5EB773321944565500D6E3DE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -69,7 +48,6 @@
 			children = (
 				5E6ADFBF19445715002E29E1 /* CWStatusBarNotification */,
 				5EB773251944565500D6E3DE /* CWNotificationDemo */,
-				5EB773381944565500D6E3DE /* CWNotificationDemoTests */,
 				5EB773241944565500D6E3DE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,7 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				5EB773231944565500D6E3DE /* CWNotificationDemo.app */,
-				5EB773351944565500D6E3DE /* CWNotificationDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,23 +80,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5EB773381944565500D6E3DE /* CWNotificationDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				5EB7733B1944565500D6E3DE /* CWNotificationDemoTests.swift */,
-				5EB773391944565500D6E3DE /* Supporting Files */,
-			);
-			path = CWNotificationDemoTests;
-			sourceTree = "<group>";
-		};
-		5EB773391944565500D6E3DE /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				5EB7733A1944565500D6E3DE /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -140,24 +100,6 @@
 			productReference = 5EB773231944565500D6E3DE /* CWNotificationDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5EB773341944565500D6E3DE /* CWNotificationDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5EB773421944565500D6E3DE /* Build configuration list for PBXNativeTarget "CWNotificationDemoTests" */;
-			buildPhases = (
-				5EB773311944565500D6E3DE /* Sources */,
-				5EB773321944565500D6E3DE /* Frameworks */,
-				5EB773331944565500D6E3DE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5EB773371944565500D6E3DE /* PBXTargetDependency */,
-			);
-			name = CWNotificationDemoTests;
-			productName = CWNotificationDemoTests;
-			productReference = 5EB773351944565500D6E3DE /* CWNotificationDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -169,10 +111,6 @@
 				TargetAttributes = {
 					5EB773221944565500D6E3DE = {
 						CreatedOnToolsVersion = 6.0;
-					};
-					5EB773341944565500D6E3DE = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 5EB773221944565500D6E3DE;
 					};
 				};
 			};
@@ -190,7 +128,6 @@
 			projectRoot = "";
 			targets = (
 				5EB773221944565500D6E3DE /* CWNotificationDemo */,
-				5EB773341944565500D6E3DE /* CWNotificationDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -202,13 +139,6 @@
 			files = (
 				5EB7732E1944565500D6E3DE /* Main.storyboard in Resources */,
 				5EB773301944565500D6E3DE /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5EB773331944565500D6E3DE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,23 +155,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5EB773311944565500D6E3DE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5EB7733C1944565500D6E3DE /* CWNotificationDemoTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5EB773371944565500D6E3DE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5EB773221944565500D6E3DE /* CWNotificationDemo */;
-			targetProxy = 5EB773361944565500D6E3DE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5EB7732C1944565500D6E3DE /* Main.storyboard */ = {
@@ -358,42 +272,6 @@
 			};
 			name = Release;
 		};
-		5EB773431944565500D6E3DE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CWNotificationDemo.app/CWNotificationDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CWNotificationDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		5EB773441944565500D6E3DE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CWNotificationDemo.app/CWNotificationDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CWNotificationDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -411,15 +289,6 @@
 			buildConfigurations = (
 				5EB773401944565500D6E3DE /* Debug */,
 				5EB773411944565500D6E3DE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5EB773421944565500D6E3DE /* Build configuration list for PBXNativeTarget "CWNotificationDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5EB773431944565500D6E3DE /* Debug */,
-				5EB773441944565500D6E3DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
