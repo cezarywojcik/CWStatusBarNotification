@@ -160,6 +160,7 @@ class CWStatusBarNotification : NSObject {
     var notificationLabelHeight : CGFloat!
     var multiline : Bool = false
     var statusBarView : UIView!
+    var statusBarImageView : UIView!
     var notificationTappedClosure : () -> () = {}
     var notificationStyle : CWNotificationStyle = .StatusBarNotification
     var notificationAnimationInStyle : CWNotificationAnimationStyle = .Bottom
@@ -298,7 +299,7 @@ class CWStatusBarNotification : NSObject {
         self.statusBarView = UIView(frame: self.getNotificationLabelFrame())
         self.statusBarView.clipsToBounds = true
         if self.notificationAnimationType == .Replace {
-            var statusBarImageView : UIView = UIScreen.mainScreen().snapshotViewAfterScreenUpdates(true)
+            self.statusBarImageView = UIScreen.mainScreen().snapshotViewAfterScreenUpdates(true)
             self.statusBarView.addSubview(statusBarImageView)
         }
         self.notificationWindow.rootViewController!.view.addSubview(self.statusBarView)
@@ -391,6 +392,7 @@ class CWStatusBarNotification : NSObject {
             cancelDelayedClosure(self.dismissHandle)
             self.notificationIsDismissing = true
             self.secondFrameChange()
+            self.statusBarImageView?.removeFromSuperview()
             UIView.animateWithDuration(STATUS_BAR_ANIMATION_LENGTH, animations: {
                 self.thirdFrameChange()
                 }, completion: { (finished : Bool) -> () in
