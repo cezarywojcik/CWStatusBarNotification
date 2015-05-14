@@ -195,18 +195,12 @@ class CWStatusBarNotification : NSObject {
         let sharedApp = UIApplication.sharedApplication()
         
         var statusBarHeight = sharedApp.statusBarFrame.size.height
-        if UIInterfaceOrientationIsLandscape(sharedApp.statusBarOrientation) {
-            statusBarHeight = sharedApp.statusBarFrame.size.width
-        }
         
         return statusBarHeight > 0 ? statusBarHeight : 20.0;
     }
     
     func getStatusBarWidth() -> CGFloat {
-        if UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication().statusBarOrientation) {
-            return UIScreen.mainScreen().bounds.size.width
-        }
-        return UIScreen.mainScreen().bounds.size.height
+        return UIScreen.mainScreen().bounds.size.width
     }
     
     func getNotificationLabelTopFrame() -> CGRect {
