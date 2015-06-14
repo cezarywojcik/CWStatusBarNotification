@@ -495,10 +495,10 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
-- (void)displayNotificationWithAttributedString:(NSAttributedString *)attributedString completion:(void (^)(void))completion
+- (void)displayNotificationWithAttributedText:(NSAttributedString *)attributedText completion:(void (^)(void))completion
 {
-    [self displayNotificationWithMessage:[attributedString string] completion:completion];
-    [[self notificationLabel] setAttributedText:attributedString];
+    [self displayNotificationWithMessage:[attributedText string] completion:completion];
+    [[self notificationLabel] setAttributedText:attributedText];
     
 }
 
@@ -582,10 +582,10 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }];
 }
 
-- (void)displayNotificationWithAttributedString:(NSAttributedString *)attributedString forDuration:(CGFloat)duration
+- (void)displayNotificationWithAttributedText:(NSAttributedString *)attributedText forDuration:(CGFloat)duration
 {
-    [self displayNotificationWithMessage:[attributedString string] forDuration:duration];
-    [[self notificationLabel] setAttributedText:attributedString];
+    [self displayNotificationWithMessage:[attributedText string] forDuration:duration];
+    [[self notificationLabel] setAttributedText:attributedText];
     
 }
 
