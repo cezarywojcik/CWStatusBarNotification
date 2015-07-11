@@ -61,6 +61,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (nonatomic) CWNotificationAnimationStyle notificationAnimationInStyle;
 @property (nonatomic) CWNotificationAnimationStyle notificationAnimationOutStyle;
 @property (nonatomic) CWNotificationAnimationType notificationAnimationType;
+@property (nonatomic) NSTimeInterval notificationAnimationDuration;
 @property (nonatomic) BOOL notificationIsShowing;
 @property (nonatomic) BOOL notificationIsDismissing;
 
