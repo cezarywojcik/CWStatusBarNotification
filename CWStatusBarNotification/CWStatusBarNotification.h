@@ -143,8 +143,9 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
  */
 @property (assign, nonatomic) BOOL multiline;
 /**
- * The supported interface orientations. Default value is 
- * @c UIInterfaceOrientationMaskAll.
+ * The supported interface orientations. Default value is the
+ * @c supportedInterfaceOrientations value of the root view controller of the
+ * application.
  */
 @property (nonatomic) UIInterfaceOrientationMask supportedInterfaceOrientations;
 /**

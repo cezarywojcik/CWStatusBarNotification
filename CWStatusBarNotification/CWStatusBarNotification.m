@@ -200,7 +200,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         self.notificationLabelHeight = 0.0;
         self.customView = nil;
         self.multiline = NO;
-        self.supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
+        self.supportedInterfaceOrientations = [UIApplication sharedApplication].keyWindow.rootViewController.supportedInterfaceOrientations;
         self.notificationAnimationDuration = 0.25;
         self.notificationStyle = CWNotificationStyleStatusBarNotification;
         self.notificationAnimationInStyle = CWNotificationAnimationStyleBottom;
