@@ -148,6 +148,11 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
  */
 @property (nonatomic) UIInterfaceOrientationMask supportedInterfaceOrientations;
 /**
+ * The amount of time that it takes to animate the notification in or out.
+ * Default value is 0.25.
+ */
+@property (nonatomic) NSTimeInterval notificationAnimationDuration;
+/**
  * Determines whether the notification covers the status bar or both the status
  * bar and the navigation bar. Default value is 
  * @c CWNotificationStyleStatusBarNotification.

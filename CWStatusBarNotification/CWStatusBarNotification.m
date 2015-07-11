@@ -11,12 +11,10 @@
 
 #define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
-#define STATUS_BAR_ANIMATION_LENGTH 0.25f
 #define FONT_SIZE 12.0f
 #define PADDING 10.0f
 #define SCROLL_SPEED 40.0f
 #define SCROLL_DELAY 1.0f
-
 
 # pragma mark - ScrollLabel
 
@@ -203,6 +201,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         self.customView = nil;
         self.multiline = NO;
         self.supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
+        self.notificationAnimationDuration = 0.25;
         self.notificationStyle = CWNotificationStyleStatusBarNotification;
         self.notificationAnimationInStyle = CWNotificationAnimationStyleBottom;
         self.notificationAnimationOutStyle = CWNotificationAnimationStyleBottom;
@@ -489,7 +488,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateStatusBarFrame) name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
 
         // animate
-        [UIView animateWithDuration:STATUS_BAR_ANIMATION_LENGTH animations:^{
+        [UIView animateWithDuration:self.notificationAnimationDuration animations:^{
             [self firstFrameChange];
         } completion:^(BOOL finished) {
             double delayInSeconds = [self.notificationLabel scrollTime];
@@ -549,7 +548,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateStatusBarFrame) name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
 
         // animate
-        [UIView animateWithDuration:STATUS_BAR_ANIMATION_LENGTH animations:^{
+        [UIView animateWithDuration:self.notificationAnimationDuration animations:^{
             [self firstFrameChange];
         } completion:^(BOOL finished) {
             [completion invoke];
@@ -572,7 +571,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         cancel_delayed_block(self.dismissHandle);
         self.notificationIsDismissing = YES;
         [self secondFrameChange];
-        [UIView animateWithDuration:STATUS_BAR_ANIMATION_LENGTH animations:^{
+        [UIView animateWithDuration:self.notificationAnimationDuration animations:^{
             [self thirdFrameChange];
         } completion:^(BOOL finished) {
             UIView *view = self.isCustomView ? self.customView : self.notificationLabel;
