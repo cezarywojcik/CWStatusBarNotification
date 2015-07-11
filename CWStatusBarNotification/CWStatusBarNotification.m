@@ -3,7 +3,7 @@
 //  CWNotificationDemo
 //
 //  Created by Cezary Wojcik on 11/15/13.
-//  Copyright (c) 2013 Cezary Wojcik. All rights reserved.
+//  Copyright (c) 2015 Cezary Wojcik. All rights reserved.
 //
 
 #import <QuartzCore/QuartzCore.h>
@@ -17,6 +17,68 @@
 #define SCROLL_SPEED 40.0f
 #define SCROLL_DELAY 1.0f
 
+
+# pragma mark - ScrollLabel
+
+@implementation ScrollLabel
+{
+    UIImageView *textImage;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        textImage = [[UIImageView alloc] init];
+        [self addSubview:textImage];
+    }
+    return self;
+}
+
+- (CGFloat)fullWidth
+{
+    return [self.text sizeWithAttributes:@{NSFontAttributeName: self.font}].width;
+}
+
+- (CGFloat)scrollOffset
+{
+    if (self.numberOfLines != 1) return 0;
+    
+    CGRect insetRect = CGRectInset(self.bounds, PADDING, 0);
+    return MAX(0, [self fullWidth] - insetRect.size.width);
+}
+
+- (CGFloat)scrollTime
+{
+    return ([self scrollOffset] > 0) ? [self scrollOffset] / SCROLL_SPEED + SCROLL_DELAY : 0;
+}
+
+- (void)drawTextInRect:(CGRect)rect
+{
+    if ([self scrollOffset] > 0) {
+        rect.size.width = [self fullWidth] + PADDING * 2;
+        UIGraphicsBeginImageContextWithOptions(rect.size, NO, [UIScreen mainScreen].scale);
+        [super drawTextInRect:rect];
+        textImage.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        [textImage sizeToFit];
+        [UIView animateWithDuration:[self scrollTime] - SCROLL_DELAY
+                              delay:SCROLL_DELAY
+                            options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             textImage.transform = CGAffineTransformMakeTranslation(-[self scrollOffset], 0);
+                         } completion:^(BOOL finished) {
+                         }];
+    } else {
+        textImage.image = nil;
+        [super drawTextInRect:CGRectInset(rect, PADDING, 0)];
+    }
+}
+
+@end
+
+# pragma mark - CWWindowContainer
+
 @implementation CWWindowContainer
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
@@ -24,11 +86,9 @@
     CGFloat height;
     if (SYSTEM_VERSION_LESS_THAN(@"8.0") && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
         height = [UIApplication sharedApplication].statusBarFrame.size.width;
-    }
-    else {
+    } else {
         height = [UIApplication sharedApplication].statusBarFrame.size.height;
     }
-
     if (point.y > 0 && point.y < (self.notificationHeight != 0.0 ? self.notificationHeight : height)) {
         return [super hitTest:point withEvent:event];
     }
@@ -37,6 +97,8 @@
 }
 
 @end
+
+# pragma mark - CWViewController
 
 @interface CWViewController()
 
@@ -51,12 +113,12 @@
     return _preferredStatusBarStyle;
 }
 
-- (void)setSupportedInterfaceOrientations:(NSInteger)supportedInterfaceOrientations
+- (void)setSupportedInterfaceOrientations:(UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     self._cwViewControllerSupportedInterfaceOrientation = supportedInterfaceOrientations;
 }
 
-- (NSInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return self._cwViewControllerSupportedInterfaceOrientation;
 }
@@ -111,66 +173,6 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 	delayedHandle(YES);
 }
-
-# pragma mark - ScrollLabel
-
-@implementation ScrollLabel
-{
-    UIImageView *textImage;
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        textImage = [[UIImageView alloc] init];
-        [self addSubview:textImage];
-    }
-    return self;
-}
-
-- (CGFloat)fullWidth
-{
-    return [self.text sizeWithAttributes:@{NSFontAttributeName: self.font}].width;
-}
-
-- (CGFloat)scrollOffset
-{
-    if (self.numberOfLines != 1) return 0;
-
-    CGRect insetRect = CGRectInset(self.bounds, PADDING, 0);
-    return MAX(0, [self fullWidth] - insetRect.size.width);
-}
-
-- (CGFloat)scrollTime
-{
-    return ([self scrollOffset] > 0) ? [self scrollOffset] / SCROLL_SPEED + SCROLL_DELAY : 0;
-}
-
-- (void)drawTextInRect:(CGRect)rect
-{
-    if ([self scrollOffset] > 0) {
-        rect.size.width = [self fullWidth] + PADDING * 2;
-        UIGraphicsBeginImageContextWithOptions(rect.size, NO, [UIScreen mainScreen].scale);
-        [super drawTextInRect:rect];
-        textImage.image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        [textImage sizeToFit];
-        [UIView animateWithDuration:[self scrollTime] - SCROLL_DELAY
-                              delay:SCROLL_DELAY
-                            options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut
-                         animations:^{
-                             textImage.transform = CGAffineTransformMakeTranslation(-[self scrollOffset], 0);
-                         } completion:^(BOOL finished) {
-                         }];
-    } else {
-        textImage.image = nil;
-        [super drawTextInRect:CGRectInset(rect, PADDING, 0)];
-    }
-}
-
-@end
-
 # pragma mark - CWStatusBarNotification
 
 @interface CWStatusBarNotification()
@@ -193,10 +195,14 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 {
     self = [super init];
     if (self) {
-        // set defaults
+        // set default
         self.notificationLabelBackgroundColor = [[UIApplication sharedApplication] delegate].window.tintColor;
         self.notificationLabelTextColor = [UIColor whiteColor];
         self.notificationLabelFont = [UIFont systemFontOfSize:FONT_SIZE];
+        self.notificationLabelHeight = 0.0;
+        self.customView = nil;
+        self.multiline = NO;
+        self.supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
         self.notificationStyle = CWNotificationStyleStatusBarNotification;
         self.notificationAnimationInStyle = CWNotificationAnimationStyleBottom;
         self.notificationAnimationOutStyle = CWNotificationAnimationStyleBottom;
@@ -204,7 +210,6 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         self.notificationIsDismissing = NO;
         self.isCustomView = NO;
         self.preferredStatusBarStyle = UIStatusBarStyleDefault;
-        self.supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
 
         // create tap recognizer
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(notificationTapped:)];
@@ -495,11 +500,25 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
-- (void)displayNotificationWithAttributedText:(NSAttributedString *)attributedText completion:(void (^)(void))completion
+- (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration
 {
-    [self displayNotificationWithMessage:[attributedText string] completion:completion];
-    [[self notificationLabel] setAttributedText:attributedText];
-    
+    [self displayNotificationWithMessage:message completion:^{
+        self.dismissHandle = perform_block_after_delay(duration, ^{
+            [self dismissNotification];
+        });
+    }];
+}
+
+- (void)displayNotificationWithAttributedString:(NSAttributedString *)attributedString completion:(void (^)(void))completion
+{
+    [self displayNotificationWithMessage:[attributedString string] completion:completion];
+    [[self notificationLabel] setAttributedText:attributedString];
+}
+
+- (void)displayNotificationWithAttributedString:(NSAttributedString *)attributedString forDuration:(CGFloat)duration
+{
+    [self displayNotificationWithMessage:[attributedString string] forDuration:duration];
+    [[self notificationLabel] setAttributedText:attributedString];
 }
 
 - (void)displayNotificationWithView:(UIView *)view completion:(void (^)(void))completion
@@ -538,9 +557,13 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
-- (void)dismissNotification
+- (void)displayNotificationWithView:(UIView *)view forDuration:(CGFloat)duration
 {
-    [self dismissNotificationWithCompletion:nil];
+    [self displayNotificationWithView:view completion:^{
+        self.dismissHandle = perform_block_after_delay(duration, ^{
+            [self dismissNotification];
+        });
+    }];
 }
 
 - (void)dismissNotificationWithCompletion:(void (^)(void))completion
@@ -573,29 +596,8 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
-- (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration
+- (void)dismissNotification
 {
-    [self displayNotificationWithMessage:message completion:^{
-        self.dismissHandle = perform_block_after_delay(duration, ^{
-            [self dismissNotification];
-        });
-    }];
+    [self dismissNotificationWithCompletion:nil];
 }
-
-- (void)displayNotificationWithAttributedText:(NSAttributedString *)attributedText forDuration:(CGFloat)duration
-{
-    [self displayNotificationWithMessage:[attributedText string] forDuration:duration];
-    [[self notificationLabel] setAttributedText:attributedText];
-    
-}
-
-- (void)displayNotificationWithView:(UIView *)view forDuration:(CGFloat)duration
-{
-    [self displayNotificationWithView:view completion:^{
-        self.dismissHandle = perform_block_after_delay(duration, ^{
-            [self dismissNotification];
-        });
-    }];
-}
-
 @end

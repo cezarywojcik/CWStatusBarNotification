@@ -18,7 +18,7 @@ Works for iPhone and iPad.
 
 ### CocoaPods
 
-`pod 'CWStatusBarNotification', '~> 2.2.6'`
+`pod 'CWStatusBarNotification', '~> 2.3.0'`
 
 ### Manual
 
