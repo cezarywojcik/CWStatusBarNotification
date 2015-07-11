@@ -20,6 +20,10 @@ typedef void(^CWCompletionBlock)(void);
  * label.
  */
 @interface ScrollLabel : UILabel
+/**
+ * Used to find the amount of time that the label will spend scrolling.
+ * @return The amount of time that will be spent scrolling.
+ */
 - (CGFloat)scrollTime;
 @end
 
