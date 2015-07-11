@@ -198,7 +198,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
  *        not including the animate in and out times.
  */
 - (void)displayNotificationWithMessage:(NSString *)message
-                           forDuration:(CGFloat)duration;
+                           forDuration:(NSTimeInterval)duration;
 
 /**
  * Displays a notification with the indicated attributed string and then 
@@ -223,7 +223,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
  */
 - (void)displayNotificationWithAttributedString:(NSAttributedString *)
                                                 attributedString
-                                    forDuration:(CGFloat)duration;
+                                    forDuration:(NSTimeInterval)duration;
 
 /**
  * Displays a notification with the indicated custom view and then performs the
@@ -247,7 +247,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
  *        not including the animate in and out times.
  */
 - (void)displayNotificationWithView:(UIView *)view
-                        forDuration:(CGFloat)duration;
+                        forDuration:(NSTimeInterval)duration;
 
 /**
  * Dismisses the currently presented notification and then performs the

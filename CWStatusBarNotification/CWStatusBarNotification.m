@@ -500,7 +500,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
-- (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration
+- (void)displayNotificationWithMessage:(NSString *)message forDuration:(NSTimeInterval)duration
 {
     [self displayNotificationWithMessage:message completion:^{
         self.dismissHandle = perform_block_after_delay(duration, ^{
@@ -515,7 +515,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     [[self notificationLabel] setAttributedText:attributedString];
 }
 
-- (void)displayNotificationWithAttributedString:(NSAttributedString *)attributedString forDuration:(CGFloat)duration
+- (void)displayNotificationWithAttributedString:(NSAttributedString *)attributedString forDuration:(NSTimeInterval)duration
 {
     [self displayNotificationWithMessage:[attributedString string] forDuration:duration];
     [[self notificationLabel] setAttributedText:attributedString];
@@ -557,7 +557,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
-- (void)displayNotificationWithView:(UIView *)view forDuration:(CGFloat)duration
+- (void)displayNotificationWithView:(UIView *)view forDuration:(NSTimeInterval)duration
 {
     [self displayNotificationWithView:view completion:^{
         self.dismissHandle = perform_block_after_delay(duration, ^{
