@@ -495,6 +495,13 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
+- (void)displayNotificationWithAttributedText:(NSAttributedString *)attributedText completion:(void (^)(void))completion
+{
+    [self displayNotificationWithMessage:[attributedText string] completion:completion];
+    [[self notificationLabel] setAttributedText:attributedText];
+    
+}
+
 - (void)displayNotificationWithView:(UIView *)view completion:(void (^)(void))completion
 {
     if (!self.notificationIsShowing) {
@@ -573,6 +580,13 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
             [self dismissNotification];
         });
     }];
+}
+
+- (void)displayNotificationWithAttributedText:(NSAttributedString *)attributedText forDuration:(CGFloat)duration
+{
+    [self displayNotificationWithMessage:[attributedText string] forDuration:duration];
+    [[self notificationLabel] setAttributedText:attributedText];
+    
 }
 
 - (void)displayNotificationWithView:(UIView *)view forDuration:(CGFloat)duration
