@@ -18,15 +18,15 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    @IBOutlet var labelDuration : UILabel
-    @IBOutlet var sliderDuration : UISlider
-    @IBOutlet var textNotificationMessage : UITextField
-    @IBOutlet var segFromStyle : UISegmentedControl
-    @IBOutlet var segToStyle : UISegmentedControl
+    @IBOutlet var labelDuration : UILabel?
+    @IBOutlet var sliderDuration : UISlider?
+    @IBOutlet var textNotificationMessage : UITextField?
+    @IBOutlet var segFromStyle : UISegmentedControl?
+    @IBOutlet var segToStyle : UISegmentedControl?
     
     let notification = CWStatusBarNotification()
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -36,15 +36,15 @@ class MainViewController: UIViewController {
         self.updateDurationLabel()
         var font = UIFont.boldSystemFontOfSize(10.0)
         var attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
-        self.segFromStyle.setTitleTextAttributes(attributes, forState: .Normal)
-        self.segToStyle.setTitleTextAttributes(attributes, forState: .Normal)
+        self.segFromStyle!.setTitleTextAttributes(attributes as [NSObject : AnyObject], forState: .Normal)
+        self.segToStyle!.setTitleTextAttributes(attributes as [NSObject : AnyObject], forState: .Normal)
         
         // set default blue color
         self.notification.notificationLabelBackgroundColor = UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
     }
     
     func updateDurationLabel() {
-        self.labelDuration.text = NSString(format: "%.1f seconds", self.sliderDuration.value)
+        self.labelDuration!.text = NSString(format: "%.1f seconds", self.sliderDuration!.value) as String
     }
     
     @IBAction func sliderDurationChanged(sender : UISlider) {
@@ -52,9 +52,9 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func showNotificationPressed(sender : UIButton) {
-        self.notification.notificationAnimationInStyle = CWNotificationAnimationStyle.fromRaw(self.segFromStyle.selectedSegmentIndex)!
-        self.notification.notificationAnimationOutStyle = CWNotificationAnimationStyle.fromRaw(self.segToStyle.selectedSegmentIndex)!
-        self.notification.displayNotificationWithMessage(self.textNotificationMessage.text, duration: Double(self.sliderDuration.value))
+        self.notification.notificationAnimationInStyle = CWNotificationAnimationStyle(rawValue: self.segFromStyle!.selectedSegmentIndex)!
+        self.notification.notificationAnimationOutStyle = CWNotificationAnimationStyle(rawValue: self.segToStyle!.selectedSegmentIndex)!
+        self.notification.displayNotificationWithMessage(self.textNotificationMessage!.text, duration: Double(self.sliderDuration!.value))
     }
     
 }
