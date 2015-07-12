@@ -152,7 +152,7 @@ If you would like for your app to be featured here, [contact me](cezarywojcik.co
 
     The MIT License (MIT)
 
-    Copyright (c) 2014 Cezary Wojcik <http://www.cezarywojcik.com>
+    Copyright (c) 2015 Cezary Wojcik <http://www.cezarywojcik.com>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
