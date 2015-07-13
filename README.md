@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/cezarywojcik/CWStatusBarNotification.png?branch=master)](https://travis-ci.org/cezarywojcik/CWStatusBarNotification)
 
-**NOTE:** You can find a **Swift 2.0* implementation of this library [in the swift branch of this repo](https://github.com/cezarywojcik/CWStatusBarNotification/tree/swift). 
+**NOTE:** You can find a **Swift 2.0** implementation of this library [in the swift branch of this repo](https://github.com/cezarywojcik/CWStatusBarNotification/tree/swift). 
 
 `CWStatusBarNotification` is a library that allows you to easily create text-based notifications that appear on the status bar.
 
