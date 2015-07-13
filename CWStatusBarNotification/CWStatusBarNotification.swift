@@ -242,6 +242,9 @@ class CWStatusBarNotification : NSObject {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.customView?.addSubview(view)
         
+        // setup auto layout constraints so that the custom view that is added
+        // is constrained to be the same size as its superview, whose frame will 
+        // be altered
         self.customView?.addConstraint(NSLayoutConstraint(item: view,
             attribute: .Trailing, relatedBy: .Equal, toItem: self.customView,
             attribute: .Trailing, multiplier: 1.0, constant: 0.0))
