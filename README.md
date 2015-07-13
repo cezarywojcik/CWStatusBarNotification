@@ -8,7 +8,7 @@
 
 ## Requirements
 
-`CWStatusBarNotification` uses Swift and requires iOS 7.0+.
+`CWStatusBarNotification` uses Swift 2.0 and requires iOS 7.0+.
 
 Works for iPhone and iPad.
 
@@ -30,7 +30,7 @@ You need to create a `CWStatusBarNotification` object. It is recommended that yo
 let notification = CWStatusBarNotification()
 ```
 
-After you have a `CWStatusBarNotification` object, you can simply call the `displayNotificationMessage(message: String, duration: Double)` method:
+After you have a `CWStatusBarNotification` object, you can simply call the `displayNotificationMessage(message: String, duration: NSTimeInterval)` method:
 
 ```
 self.notification.displayNotificationWithMessage("Hello, World!", duration: 1.0)
@@ -46,11 +46,11 @@ self.notification.dismissNotification()
 
 ### Behavior on Tap
 
-The default behavior when the notification is tapped is to dismiss it. However, you can override this behavior by setting the `notificationTappedBlock` closure to something different. 
+The default behavior when the notification is tapped is to dismiss it. However, you can override this behavior by setting the `notificationTappedClosure` closure to something different. 
 
 For example:
 ```
-self.notification.notificationTappedBlock = {
+self.notification.notificationTappedClosure = {
     println("notification tapped")
     // more code here
 }
@@ -59,7 +59,7 @@ self.notification.notificationTappedBlock = {
 Note that overriding this closure means that the notification will no longer be dismissed when tapped. If you want the notification to still dismiss when tapped, make sure to implement the following when overriding the closure:
 
 ```
-self.notification.notificationTappedBlock = {
+self.notification.notificationTappedClosure = {
     if !self.notificationIsDismissing {
         self.dismissNotification()
     }
@@ -107,9 +107,9 @@ There are two properties that determine the animation style of the notification:
 
 The `notificationAnimationInStyle` describes where the notification comes from, whereas the `notificationAnimationOutStyle` describes where the notification will go.
 
-The default value for `notificationAnimationInStyle` is `CWNotificationAnimationStyle.Top`.
+The default value for `notificationAnimationInStyle` is `CWNotificationAnimationStyle.Bottom`.
 
-The default value for `notificationAnimationOutStyle` is `CWNotificationAnimationStyle.Top`.
+The default value for `notificationAnimationOutStyle` is `CWNotificationAnimationStyle.Bottom`.
 
 ### Additional Remarks
 
@@ -119,7 +119,7 @@ The notifications will work in both screen orientations, however, screen rotatio
 
     The MIT License (MIT)
 
-    Copyright (c) 2014 Cezary Wojcik <http://www.cezarywojcik.com>
+    Copyright (c) 2015 Cezary Wojcik <http://www.cezarywojcik.com>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
