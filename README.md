@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/cezarywojcik/CWStatusBarNotification.png?branch=master)](https://travis-ci.org/cezarywojcik/CWStatusBarNotification)
 
-**NOTE:** You can find a `Swift` implementation of this library [in the swift branch of this repo](https://github.com/cezarywojcik/CWStatusBarNotification/tree/swift). This version is currently somewhat outdated, but a new one with Swift 2.0 will be coming soon!
+**NOTE:** You can find a **Swift 2.0* implementation of this library [in the swift branch of this repo](https://github.com/cezarywojcik/CWStatusBarNotification/tree/swift). 
 
 `CWStatusBarNotification` is a library that allows you to easily create text-based notifications that appear on the status bar.
 
@@ -142,7 +142,7 @@ The notifications will work in both screen orientations, however, screen rotatio
 
 ## Apps Using This Library
 
-If you would like for your app to be featured here, [contact me](cezarywojcik.com/contact) and I would love to hear about your app!
+If you would like for your app to be featured here, [contact me](http://cezarywojcik.com/contact) and I would love to hear about your app!
 
 * [SlideShare Presentations](https://itunes.apple.com/app/id917418728)
 * [Pong Ping](https://itunes.apple.com/us/app/pong-ping-social-addictive/id822887888)

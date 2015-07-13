@@ -255,6 +255,27 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     return 0.0f;
 }
 
+- (CGFloat)getNavigationBarHeight
+{
+    if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation) ||
+        UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return 44.0f;
+    }
+    return 30.0f;
+}
+
+- (CGFloat)getNotificationLabelHeight
+{
+    switch (self.notificationStyle) {
+        case CWNotificationStyleStatusBarNotification:
+            return [self getStatusBarHeight];
+        case CWNotificationStyleNavigationBarNotification:
+            return [self getStatusBarHeight] + [self getNavigationBarHeight];
+        default:
+            return [self getStatusBarHeight];
+    }
+}
+
 - (CGRect)getNotificationLabelTopFrame
 {
     return CGRectMake(0, [self getStatusBarOffset] + -1*[self getNotificationLabelHeight], [self getStatusBarWidth], [self getNotificationLabelHeight]);
@@ -278,27 +299,6 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 - (CGRect)getNotificationLabelFrame
 {
     return CGRectMake(0, [self getStatusBarOffset], [self getStatusBarWidth], [self getNotificationLabelHeight]);
-}
-
-- (CGFloat)getNavigationBarHeight
-{
-    if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation) ||
-        UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        return 44.0f;
-    }
-    return 30.0f;
-}
-
-- (CGFloat)getNotificationLabelHeight
-{
-    switch (self.notificationStyle) {
-        case CWNotificationStyleStatusBarNotification:
-            return [self getStatusBarHeight];
-        case CWNotificationStyleNavigationBarNotification:
-            return [self getStatusBarHeight] + [self getNavigationBarHeight];
-        default:
-            return [self getStatusBarHeight];
-    }
 }
 
 # pragma mark - screen orientation change
@@ -360,7 +360,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     [view setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.customView addSubview:view];
 
-    // Setup Auto Layout constaints so that the custom view that is added is constained to be the same
+    // Setup Auto Layout constaints so that the custom view that is added is consrtained to be the same
     // size as its superview, whose frame will be altered
     [self.customView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.customView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0]];
     [self.customView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.customView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0]];
@@ -526,7 +526,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         self.isCustomView = YES;
         self.notificationIsShowing = YES;
 
-        // create UIWindow
+        // create window
         [self createNotificationWindow];
 
         // setup view
