@@ -1,60 +1,93 @@
 //
-//  ViewController.swift
-//  CWNotificationDemo
-//
-//  Created by Cezary Wojcik on 6/8/14.
-//  Copyright (c) 2014 Cezary Wojcik. All rights reserved.
-//
-
-//
 //  MainViewController.swift
 //  CWNotificationDemo
 //
-//  Created by Cezary Wojcik on 6/8/14.
-//  Copyright (c) 2014 Cezary Wojcik. All rights reserved.
+//  Created by Cezary Wojcik on 7/11/15.
+//  Copyright © 2015 Cezary Wojcik. All rights reserved.
 //
 
 import UIKit
 
 class MainViewController: UIViewController {
+    // MARK: - IB outlets
     
-    @IBOutlet var labelDuration : UILabel?
-    @IBOutlet var sliderDuration : UISlider?
-    @IBOutlet var textNotificationMessage : UITextField?
-    @IBOutlet var segFromStyle : UISegmentedControl?
-    @IBOutlet var segToStyle : UISegmentedControl?
+    @IBOutlet weak var lblDuration: UILabel!
+    @IBOutlet weak var sliderDuration: UISlider!
+    @IBOutlet weak var txtNotificationMessage: UITextField!
+    @IBOutlet weak var segFromStyle: UISegmentedControl!
+    @IBOutlet weak var segToStyle: UISegmentedControl!
+    @IBOutlet weak var segNotificationStyle: UISegmentedControl!
+    
+    // MARK: - properties
     
     let notification = CWStatusBarNotification()
     
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+    // MARK: - setup
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "CWStatusBarNotification"
         self.updateDurationLabel()
-        var font = UIFont.boldSystemFontOfSize(10.0)
-        var attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
-        self.segFromStyle!.setTitleTextAttributes(attributes as [NSObject : AnyObject], forState: .Normal)
-        self.segToStyle!.setTitleTextAttributes(attributes as [NSObject : AnyObject], forState: .Normal)
         
-        // set default blue color
-        self.notification.notificationLabelBackgroundColor = UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+        // setup font
+        let font = UIFont.boldSystemFontOfSize(10.0)
+        let attributes = [NSFontAttributeName : font]
+        self.segFromStyle.setTitleTextAttributes(attributes, forState: .Normal)
+        self.segToStyle.setTitleTextAttributes(attributes, forState: .Normal)
+        
+        // set default blue color (since iOS 7.1, default window `tintColor`
+        // is black)
+        self.notification.notificationLabelBackgroundColor = UIColor(red: 0.0,
+            green: 122.0/255.0, blue: 1.0, alpha: 1.0)
     }
+    
+    // MARK: - methods
     
     func updateDurationLabel() {
-        self.labelDuration!.text = NSString(format: "%.1f seconds", self.sliderDuration!.value) as String
+        self.lblDuration.text = NSString(format: "%.1f seconds",
+            self.sliderDuration.value) as String
     }
     
-    @IBAction func sliderDurationChanged(sender : UISlider) {
+    func setupNotification() {
+        guard let inStyle = CWNotificationAnimationStyle(rawValue:
+            self.segFromStyle.selectedSegmentIndex) else {
+                return
+        }
+        guard let outStyle = CWNotificationAnimationStyle(rawValue:
+            self.segToStyle.selectedSegmentIndex) else {
+                return
+        }
+        guard let notificationStyle = CWNotificationStyle(rawValue:
+            self.segNotificationStyle.selectedSegmentIndex) else {
+                return
+        }
+        self.notification.notificationAnimationInStyle = inStyle
+        self.notification.notificationAnimationOutStyle = outStyle
+        self.notification.notificationStyle = notificationStyle
+    }
+    
+    // MARK: - IB actions
+    
+    @IBAction func sliderDurationChanged(sender: UISlider) {
         self.updateDurationLabel()
     }
     
-    @IBAction func showNotificationPressed(sender : UIButton) {
-        self.notification.notificationAnimationInStyle = CWNotificationAnimationStyle(rawValue: self.segFromStyle!.selectedSegmentIndex)!
-        self.notification.notificationAnimationOutStyle = CWNotificationAnimationStyle(rawValue: self.segToStyle!.selectedSegmentIndex)!
-        self.notification.displayNotificationWithMessage(self.textNotificationMessage!.text, duration: Double(self.sliderDuration!.value))
+    @IBAction func btnShowNotificationPressed(sender: UIButton) {
+        self.setupNotification()
+        let duration = NSTimeInterval(self.sliderDuration.value)
+        self.notification.displayNotificationWithMessage(
+            self.txtNotificationMessage.text!, forDuration: duration)
+    }
+    
+    @IBAction func btnShowCustomNotificationPressed(sender: UIButton) {
+        self.setupNotification()
+        let duration = NSTimeInterval(self.sliderDuration.value)
+        guard let view = NSBundle.mainBundle().loadNibNamed("CustomView",
+            owner: nil, options: nil)[0] as? UIView else {
+                return
+        }
+        self.notification.displayNotificationWithView(view,
+            forDuration: duration)
     }
     
 }
