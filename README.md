@@ -147,6 +147,7 @@ If you would like for your app to be featured here, [contact me](http://cezarywo
 * [SlideShare Presentations](https://itunes.apple.com/app/id917418728)
 * [Pong Ping](https://itunes.apple.com/us/app/pong-ping-social-addictive/id822887888)
 * [NextMovies](https://itunes.apple.com/us/app/nextmovies-smart-movie-recommendation/id680850329)
+* [Social Dummy](https://itunes.apple.com/gb/app/social-dummy-create-fake-social/id610088272)
 
 ## License
 
