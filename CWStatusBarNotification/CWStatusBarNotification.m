@@ -194,7 +194,11 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     self = [super init];
     if (self) {
         // set default
-        self.notificationLabelBackgroundColor = [[UIApplication sharedApplication] delegate].window.tintColor;
+        if ([[UIApplication sharedApplication] delegate].window != nil) {
+            self.notificationLabelBackgroundColor = [[UIApplication sharedApplication] delegate].window.tintColor;
+        } else {
+            self.notificationLabelBackgroundColor = [UIColor blackColor];
+        }
         self.notificationLabelTextColor = [UIColor whiteColor];
         self.notificationLabelFont = [UIFont systemFontOfSize:FONT_SIZE];
         self.notificationLabelHeight = 0.0;
