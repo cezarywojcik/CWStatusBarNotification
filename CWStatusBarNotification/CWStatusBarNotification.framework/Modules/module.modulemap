@@ -1,0 +1,10 @@
+framework module CWStatusBarNotification {
+  umbrella header "CWStatusBarNotification.h"
+
+  export *
+  module * { export * }
+}
+
+module CWStatusBarNotification.Swift {
+    header "CWStatusBarNotification-Swift.h"
+}

@@ -17,7 +17,7 @@ func systemVersionLessThan(value : String) -> Bool {
 
 // MARK: - ScrollLabel
 
-class ScrollLabel : UILabel {
+public class ScrollLabel : UILabel {
     
     // MARK: - properties
     
@@ -34,11 +34,11 @@ class ScrollLabel : UILabel {
         self.addSubview(self.textImage!)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func drawTextInRect(rect: CGRect) {
+    override public func drawTextInRect(rect: CGRect) {
         guard self.scrollOffset() > 0 else {
             self.textImage = nil
             super.drawTextInRect(CGRectInset(rect, padding, 0))
@@ -94,10 +94,10 @@ class ScrollLabel : UILabel {
 
 // MARK: - CWWindowContainer
 
-class CWWindowContainer : UIWindow {
+public class CWWindowContainer : UIWindow {
     var notificationHeight : CGFloat = 0.0
     
-    override func hitTest(pt: CGPoint, withEvent event: UIEvent?) -> UIView? {
+    override public func hitTest(pt: CGPoint, withEvent event: UIEvent?) -> UIView? {
         var height : CGFloat = 0.0
         if systemVersionLessThan("8.0.0") && UIInterfaceOrientationIsLandscape(
             UIApplication.sharedApplication().statusBarOrientation) {
@@ -116,7 +116,6 @@ class CWWindowContainer : UIWindow {
 }
 
 // MARK: - CWViewController
-
 class CWViewController : UIViewController {
     var localPreferredStatusBarStyle : UIStatusBarStyle = .Default
     var localSupportedInterfaceOrientations : UIInterfaceOrientationMask = []

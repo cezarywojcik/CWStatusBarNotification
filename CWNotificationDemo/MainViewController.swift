@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CWStatusBarNotification
 
 class MainViewController: UIViewController {
     // MARK: - IB outlets

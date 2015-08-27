@@ -14,13 +14,9 @@ Works for iPhone and iPad.
 
 ## Installation
 
-### CocoaPods
+### Copy Files 
 
-Sometime in the future...
-
-### Manual
-
-Copy the folder `CWStatusBarNotification` to your project.
+Copy the two `*.swift` files from `CWStatusBarNotification/CWStatusBarNotification/` into your project.
 
 ## Usage
 

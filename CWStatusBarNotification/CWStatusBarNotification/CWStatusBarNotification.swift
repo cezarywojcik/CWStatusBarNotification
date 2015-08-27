@@ -10,26 +10,26 @@ import UIKit
 
 // MARK: - enums
 
-@objc enum CWNotificationStyle : Int {
+@objc public enum CWNotificationStyle : Int {
     case StatusBarNotification
     case NavigationBarNotification
 }
 
-@objc enum CWNotificationAnimationStyle : Int {
+@objc public enum CWNotificationAnimationStyle : Int {
     case Top
     case Bottom
     case Left
     case Right
 }
 
-@objc enum CWNotificationAnimationType : Int {
+@objc public enum CWNotificationAnimationType : Int {
     case Replace
     case Overlay
 }
 
 // MARK: - CWStatusBarNotification
 
-class CWStatusBarNotification : NSObject {
+public class CWStatusBarNotification : NSObject {
     // MARK: - properties
     
     private let fontSize : CGFloat = 10.0
@@ -38,30 +38,30 @@ class CWStatusBarNotification : NSObject {
     private var dismissHandle : CWDelayedClosureHandle?
     private var isCustomView : Bool
     
-    var notificationLabel : ScrollLabel?
-    var statusBarView : UIView?
-    var notificationTappedClosure : () -> ()
-    var notificationIsShowing = false
-    var notificationIsDismissing = false
-    var notificationWindow : CWWindowContainer?
+    public var notificationLabel : ScrollLabel?
+    public var statusBarView : UIView?
+    public var notificationTappedClosure : () -> ()
+    public var notificationIsShowing = false
+    public var notificationIsDismissing = false
+    public var notificationWindow : CWWindowContainer?
     
-    var notificationLabelBackgroundColor : UIColor
-    var notificationLabelTextColor : UIColor
-    var notificationLabelFont : UIFont
-    var notificationLabelHeight : CGFloat
-    var customView : UIView?
-    var multiline : Bool
-    var supportedInterfaceOrientations : UIInterfaceOrientationMask
-    var notificationAnimationDuration : NSTimeInterval
-    var notificationStyle : CWNotificationStyle
-    var notificationAnimationInStyle : CWNotificationAnimationStyle
-    var notificationAnimationOutStyle : CWNotificationAnimationStyle
-    var notificationAnimationType : CWNotificationAnimationType
-    var preferredStatusBarStyle : UIStatusBarStyle
+    public var notificationLabelBackgroundColor : UIColor
+    public var notificationLabelTextColor : UIColor
+    public var notificationLabelFont : UIFont
+    public var notificationLabelHeight : CGFloat
+    public var customView : UIView?
+    public var multiline : Bool
+    public var supportedInterfaceOrientations : UIInterfaceOrientationMask
+    public var notificationAnimationDuration : NSTimeInterval
+    public var notificationStyle : CWNotificationStyle
+    public var notificationAnimationInStyle : CWNotificationAnimationStyle
+    public var notificationAnimationOutStyle : CWNotificationAnimationStyle
+    public var notificationAnimationType : CWNotificationAnimationType
+    public var preferredStatusBarStyle : UIStatusBarStyle
     
     // MARK: - setup
     
-    override init() {
+    public override init() {
         if let tintColor = UIApplication.sharedApplication().delegate?.window??
             .tintColor {
                 self.notificationLabelBackgroundColor = tintColor
@@ -199,7 +199,7 @@ class CWStatusBarNotification : NSObject {
     
     // MARK: - on tap
     
-    func notificationTapped(recognizer : UITapGestureRecognizer) {
+    private func notificationTapped(recognizer : UITapGestureRecognizer) {
         self.notificationTappedClosure()
     }
     
@@ -357,7 +357,7 @@ class CWStatusBarNotification : NSObject {
     
     // MARK: - display notification
     
-    func displayNotificationWithMessage(message : String,
+    public func displayNotificationWithMessage(message : String,
         completion : () -> ()) {
             guard !self.notificationIsShowing else {
                 return
@@ -409,7 +409,7 @@ class CWStatusBarNotification : NSObject {
             }
     }
     
-    func displayNotificationWithMessage(message : String,
+    public func displayNotificationWithMessage(message : String,
         forDuration duration : NSTimeInterval) {
             self.displayNotificationWithMessage(message) { () -> () in
                 self.dismissHandle = performClosureAfterDelay(duration, closure: {
@@ -419,14 +419,14 @@ class CWStatusBarNotification : NSObject {
             }
     }
     
-    func displayNotificationWithAttributedString(
+    public func displayNotificationWithAttributedString(
         attributedString : NSAttributedString, completion : () -> ()) {
             self.displayNotificationWithMessage(attributedString.string,
                 completion: completion)
             self.notificationLabel?.attributedText = attributedString
     }
     
-    func displayNotificationWithAttributedString(
+    public func displayNotificationWithAttributedString(
         attributedString : NSAttributedString,
         forDuration duration : NSTimeInterval) {
             self.displayNotificationWithMessage(attributedString.string,
@@ -434,7 +434,7 @@ class CWStatusBarNotification : NSObject {
             self.notificationLabel?.attributedText = attributedString
     }
     
-    func displayNotificationWithView(view : UIView, completion : () -> ()) {
+    public func displayNotificationWithView(view : UIView, completion : () -> ()) {
         guard !self.notificationIsShowing else {
             return
         }
@@ -479,7 +479,7 @@ class CWStatusBarNotification : NSObject {
         }
     }
     
-    func displayNotificationWithView(view : UIView,
+    public func displayNotificationWithView(view : UIView,
         forDuration duration : NSTimeInterval) {
             self.displayNotificationWithView(view) { () -> () in
                 self.dismissHandle = performClosureAfterDelay(duration, closure: { () -> Void in
@@ -488,7 +488,7 @@ class CWStatusBarNotification : NSObject {
             }
     }
     
-    func dismissNotificationWithCompletion(completion : (() -> ())?) {
+    public func dismissNotificationWithCompletion(completion : (() -> ())?) {
         cancelDelayedClosure(self.dismissHandle)
         self.notificationIsDismissing = true
         self.secondFrameChange()
@@ -520,7 +520,7 @@ class CWStatusBarNotification : NSObject {
         }
     }
     
-    func dismissNotification() {
+    public func dismissNotification() {
         self.dismissNotificationWithCompletion(nil)
     }
 }
