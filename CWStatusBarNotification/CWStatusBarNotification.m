@@ -194,7 +194,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     self = [super init];
     if (self) {
         // set default
-        if ([[UIApplication sharedApplication] delegate].window != nil) {
+        if ([[[UIApplication sharedApplication] delegate] respondsToSelector:@selector(window)]) {
             self.notificationLabelBackgroundColor = [[UIApplication sharedApplication] delegate].window.tintColor;
         } else {
             self.notificationLabelBackgroundColor = [UIColor blackColor];
