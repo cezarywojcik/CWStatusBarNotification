@@ -261,6 +261,10 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (CGFloat)getNavigationBarHeight
 {
+    if (self.navigationBarHeight > 0) {
+        return self.navigationBarHeight;
+    }
+    
     if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation) ||
         UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         return 44.0f;
