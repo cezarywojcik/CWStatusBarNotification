@@ -40,7 +40,7 @@
     return self;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return [self.notification.delegate statusBarNotificationSupportedOrientations];
 }
 
