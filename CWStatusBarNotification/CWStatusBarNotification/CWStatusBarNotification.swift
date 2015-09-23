@@ -199,7 +199,7 @@ public class CWStatusBarNotification : NSObject {
     
     // MARK: - on tap
     
-    private func notificationTapped(recognizer : UITapGestureRecognizer) {
+    func notificationTapped(recognizer : UITapGestureRecognizer) {
         self.notificationTappedClosure()
     }
     
