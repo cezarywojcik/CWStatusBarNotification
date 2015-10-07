@@ -187,7 +187,7 @@ public class CWStatusBarNotification : NSObject {
     
     // MARK: - screen orientation change
     
-    private func updateStatusBarFrame() {
+    func updateStatusBarFrame() {
         if let view = self.isCustomView ? self.customView :
             self.notificationLabel {
                 view.frame = self.getNotificationLabelFrame()
