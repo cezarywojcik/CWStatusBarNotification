@@ -248,7 +248,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     if (SYSTEM_VERSION_LESS_THAN(@"8.0") && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
         return [UIScreen mainScreen].bounds.size.height;
     }
-    return [UIScreen mainScreen].bounds.size.width;
+    return [[UIApplication sharedApplication] keyWindow].bounds.size.width;
 }
 
 - (CGFloat)getStatusBarOffset
@@ -376,7 +376,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)createNotificationWindow
 {
-    self.notificationWindow = [[CWWindowContainer alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.notificationWindow = [[CWWindowContainer alloc] initWithFrame:[[[UIApplication sharedApplication] keyWindow] bounds]];
     self.notificationWindow.backgroundColor = [UIColor clearColor];
     self.notificationWindow.userInteractionEnabled = YES;
     self.notificationWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
