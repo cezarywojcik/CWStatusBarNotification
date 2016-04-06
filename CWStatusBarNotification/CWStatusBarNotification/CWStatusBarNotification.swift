@@ -32,12 +32,12 @@ import UIKit
 public class CWStatusBarNotification : NSObject {
     // MARK: - properties
     
-    private let fontSize : CGFloat = 10.0
-    
     private var tapGestureRecognizer : UITapGestureRecognizer!
     private var dismissHandle : CWDelayedClosureHandle?
     private var isCustomView : Bool
     
+    public var fontSize : CGFloat = 10.0
+
     public var notificationLabel : ScrollLabel?
     public var statusBarView : UIView?
     public var notificationTappedClosure : () -> ()
@@ -226,6 +226,7 @@ public class CWStatusBarNotification : NSObject {
         self.notificationLabel?.numberOfLines = self.multiline ? 0 : 1
         self.notificationLabel?.text = message
         self.notificationLabel?.textAlignment = .Center
+        self.notificationLabelFont = UIFont.systemFontOfSize(self.fontSize)
         self.notificationLabel?.adjustsFontSizeToFitWidth = false
         self.notificationLabel?.font = self.notificationLabelFont
         self.notificationLabel?.backgroundColor =
