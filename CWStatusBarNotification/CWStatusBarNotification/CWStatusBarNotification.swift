@@ -104,7 +104,7 @@ public class CWStatusBarNotification : NSObject {
         
         // create tap recognizer
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self,
-            action: "notificationTapped:")
+            action: #selector(CWStatusBarNotification.notificationTapped(_:)))
     }
     
     // MARK: - dimensions
@@ -385,13 +385,13 @@ public class CWStatusBarNotification : NSObject {
             
             // checking for screen orientation change
             NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "updateStatusBarFrame",
+                selector:#selector(CWStatusBarNotification.updateStatusBarFrame),
                 name: UIApplicationDidChangeStatusBarFrameNotification,
                 object: nil)
             
             // checking for status bar change
             NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "updateStatusBarFrame",
+                selector:#selector(CWStatusBarNotification.updateStatusBarFrame),
                 name: UIApplicationWillChangeStatusBarFrameNotification,
                 object: nil)
             
@@ -460,13 +460,12 @@ public class CWStatusBarNotification : NSObject {
         
         // checking for screen orientation change
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "updateStatusBarFrame",
+            selector:#selector(CWStatusBarNotification.updateStatusBarFrame),
             name: UIApplicationDidChangeStatusBarFrameNotification,
             object: nil)
         
         // checking for status bar change
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "updateStatusBarFrame",
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(CWStatusBarNotification.updateStatusBarFrame),
             name: UIApplicationWillChangeStatusBarFrameNotification,
             object: nil)
         
