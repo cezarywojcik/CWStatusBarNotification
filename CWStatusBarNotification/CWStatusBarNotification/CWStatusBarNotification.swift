@@ -32,7 +32,7 @@ import UIKit
 public class CWStatusBarNotification : NSObject {
     // MARK: - properties
     
-    private var fontSize : CGFloat = 10.0
+    private let fontSize : CGFloat = 10.0
 
     private var tapGestureRecognizer : UITapGestureRecognizer!
     private var dismissHandle : CWDelayedClosureHandle?
