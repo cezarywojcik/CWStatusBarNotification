@@ -211,7 +211,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
     
     CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
-    if (SYSTEM_VERSION_LESS_THAN(@"8.0") && UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+    if (SYSTEM_VERSION_LESS_THAN(@"8.0") && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
         statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.width;
     }
     return statusBarHeight > 0 ? statusBarHeight : 20;
@@ -219,7 +219,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (CGFloat)getStatusBarWidth
 {
-    if (SYSTEM_VERSION_LESS_THAN(@"8.0") && UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+    if (SYSTEM_VERSION_LESS_THAN(@"8.0") && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
         return [UIScreen mainScreen].bounds.size.height;
     }
     return [UIScreen mainScreen].bounds.size.width;
@@ -260,7 +260,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (CGFloat)getNavigationBarHeight
 {
-    if (UIDeviceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation) ||
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation) ||
         UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         return 44.0f;
     }
