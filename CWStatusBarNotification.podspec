@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "CWStatusBarNotification"
-  s.version      = "2.3.4"
+  s.version      = "2.3.5"
   s.summary      = "A library that creates status bar notifications."
   s.description  = "CWStatusBarNotification is a library allows you to present a beautiful text-based notification in the status bar."
   s.homepage     = "https://github.com/cezarywojcik/CWStatusBarNotification"
