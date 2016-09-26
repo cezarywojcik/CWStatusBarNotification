@@ -139,18 +139,18 @@ class CWViewController : UIViewController {
 
 typealias CWDelayedClosureHandle = (Bool) -> ()
 
-func performClosureAfterDelay(seconds : Double, closure: dispatch_block_t?) -> CWDelayedClosureHandle? {
+func performClosureAfterDelay(_ seconds : Double, closure: (() -> ())?) -> CWDelayedClosureHandle? {
     guard closure != nil else {
         return nil
     }
     
-    var closureToExecute : dispatch_block_t! = closure // copy?
+    var closureToExecute : (() -> ())! = closure // copy?
     var delayHandleCopy : CWDelayedClosureHandle! = nil
     
     let delayHandle : CWDelayedClosureHandle = {
         (cancel : Bool) -> () in
         if !cancel && closureToExecute != nil {
-            dispatch_async(dispatch_get_main_queue(), closureToExecute)
+            DispatchQueue.main.async(execute: closureToExecute)
         }
         closureToExecute = nil
         delayHandleCopy = nil
@@ -159,8 +159,8 @@ func performClosureAfterDelay(seconds : Double, closure: dispatch_block_t?) -> C
     delayHandleCopy = delayHandle
     
     let delay = Int64(Double(seconds) * Double(NSEC_PER_SEC))
-    let after = dispatch_time(DISPATCH_TIME_NOW, delay)
-    dispatch_after(after, dispatch_get_main_queue()) {
+    let after = DispatchTime.now() + Double(delay) / Double(NSEC_PER_SEC)
+    DispatchQueue.main.asyncAfter(deadline: after) {
         if delayHandleCopy != nil {
             delayHandleCopy(false)
         }
