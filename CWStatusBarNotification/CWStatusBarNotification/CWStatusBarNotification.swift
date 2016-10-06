@@ -359,7 +359,7 @@ public class CWStatusBarNotification : NSObject {
 
     // MARK: - display notification
 
-    public func displayNotification(withMessage message : String,
+    public func displayNotification(_ message : String,
                                                completion : @escaping () -> ()) {
         guard !self.notificationIsShowing else {
             return
@@ -409,7 +409,7 @@ public class CWStatusBarNotification : NSObject {
 
     public func displayNotification(_ message : String,
                                                duration : TimeInterval) {
-        self.displayNotification(withMessage: message) { () -> () in
+        self.displayNotification(message) { () -> () in
             self.dismissHandle = performClosureAfterDelay(duration, closure: {
                 self.dismissNotification()
             })
@@ -418,7 +418,7 @@ public class CWStatusBarNotification : NSObject {
 
     public func displayNotificationWithAttributedString(
         attributedString : NSAttributedString, completion : @escaping () -> ()) {
-        self.displayNotification(withMessage: attributedString.string, completion: completion)
+        self.displayNotification(attributedString.string, completion: completion)
         self.notificationLabel?.attributedText = attributedString
     }
 
