@@ -14,7 +14,7 @@ Works for iPhone and iPad.
 
 ## Installation
 
-### Copy Files 
+### Copy Files
 
 Copy the two `*.swift` files from `CWStatusBarNotification/CWStatusBarNotification/` into your project.
 
@@ -26,23 +26,23 @@ You need to create a `CWStatusBarNotification` object. It is recommended that yo
 let notification = CWStatusBarNotification()
 ```
 
-After you have a `CWStatusBarNotification` object, you can simply call the `displayNotificationMessage(message: String, duration: NSTimeInterval)` method:
+After you have a `CWStatusBarNotification` object, you can simply call the `displayNotification(String, duration: NSTimeInterval)` method:
 
 ```
-self.notification.displayNotificationWithMessage("Hello, World!", duration: 1.0)
+self.notification.displayNotification("Hello, World!", duration: 1.0)
 ```
 
 If you prefer to manually choose when to display and dismiss the notification, you can do so as well:
 
 ```
-self.notification.displayNotificationWithMessage("Hello", completion: nil)
+self.notification.displayNotification("Hello", completion: nil)
 // wait until you need to dismiss
 self.notification.dismissNotification()
 ```
 
 ### Behavior on Tap
 
-The default behavior when the notification is tapped is to dismiss it. However, you can override this behavior by setting the `notificationTappedClosure` closure to something different. 
+The default behavior when the notification is tapped is to dismiss it. However, you can override this behavior by setting the `notificationTappedClosure` closure to something different.
 
 For example:
 ```
@@ -70,42 +70,42 @@ First of all, you can customize the background color and text color using the fo
 Example:
 
 ```
-self.notification.notificationLabelBackgroundColor = UIColor.blackColor()
-self.notification.notificationLabelTextColor = UIColor.greenColor()
+self.notification.notificationLabelBackgroundColor = UIColor.black
+self.notification.notificationLabelTextColor = UIColor.green
 ```
 
 ![custom colors](screenshots/ss1.gif)
 
-The default value of `notificationLabelBackgroundColor` is `UIColor.blackColor()`.
+The default value of `notificationLabelBackgroundColor` is `UIColor.black`.
 
-The default value of `notification.notificationLabelTextColor` is `UIColor.whiteColor()`.
+The default value of `notification.notificationLabelTextColor` is `UIColor.white`.
 
-Finally, you can also choose from two styles - a notification the size of the status bar, or a notification the size of the status bar and a navigation bar. Simply change the `notificationStyle` property of the `CWStatusBarNotification` object to either `CWNotificationStyle.StatusBarNotification` or `CWNotificationStyle.NavigationBarNotification`.
+Finally, you can also choose from two styles - a notification the size of the status bar, or a notification the size of the status bar and a navigation bar. Simply change the `notificationStyle` property of the `CWStatusBarNotification` object to either `CWNotificationStyle.statusBarNotification` or `CWNotificationStyle.navigationBarNotification`.
 
 Example:
 
 ```
-self.notification.notificationStyle = .NavigationBarNotification
+self.notification.notificationStyle = .navigationBarNotification
 ```
 
 ![custom style](screenshots/ss2.gif)
 
-The default value of `notificationStyle` is `CWNotificationStyle.StatusBarNotification`.
+The default value of `notificationStyle` is `CWNotificationStyle.statusBarNotification`.
 
 ## Customizing Animation
 
 There are two properties that determine the animation style of the notification: `notificationAnimationInStyle` and `notificationAnimationOutStyle`. Each can take on one of four values:
 
-* `CWNotificationAnimationStyle.Top`
-* `CWNotificationAnimationStyle.Bottom`
-* `CWNotificationAnimationStyle.Left`
-* `CWNotificationAnimationStyle.Right`
+* `CWNotificationAnimationStyle.top`
+* `CWNotificationAnimationStyle.bottom`
+* `CWNotificationAnimationStyle.left`
+* `CWNotificationAnimationStyle.right`
 
 The `notificationAnimationInStyle` describes where the notification comes from, whereas the `notificationAnimationOutStyle` describes where the notification will go.
 
-The default value for `notificationAnimationInStyle` is `CWNotificationAnimationStyle.Bottom`.
+The default value for `notificationAnimationInStyle` is `CWNotificationAnimationStyle.bottom`.
 
-The default value for `notificationAnimationOutStyle` is `CWNotificationAnimationStyle.Bottom`.
+The default value for `notificationAnimationOutStyle` is `CWNotificationAnimationStyle.bottom`.
 
 ### Additional Remarks
 
