@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/CWStatusBarNotification-Swift.h</key>
 		<data>
-		sHk9UTdVUQ+K2bnEze4Om700M5g=
+		UnAjFWeQmm0CQ7v2xd92kTgKM/Q=
 		</data>
 		<key>Headers/CWStatusBarNotification.h</key>
 		<data>
@@ -14,23 +14,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		vnpKR34QNRjEzSLsaiVc3ESfYak=
+		/V4btMJ2pRIsSjlFQdqh3WVN8BA=
 		</data>
-		<key>Modules/CWStatusBarNotification.swiftmodule/arm.swiftdoc</key>
+		<key>Modules/CWStatusBarNotification.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		G40ZKxZeGbDiufsVP/4VgPLgqGY=
+		ZFeGkK/ObsF/ksLjEDM0aHEU8cg=
 		</data>
-		<key>Modules/CWStatusBarNotification.swiftmodule/arm.swiftmodule</key>
+		<key>Modules/CWStatusBarNotification.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		GgtVi9uEw7MXifjf18ZZ5F6i7jE=
-		</data>
-		<key>Modules/CWStatusBarNotification.swiftmodule/arm64.swiftdoc</key>
-		<data>
-		Fq4/GBaJtuC5ZnCk+gF/L2KS1cY=
-		</data>
-		<key>Modules/CWStatusBarNotification.swiftmodule/arm64.swiftmodule</key>
-		<data>
-		ssTzLsTAKPUkfcl07Pa/xiV723g=
+		L7bhUXeBQX/RdbfaQrLzDRS8xvo=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -40,33 +32,60 @@
 	<key>files2</key>
 	<dict>
 		<key>Headers/CWStatusBarNotification-Swift.h</key>
-		<data>
-		sHk9UTdVUQ+K2bnEze4Om700M5g=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			UnAjFWeQmm0CQ7v2xd92kTgKM/Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			BqcT64nJ0ZhhNSUz2Fdu/zWkjKvgs3HmzZ5uoc38k3A=
+			</data>
+		</dict>
 		<key>Headers/CWStatusBarNotification.h</key>
-		<data>
-		dKyiSWNdnUbx8kFZhyBOJeSw0IM=
-		</data>
-		<key>Modules/CWStatusBarNotification.swiftmodule/arm.swiftdoc</key>
-		<data>
-		G40ZKxZeGbDiufsVP/4VgPLgqGY=
-		</data>
-		<key>Modules/CWStatusBarNotification.swiftmodule/arm.swiftmodule</key>
-		<data>
-		GgtVi9uEw7MXifjf18ZZ5F6i7jE=
-		</data>
-		<key>Modules/CWStatusBarNotification.swiftmodule/arm64.swiftdoc</key>
-		<data>
-		Fq4/GBaJtuC5ZnCk+gF/L2KS1cY=
-		</data>
-		<key>Modules/CWStatusBarNotification.swiftmodule/arm64.swiftmodule</key>
-		<data>
-		ssTzLsTAKPUkfcl07Pa/xiV723g=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			dKyiSWNdnUbx8kFZhyBOJeSw0IM=
+			</data>
+			<key>hash2</key>
+			<data>
+			qR/LsE3t6eerp/5uF/MUSf083Miuk4kR0zMJ26cJxiY=
+			</data>
+		</dict>
+		<key>Modules/CWStatusBarNotification.swiftmodule/x86_64.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZFeGkK/ObsF/ksLjEDM0aHEU8cg=
+			</data>
+			<key>hash2</key>
+			<data>
+			UZRNKG++uOvbZknlKlpNuaafybVWUDHW/qdxU6SUjfk=
+			</data>
+		</dict>
+		<key>Modules/CWStatusBarNotification.swiftmodule/x86_64.swiftmodule</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			L7bhUXeBQX/RdbfaQrLzDRS8xvo=
+			</data>
+			<key>hash2</key>
+			<data>
+			YeaQCwLDnScdpBCJndcwPYGlI8fFy5Uq6KiUQcIpEW8=
+			</data>
+		</dict>
 		<key>Modules/module.modulemap</key>
-		<data>
-		92f/QlE0cBcXT4XFRh5+RB4ItR8=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			92f/QlE0cBcXT4XFRh5+RB4ItR8=
+			</data>
+			<key>hash2</key>
+			<data>
+			+rB6syL+mFfQB7ZftZA2x8Oe8Faw6poezDWJ+N6W3Kg=
+			</data>
+		</dict>
 	</dict>
 	<key>rules</key>
 	<dict>
@@ -85,6 +104,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^version.plist$</key>
 		<true/>
@@ -130,6 +154,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^Info\.plist$</key>
 		<dict>
