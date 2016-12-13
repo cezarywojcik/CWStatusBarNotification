@@ -31,14 +31,14 @@ class MainViewController: UIViewController {
         self.updateDurationLabel()
         
         // setup font
-        let font = UIFont.boldSystemFontOfSize(10.0)
+        let font = UIFont.boldSystemFont(ofSize: 10.0)
         let attributes = [NSFontAttributeName : font]
-        self.segFromStyle.setTitleTextAttributes(attributes, forState: .Normal)
-        self.segToStyle.setTitleTextAttributes(attributes, forState: .Normal)
+        self.segFromStyle.setTitleTextAttributes(attributes, for: .normal)
+        self.segToStyle.setTitleTextAttributes(attributes, for: .normal)
         
         // set default blue color (since iOS 7.1, default window `tintColor`
         // is black)
-        self.notification.notificationLabelBackgroundColor = UIColor(red: 0.0,
+        self.notification.backgroundColor = UIColor(red: 0.0,
             green: 122.0/255.0, blue: 1.0, alpha: 1.0)
     }
     
@@ -62,32 +62,32 @@ class MainViewController: UIViewController {
             self.segNotificationStyle.selectedSegmentIndex) else {
                 return
         }
-        self.notification.notificationAnimationInStyle = inStyle
-        self.notification.notificationAnimationOutStyle = outStyle
-        self.notification.notificationStyle = notificationStyle
+        self.notification.animationInStyle = inStyle
+        self.notification.animationOutStyle = outStyle
+        self.notification.style = notificationStyle
     }
     
     // MARK: - IB actions
     
-    @IBAction func sliderDurationChanged(sender: UISlider) {
+    @IBAction func sliderDurationChanged(_ sender: UISlider) {
         self.updateDurationLabel()
     }
     
-    @IBAction func btnShowNotificationPressed(sender: UIButton) {
+    @IBAction func btnShowNotificationPressed(_ sender: UIButton) {
         self.setupNotification()
-        let duration = NSTimeInterval(self.sliderDuration.value)
-        self.notification.displayNotificationWithMessage(
-            self.txtNotificationMessage.text!, forDuration: duration)
+        let duration = TimeInterval(self.sliderDuration.value)
+        self.notification.displayNotification(message:
+            self.txtNotificationMessage.text!, duration: duration)
     }
     
-    @IBAction func btnShowCustomNotificationPressed(sender: UIButton) {
+    @IBAction func btnShowCustomNotificationPressed(_ sender: UIButton) {
         self.setupNotification()
-        let duration = NSTimeInterval(self.sliderDuration.value)
-        guard let view = NSBundle.mainBundle().loadNibNamed("CustomView",
-            owner: nil, options: nil)[0] as? UIView else {
+        let duration = TimeInterval(self.sliderDuration.value)
+        guard let view = Bundle.main.loadNibNamed("CustomView",
+            owner: nil, options: nil)?[0] as? UIView else {
                 return
         }
-        self.notification.displayNotificationWithView(view,
+        self.notification.displayNotification(view: view,
             forDuration: duration)
     }
     

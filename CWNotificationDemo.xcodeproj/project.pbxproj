@@ -13,18 +13,18 @@
 		5EB2509E1B5350580093E304 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2509D1B5350580093E304 /* Assets.xcassets */; };
 		5EB250A11B5350580093E304 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2509F1B5350580093E304 /* LaunchScreen.storyboard */; };
 		5EC0FBB71B8F8C2900704169 /* CustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EC0FBB61B8F8C2900704169 /* CustomView.xib */; };
-		5EC0FBBC1B8F8ED500704169 /* CWStatusBarNotification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC0FBB81B8F8E6A00704169 /* CWStatusBarNotification.framework */; };
-		5EC0FBBD1B8F8ED500704169 /* CWStatusBarNotification.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC0FBB81B8F8E6A00704169 /* CWStatusBarNotification.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		93E27FC51DFFC9DA001FAB54 /* CWStatusBarNotification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E27FC31DFFC9D4001FAB54 /* CWStatusBarNotification.framework */; };
+		93E27FC61DFFC9DA001FAB54 /* CWStatusBarNotification.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 93E27FC31DFFC9D4001FAB54 /* CWStatusBarNotification.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		5EC0FBBE1B8F8ED500704169 /* Embed Frameworks */ = {
+		93E27FC21DFFC822001FAB54 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5EC0FBBD1B8F8ED500704169 /* CWStatusBarNotification.framework in Embed Frameworks */,
+				93E27FC61DFFC9DA001FAB54 /* CWStatusBarNotification.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -40,7 +40,7 @@
 		5EB250A01B5350580093E304 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EB250A21B5350580093E304 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EC0FBB61B8F8C2900704169 /* CustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomView.xib; sourceTree = "<group>"; };
-		5EC0FBB81B8F8E6A00704169 /* CWStatusBarNotification.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CWStatusBarNotification.framework; path = CWStatusBarNotification/CWStatusBarNotification.framework; sourceTree = "<group>"; };
+		93E27FC31DFFC9D4001FAB54 /* CWStatusBarNotification.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CWStatusBarNotification.framework; path = CWStatusBarNotification/CWStatusBarNotification.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EC0FBBC1B8F8ED500704169 /* CWStatusBarNotification.framework in Frameworks */,
+				93E27FC51DFFC9DA001FAB54 /* CWStatusBarNotification.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +89,7 @@
 		5EB250A81B5350600093E304 /* CWStatusBarNotification */ = {
 			isa = PBXGroup;
 			children = (
-				5EC0FBB81B8F8E6A00704169 /* CWStatusBarNotification.framework */,
+				93E27FC31DFFC9D4001FAB54 /* CWStatusBarNotification.framework */,
 			);
 			name = CWStatusBarNotification;
 			sourceTree = "<group>";
@@ -104,7 +104,7 @@
 				5EB2508F1B5350580093E304 /* Sources */,
 				5EB250901B5350580093E304 /* Frameworks */,
 				5EB250911B5350580093E304 /* Resources */,
-				5EC0FBBE1B8F8ED500704169 /* Embed Frameworks */,
+				93E27FC21DFFC822001FAB54 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +126,7 @@
 				TargetAttributes = {
 					5EB250921B5350580093E304 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -289,6 +290,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CW.CWNotificationDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -305,6 +307,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CW.CWNotificationDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
