@@ -33,8 +33,8 @@ class MainViewController: UIViewController {
         // setup font
         let font = UIFont.boldSystemFont(ofSize: 10.0)
         let attributes = [NSFontAttributeName : font]
-        self.segFromStyle.setTitleTextAttributes(attributes, for: UIControlState())
-        self.segToStyle.setTitleTextAttributes(attributes, for: UIControlState())
+        self.segFromStyle.setTitleTextAttributes(attributes, for: .normal)
+        self.segToStyle.setTitleTextAttributes(attributes, for: .normal)
         
         // set default blue color (since iOS 7.1, default window `tintColor`
         // is black)
