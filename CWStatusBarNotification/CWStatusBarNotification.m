@@ -9,12 +9,14 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CWStatusBarNotification.h"
 
-#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+static BOOL SYSTEM_VERSION_LESS_THAN(NSString *v) {
+    return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending);
+}
 
-#define FONT_SIZE 12.0f
-#define PADDING 10.0f
-#define SCROLL_SPEED 40.0f
-#define SCROLL_DELAY 1.0f
+static const CGFloat FONT_SIZE = 12.0f;
+static const CGFloat PADDING = 10.0f;
+static const CGFloat SCROLL_SPEED = 40.0f;
+static const CGFloat SCROLL_DELAY = 1.0f;
 
 # pragma mark - ScrollLabel
 
