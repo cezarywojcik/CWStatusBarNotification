@@ -135,6 +135,12 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
  */
 @property (assign, nonatomic) CGFloat notificationLabelHeight;
 /**
+ * Allows setting a custom height for the navigation bar. If this value is
+ * 0, the height will be determined by default values. Default value
+ * is 0.
+ */
+@property (assign, nonatomic) CGFloat navigationBarHeight;
+/**
  * The custom view to present if using @c displayNotificationWithView. Default
  * value is @c nil.
  */
