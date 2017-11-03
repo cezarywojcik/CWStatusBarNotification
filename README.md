@@ -2,9 +2,11 @@
 
 [![Build Status](https://travis-ci.org/cezarywojcik/CWStatusBarNotification.png?branch=master)](https://travis-ci.org/cezarywojcik/CWStatusBarNotification)
 
-**NOTE:** You can find a `Swift` implementation of this library [in the swift branch of this repo](https://github.com/cezarywojcik/CWStatusBarNotification/tree/swift).
+**NOTE:** You can find a **Swift 2.0** implementation of this library [in the swift branch of this repo](https://github.com/cezarywojcik/CWStatusBarNotification/tree/swift). 
 
 `CWStatusBarNotification` is a library that allows you to easily create text-based notifications that appear on the status bar.
+
+You can find the documentation [here](http://cocoadocs.org/docsets/CWStatusBarNotification/).
 
 ![demo](screenshots/demo.gif)
 
@@ -18,7 +20,7 @@ Works for iPhone and iPad.
 
 ### CocoaPods
 
-`pod 'CWStatusBarNotification', '~> 2.2.6'`
+`pod 'CWStatusBarNotification', '~> 2.3.5'`
 
 ### Manual
 
@@ -140,17 +142,18 @@ The notifications will work in both screen orientations, however, screen rotatio
 
 ## Apps Using This Library
 
-If you would like for your app to be featured here, [contact me](cezarywojcik.com/contact) and I would love to hear about your app!
+If you would like for your app to be featured here, [contact me](http://cezarywojcik.com/contact) and I would love to hear about your app!
 
 * [SlideShare Presentations](https://itunes.apple.com/app/id917418728)
 * [Pong Ping](https://itunes.apple.com/us/app/pong-ping-social-addictive/id822887888)
 * [NextMovies](https://itunes.apple.com/us/app/nextmovies-smart-movie-recommendation/id680850329)
+* [Social Dummy](https://itunes.apple.com/gb/app/social-dummy-create-fake-social/id610088272)
 
 ## License
 
     The MIT License (MIT)
 
-    Copyright (c) 2014 Cezary Wojcik <http://www.cezarywojcik.com>
+    Copyright (c) 2015 Cezary Wojcik <http://www.cezarywojcik.com>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
