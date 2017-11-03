@@ -20,6 +20,9 @@ typedef void(^CWCompletionBlock)(void);
  * label.
  */
 @interface ScrollLabel : UILabel
+
+@property (assign, nonatomic) UIEdgeInsets edgeInsets;
+
 /**
  * Used to find the amount of time that the label will spend scrolling.
  * @return The amount of time that will be spent scrolling.
@@ -70,7 +73,9 @@ typedef NS_ENUM(NSInteger, CWNotificationStyle) {
     /// Covers the status bar portion of the screen.
     CWNotificationStyleStatusBarNotification,
     /// Covers the status bar and navigation bar portions of the screen.
-    CWNotificationStyleNavigationBarNotification
+    CWNotificationStyleNavigationBarNotification,
+    /// Appears under the home indicator and slightly above it on iPhone X models.
+    CWNotificationStyleHomeIndicatorNotification
 };
 
 /**
