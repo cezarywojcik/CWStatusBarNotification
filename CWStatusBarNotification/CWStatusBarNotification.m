@@ -515,6 +515,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
         // create status bar view
         if ([self notificationStyle]==CWNotificationStyleHomeIndicatorNotification) {
+	    [self.statusBarView removeFromSuperview];
             self.statusBarView=nil;
             
         } else {
@@ -580,6 +581,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
         // create status bar view
         if ([self notificationStyle]==CWNotificationStyleHomeIndicatorNotification) {
+	    [self.statusBarView removeFromSuperview];
             self.statusBarView=nil;
             
         } else {
