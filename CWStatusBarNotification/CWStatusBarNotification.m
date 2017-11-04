@@ -16,6 +16,9 @@
 #define SCROLL_SPEED 40.0f
 #define SCROLL_DELAY 1.0f
 
+#define HOMEINDICATOR_OFFSET 11.0f
+#define HOMEINDICATOR_TEXT_INSET_BOTTOM 14.0f
+
 # pragma mark - ScrollLabel
 
 @implementation ScrollLabel
@@ -56,7 +59,7 @@
     if ([self scrollOffset] > 0) {
         rect.size.width = [self fullWidth] + PADDING * 2;
         UIGraphicsBeginImageContextWithOptions(rect.size, NO, [UIScreen mainScreen].scale);
-        [super drawTextInRect:rect];
+        [super drawTextInRect:UIEdgeInsetsInsetRect(rect, self.edgeInsets)];
         textImage.image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         [textImage sizeToFit];
@@ -69,7 +72,7 @@
                          }];
     } else {
         textImage.image = nil;
-        [super drawTextInRect:CGRectInset(rect, PADDING, 0)];
+        [super drawTextInRect:UIEdgeInsetsInsetRect(CGRectInset(rect, PADDING, 0), self.edgeInsets)];
     }
 }
 
@@ -238,6 +241,16 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     if (self.notificationLabelHeight > 0) {
         return self.notificationLabelHeight;
     }
+    ////
+    
+    if (@available(iOS 11.0, *)) {
+        if ([self notificationStyle]==CWNotificationStyleHomeIndicatorNotification) {
+            return [[[UIApplication sharedApplication] keyWindow] safeAreaInsets].bottom;
+            
+        }
+    
+    }
+    
     CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     if (SYSTEM_VERSION_LESS_THAN(@"8.0") && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
         statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.width;
@@ -255,10 +268,23 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (CGFloat)getStatusBarOffset
 {
+    CGFloat offset=0.0f;
+    
     if ([self getStatusBarHeight] == 40.0f) {
-        return -20.0f;
+        offset = -20.0f;
     }
-    return 0.0f;
+    ////
+    
+    if (@available(iOS 11.0, *)) {
+        if ([self notificationStyle]==CWNotificationStyleHomeIndicatorNotification) {
+            UIWindow *keyWindow=[[UIApplication sharedApplication] keyWindow];
+            offset=keyWindow.frame.size.height-[keyWindow safeAreaInsets].bottom-HOMEINDICATOR_OFFSET;
+            
+        }
+        
+    }
+    
+    return offset;
 }
 
 - (CGFloat)getNavigationBarHeight
@@ -273,6 +299,8 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 - (CGFloat)getNotificationLabelHeight
 {
     switch (self.notificationStyle) {
+        case CWNotificationStyleHomeIndicatorNotification:
+            return [self getStatusBarHeight]+HOMEINDICATOR_OFFSET;
         case CWNotificationStyleStatusBarNotification:
             return [self getStatusBarHeight];
         case CWNotificationStyleNavigationBarNotification:
@@ -349,6 +377,12 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 - (void)createNotificationLabelWithMessage:(NSString *)message
 {
     self.notificationLabel = [ScrollLabel new];
+    
+    if ([self notificationStyle]==CWNotificationStyleHomeIndicatorNotification) {
+        self.notificationLabel.edgeInsets=UIEdgeInsetsMake(0, 0, HOMEINDICATOR_TEXT_INSET_BOTTOM, 0);
+        
+    }
+    
     self.notificationLabel.numberOfLines = self.multiline ? 0 : 1;
     self.notificationLabel.text = message;
     self.notificationLabel.textAlignment = NSTextAlignmentCenter;
@@ -480,8 +514,15 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         [self createNotificationLabelWithMessage:message];
 
         // create status bar view
-        [self createStatusBarView];
+        if ([self notificationStyle]==CWNotificationStyleHomeIndicatorNotification) {
+	    [self.statusBarView removeFromSuperview];
+            self.statusBarView=nil;
+            
+        } else {
+            [self createStatusBarView];
 
+        }
+        
         // add label to window
         [self.notificationWindow.rootViewController.view addSubview:self.notificationLabel];
         [self.notificationWindow.rootViewController.view bringSubviewToFront:self.notificationLabel];
@@ -539,8 +580,15 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         [self createNotificationCustomView:view];
 
         // create status bar view
-        [self createStatusBarView];
+        if ([self notificationStyle]==CWNotificationStyleHomeIndicatorNotification) {
+	    [self.statusBarView removeFromSuperview];
+            self.statusBarView=nil;
+            
+        } else {
+            [self createStatusBarView];
 
+        }
+        
         // add view to window
         UIView *rootView = self.notificationWindow.rootViewController.view;
         [rootView addSubview:self.customView];
