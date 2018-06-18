@@ -482,14 +482,22 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateStatusBarFrame) name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
         
         // animate
-        [UIView animateWithDuration:self.notificationAnimationDuration animations:^{
+        if (self.notificationAnimationDuration == (NSTimeInterval) 0) {
             [self firstFrameChange];
-        } completion:^(BOOL finished) {
             double delayInSeconds = [self.notificationLabel scrollTime];
             perform_block_after_delay(delayInSeconds, ^{
                 [completion invoke];
             });
-        }];
+        } else {
+            [UIView animateWithDuration:self.notificationAnimationDuration animations:^{
+                [self firstFrameChange];
+            } completion:^(BOOL finished) {
+                double delayInSeconds = [self.notificationLabel scrollTime];
+                perform_block_after_delay(delayInSeconds, ^{
+                    [completion invoke];
+                });
+            }];
+        }
     }
 }
 
