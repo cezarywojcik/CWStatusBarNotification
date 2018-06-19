@@ -247,11 +247,6 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     return 0.0f;
 }
 
-- (CGRect)getNotificationLabelNoFrame
-{
-    return CGRectMake(0, [self getNotificationLabelHeight], [self getStatusBarWidth], [self getNotificationLabelHeight]);
-}
-
 - (CGRect)getNotificationLabelTopFrame
 {
     return CGRectMake(0, [self getStatusBarOffset] + -1*[self getNotificationLabelHeight], [self getStatusBarWidth], [self getNotificationLabelHeight]);
@@ -434,7 +429,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)thirdFrameChange
 {
-    self.statusBarView.frame = [self getNotificationLabelFrame];
+    //self.statusBarView.frame = [self getNotificationLabelFrame];
     switch (self.notificationAnimationOutStyle) {
         case CWNotificationAnimationStyleTop:
             self.notificationLabel.frame = [self getNotificationLabelTopFrame];
@@ -482,22 +477,23 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateStatusBarFrame) name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
         
         // animate
-        if (self.notificationAnimationDuration == (NSTimeInterval) 0) {
+        if (self.iPhoneX) {
+            self.statusBarView.frame = [self getNotificationLabelBottomFrame];
+            [UIView animateWithDuration:self.notificationAnimationDuration animations:^{
+                self.notificationLabel.frame = [self getNotificationLabelFrame];
+            } completion:^(BOOL finished) {
+                [completion invoke];
+            }];
+            return;
+        }
+        [UIView animateWithDuration:self.notificationAnimationDuration animations:^{
             [self firstFrameChange];
+        } completion:^(BOOL finished) {
             double delayInSeconds = [self.notificationLabel scrollTime];
             perform_block_after_delay(delayInSeconds, ^{
                 [completion invoke];
             });
-        } else {
-            [UIView animateWithDuration:self.notificationAnimationDuration animations:^{
-                [self firstFrameChange];
-            } completion:^(BOOL finished) {
-                double delayInSeconds = [self.notificationLabel scrollTime];
-                perform_block_after_delay(delayInSeconds, ^{
-                    [completion invoke];
-                });
-            }];
-        }
+        }];
     }
 }
 
@@ -569,27 +565,35 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (void)dismissNotificationWithCompletion:(void (^)(void))completion
 {
+    void (^animationCompletion)(BOOL finished) = ^void(BOOL finished) {
+        UIView *view = self.isCustomView ? self.customView : self.notificationLabel;
+        [view removeFromSuperview];
+        [self.statusBarView removeFromSuperview];
+        [self.notificationWindow setHidden:YES];
+        self.notificationWindow = nil;
+        view = nil;
+        self.notificationIsShowing = NO;
+        self.notificationIsDismissing = NO;
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
+        if (completion) {
+            completion();
+        }
+    };
+    
     if (self.notificationIsShowing) {
         cancel_delayed_block(self.dismissHandle);
         self.notificationIsDismissing = YES;
         [self secondFrameChange];
+        if (self.iPhoneX) {
+            [UIView animateWithDuration: self.notificationAnimationDuration animations:^{
+                self.notificationLabel.frame = [self getNotificationLabelTopFrame];
+            } completion: animationCompletion];
+            return;
+        }
         [UIView animateWithDuration:self.notificationAnimationDuration animations:^{
             [self thirdFrameChange];
-        } completion:^(BOOL finished) {
-            UIView *view = self.isCustomView ? self.customView : self.notificationLabel;
-            [view removeFromSuperview];
-            [self.statusBarView removeFromSuperview];
-            [self.notificationWindow setHidden:YES];
-            self.notificationWindow = nil;
-            view = nil;
-            self.notificationIsShowing = NO;
-            self.notificationIsDismissing = NO;
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
-            if (completion) {
-                completion();
-            }
-        }];
+        } completion:animationCompletion];
     } else {
         if (completion) {
             completion();

@@ -81,6 +81,8 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (nonatomic) BOOL notificationIsDismissing;
 /// The window that holds the notification.
 @property (strong, nonatomic) CWWindowContainer *notificationWindow;
+/// iPhone X Flag
+@property (nonatomic) BOOL iPhoneX;
 
 /**
  * The background color of the notification label. Default value is the tint
