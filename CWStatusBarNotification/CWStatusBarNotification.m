@@ -269,7 +269,10 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (CGRect)getNotificationLabelFrame
 {
-    return CGRectMake(0, [self getStatusBarOffset], [self getStatusBarWidth], [self getNotificationLabelHeight]);
+    // Added a bit of an offset for iPhone X
+    return self.iPhoneX ?
+            CGRectMake(0, [self getStatusBarOffset] + 4, [self getStatusBarWidth], [self getNotificationLabelHeight] + 4) :
+            CGRectMake(0, [self getStatusBarOffset], [self getStatusBarWidth], [self getNotificationLabelHeight]);
 }
 
 - (CGFloat)getNavigationBarHeight
