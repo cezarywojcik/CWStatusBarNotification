@@ -212,7 +212,7 @@
 				ORGANIZATIONNAME = "Cezary Wojcik";
 				TargetAttributes = {
 					5E2FFB5218367C01003333F8 = {
-						DevelopmentTeam = QMZH6X9D3C;
+						DevelopmentTeam = 3C9W46WXZC;
 					};
 					5E2FFB6D18367C01003333F8 = {
 						TestTargetID = 5E2FFB5218367C01003333F8;
@@ -381,6 +381,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3C9W46WXZC;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CWNotificationDemo/CWNotificationDemo-Prefix.pch";
 				INFOPLIST_FILE = "CWNotificationDemo/CWNotificationDemo-Info.plist";
@@ -399,6 +400,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3C9W46WXZC;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CWNotificationDemo/CWNotificationDemo-Prefix.pch";
 				INFOPLIST_FILE = "CWNotificationDemo/CWNotificationDemo-Info.plist";

@@ -196,6 +196,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 - (void)displayNotificationWithMessage:(NSString *)message
                             completion:(void (^)(void))completion;
 
+    
 /**
  * Displays a notification with the indicated message for the indicated
  * duration.
@@ -207,6 +208,21 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
  */
 - (void)displayNotificationWithMessage:(NSString *)message
                            forDuration:(NSTimeInterval)duration;
+    
+    
+/**
+ * Displays a notification with the indicated message for the indicated
+ * duration.
+ * @param message
+ *        The content of the message to be displayed.
+ * @param duration
+ *        The amount of seconds for which the notification should be displayed,
+ *        not including the animate in and out times.
+ */
+- (void)displayNotificationWithMessage:(NSString *)message
+                           forDuration:(NSTimeInterval)duration
+                       backgroundColor:(UIColor*)bgColor
+                        labelTextColor:(UIColor*)textColor;
 
 /**
  * Displays a notification with the indicated attributed string and then 
@@ -220,6 +236,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
                                                 attributedString
                                      completion:(void (^)(void))completion;
 
+    
 /**
  * Displays a notification with the indicated message for the indicated
  * duration.
@@ -232,6 +249,22 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 - (void)displayNotificationWithAttributedString:(NSAttributedString *)
                                                 attributedString
                                     forDuration:(NSTimeInterval)duration;
+    
+    
+/**
+ * Displays a notification with the indicated message for the indicated
+ * duration.
+ * @param attributedString
+ *        The content of the message to be displayed.
+ * @param duration
+ *        The amount of seconds for which the notification should be displayed,
+ *        not including the animate in and out times.
+ */
+- (void)displayNotificationWithAttributedString:(NSAttributedString *)
+                                                attributedString
+                                    forDuration:(NSTimeInterval)duration
+                                       backgroundColor:(UIColor*)bgColor
+                                      labelTextColor:(UIColor*)textColor;
 
 /**
  * Displays a notification with the indicated custom view and then performs the

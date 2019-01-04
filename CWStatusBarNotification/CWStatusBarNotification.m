@@ -504,9 +504,24 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
         }];
     }
 }
-
+    
 - (void)displayNotificationWithMessage:(NSString *)message forDuration:(NSTimeInterval)duration
 {
+    [self displayNotificationWithMessage:message completion:^{
+        self.dismissHandle = perform_block_after_delay(duration, ^{
+            [self dismissNotification];
+        });
+    }];
+}
+
+- (void)displayNotificationWithMessage:(NSString *)message forDuration:(NSTimeInterval)duration backgroundColor:(UIColor *)bgColor labelTextColor:(UIColor *)textColor
+{
+    // create backgroundColor
+    self.notificationLabelBackgroundColor = bgColor;
+    
+    // create labelTextColor
+    self.notificationLabelTextColor = textColor;
+    
     [self displayNotificationWithMessage:message completion:^{
         self.dismissHandle = perform_block_after_delay(duration, ^{
             [self dismissNotification];
@@ -519,10 +534,16 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     [self displayNotificationWithMessage:[attributedString string] completion:completion];
     [[self notificationLabel] setAttributedText:attributedString];
 }
-
+    
 - (void)displayNotificationWithAttributedString:(NSAttributedString *)attributedString forDuration:(NSTimeInterval)duration
 {
     [self displayNotificationWithMessage:[attributedString string] forDuration:duration];
+    [[self notificationLabel] setAttributedText:attributedString];
+}
+    
+- (void)displayNotificationWithAttributedString:(NSAttributedString *)attributedString forDuration:(NSTimeInterval)duration backgroundColor:(UIColor *)bgColor labelTextColor:(UIColor *)textColor
+{
+    [self displayNotificationWithMessage:[attributedString string] forDuration:duration backgroundColor:bgColor labelTextColor:textColor];
     [[self notificationLabel] setAttributedText:attributedString];
 }
 
