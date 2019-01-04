@@ -73,7 +73,7 @@
 - (IBAction)btnShowNotificationPressed:(UIButton *)sender
 {
     [self setupNotification];
-    [self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value];
+    [self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value backgroundColor:UIColor.blackColor labelTextColor:UIColor.whiteColor];
 }
 
 - (IBAction)btnShowCustomNotificationPressed:(UIButton *)sender {
